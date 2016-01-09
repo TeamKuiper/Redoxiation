@@ -1,0 +1,17 @@
+[
+{
+  "modid": "Redoxiation",
+  "name": "Redoxiation",
+  "description": "Realistic tech mod.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Team Kuiper"],
+  "credits": "Oxidation-Reduction!",
+  "logoFile": "assets/redoxiation/textures/logo.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]
+

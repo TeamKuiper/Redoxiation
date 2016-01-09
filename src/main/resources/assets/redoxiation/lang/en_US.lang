@@ -1,0 +1,165 @@
+#en_US.lang
+
+#Redoxiation Blocks
+tile.redoxiation.oreCopper.name=Copper Ore
+tile.redoxiation.oreTin.name=Tin Ore
+tile.redoxiation.oreLead.name=Lead Ore
+tile.redoxiation.oreSilver.name=Silver Ore
+tile.redoxiation.oreNickel.name=Nickel Ore
+tile.redoxiation.orePlatinum.name=Platinum Ore
+tile.redoxiation.oreZinc.name=Zinc Ore
+tile.redoxiation.oreCobalt.name=Cobalt Ore
+tile.redoxiation.oreChromium.name=Chromium Ore
+tile.redoxiation.pitchblend.name=Pitchblend
+tile.redoxiation.limestone.name=Limestone
+tile.redoxiation.saltRock.name=Salt Rock
+tile.redoxiation.bauxite.name=Bauxite
+tile.redoxiation.rutile.name=Rutile
+tile.redoxiation.scheelite.name=Scheelite
+tile.redoxiation.cryolite.name=Cryolite
+tile.redoxiation.oreSulfur.name=Sulfur Ore
+tile.redoxiation.oreFerroNickel.name=Ferronickel Ore
+tile.redoxiation.orePseudoBronze.name=Pseudo-Bronze Ore
+tile.redoxiation.orePseudoBrassOre.name=Pseudo-Brass Ore
+tile.redoxiation.argentAurum.name=Argent Aurum
+tile.redoxiation.pseudoSolder.name=Pseudo-Solder Ore
+tile.redoxiation.pseudoStellite.name=Pseudo-Stellite Ore
+tile.redoxiation.tntium.name=TNTium
+tile.redoxiation.obsidianIron.name=Iron Obsidian
+tile.redoxiation.obsidianGold.name=Gold Obsidian
+tile.redoxiation.obsidianCopper.name=Copper Obsidian
+tile.redoxiation.obsidianTin.name=Tin Obsidian
+tile.redoxiation.obsidianLead.name=Lead Obsidian
+tile.redoxiation.obsidianSilver.name=Silver Obsidian
+tile.redoxiation.obsidianNickel.name=Nickel Obsidian
+tile.redoxiation.obsidianPlatinum.name=Platinum Obsidian
+tile.redoxiation.obsidianZinc.name=Zinc Obsidian
+tile.redoxiation.obsidianCobalt.name=Cobalt Obsidian
+tile.redoxiation.obsidianChromium.name=Chromium Obsidian
+tile.redoxiation.obsidianUranium.name=Uranium Obsidian
+tile.redoxiation.obsidianPlutonium.name=Plutonium Obsidian
+tile.redoxiation.blastFurnaceBlock.name=Blast Furnace
+tile.redoxiation.dolomite.name=Dolomite
+tile.redoxiation.wire.name=Wire
+tile.redoxiation.leadTank.name=Lead Tank
+
+#Redoxiation Items
+item.redoxiation.MortarAndPestle.name=Mortar and Pestle
+item.redoxiation.Calcite.name=Calcite
+item.redoxiation.SaltChunk.name=Salt Chunk
+item.redoxiation.RawBauxite.name=Raw Bauxite
+item.redoxiation.RawRutile.name=Raw Rutile
+item.redoxiation.RawScheelite.name=Raw Scheelite
+item.redoxiation.crushedOreIron.name=Crushed Iron Ore
+item.redoxiation.crushedOreGold.name=Crushed Gold Ore
+item.redoxiation.crushedOreCopper.name=Crushed Copper Ore
+item.redoxiation.crushedOreTin.name=Crushed Tin Ore
+item.redoxiation.crushedOreLead.name=Crushed Lead Ore
+item.redoxiation.crushedOreSilver.name=Crushed Silver Ore
+item.redoxiation.crushedOrePlatinum.name=Crushed Platinum Ore
+item.redoxiation.crushedOreZinc.name=Crushed Zinc Ore
+item.redoxiation.crushedOreNickel.name=Crushed Nickel Ore
+item.redoxiation.crushedOreChromium.name=Crushed Chromium Ore
+item.redoxiation.dustOreIron.name=Iron Ore Dust
+item.redoxiation.dustOreGold.name=Gold Ore Dust
+item.redoxiation.dustOreCopper.name=Copper Ore Dust
+item.redoxiation.dustOreTin.name=Tin Ore Dust
+item.redoxiation.dustOreLead.name=Lead Ore Dust
+item.redoxiation.dustOreSilver.name=Silver Ore Dust
+item.redoxiation.dustOrePlatinum.name=Platinum Ore Dust
+item.redoxiation.dustOreZinc.name=Zinc Ore Dust
+item.redoxiation.dustOreNickel.name=Nickel Ore Dust
+item.redoxiation.dustOreChromium.name=Chromium Ore Dust
+item.redoxiation.dustSalt.name=Salt
+item.redoxiation.dustBauxite.name=Bauxite Dust
+item.redoxiation.dustRutile.name=Rutile Dust
+item.redoxiation.dustScheelite.name=Scheelite Dust
+item.redoxiation.ingotCopper.name=Copper Ingot
+item.redoxiation.ingotTin.name=Tin Ingot
+item.redoxiation.ingotLead.name=Lead Ingot
+item.redoxiation.ingotSilver.name=Silver Ingot
+item.redoxiation.ingotPlatinum.name=Platinum Ingot
+item.redoxiation.ingotZinc.name=Zinc Ingot
+item.redoxiation.ingotNickel.name=Nickel Ingot
+item.redoxiation.ingotChromium.name=Chromium Ingot
+item.redoxiation.ingotAluminum.name=Aluminum Ingot
+item.redoxiation.ingotCobalt.name=Cobalt Ingot
+item.redoxiation.ingotTitanium.name=Titanium Ingot
+item.redoxiation.ingotTungsten.name=Tungsten Ingot
+item.redoxiation.ingotSteel.name=Steel Ingot
+item.redoxiation.nuggetIron.name=Iron Nugget
+item.redoxiation.nuggetCopper.name=Copper Nugget
+item.redoxiation.nuggetTin.name=Tin Nugget
+item.redoxiation.nuggetLead.name=Lead Nugget
+item.redoxiation.nuggetSilver.name=Silver Nugget
+item.redoxiation.nuggetPlatinum.name=Platinum Nugget
+item.redoxiation.nuggetZinc.name=Zinc Nugget
+item.redoxiation.nuggetNickel.name=Nickel Nugget
+item.redoxiation.nuggetChromium.name=Chromium Nugget
+item.redoxiation.nuggetAluminum.name=Aluminum Nugget
+item.redoxiation.nuggetTitanium.name=Titanium Nugget
+item.redoxiation.nuggetTungsten.name=Tungsten Nugget
+item.redoxiation.nuggetSteel.name=Steel Nugget
+item.redoxiation.SulfurChunk.name=Sulfur Chunk
+item.redoxiation.dustSulfur.name=Sulfur Dust
+item.redoxiation.ItemCryolite.name=Cryolite
+item.redoxiation.HotAirBucket.name=Hot Air Bucket
+item.redoxiation.MoltenPigironBucket.name=Molten Pig Iron Bucket
+item.redoxiation.SlagBucket.name=Slag Bucket
+item.redoxiation.DolomitePowder.name=Dolomite Powder
+item.redoxiation.DolomiteShard.name=Dolomite Shard
+
+#Redoxiation Fluids
+tile.HotAir.name=Hot Air
+tile.MoltenPigiron.name=Molten Pig Iron
+tile.Slag.name=Slag
+
+#Redoxiation Cogs
+tile.redoxiation.WoodenCog.name=Wooden Cogs
+tile.redoxiation.StoneCog.name=Stone Cogs
+tile.redoxiation.IronCog.name=Iron Cogs
+
+#Redoxiation Tools
+item.redoxiation.WoodenSaw.name=Wooden Saw
+item.redoxiation.IronSaw.name=Iron Saw
+item.redoxiation.GoldenSaw.name=Golden Saw
+item.redoxiation.DiamondSaw.name=Diamond Saw
+item.redoxiation.CopperSaw.name=Copper Saw
+item.redoxiation.BronzeSaw.name=Bronze Saw
+item.redoxiation.SteelSaw.name=Steel Saw
+item.redoxiation.DuraluminSaw.name=Duralumin Saw
+item.redoxiation.TitaniumSaw.name=Titanium Steel Saw
+item.redoxiation.TungstenSaw.name=Tungsten Steel Saw
+item.redoxiation.WoodenScythe.name=Wooden Scythe
+item.redoxiation.IronScythe.name=Iron Scythe
+item.redoxiation.GoldenScythe.name=Golden Scythe
+item.redoxiation.DiamondScythe.name=Diamond Scythe
+item.redoxiation.CopperScythe.name=Copper Scythe
+item.redoxiation.BronzeScythe.name=Bronze Scythe
+item.redoxiation.SteelScythe.name=Steel Scythe
+item.redoxiation.DuraluminScythe.name=Duralumin Scythe
+item.redoxiation.TitaniumScythe.name=Titanium Steel Scythe
+item.redoxiation.TungstenScythe.name=Tungsten Steel Scythe
+
+#Redoxiation Creative Tabs
+itemGroup.Redoxiation=Redoxiation Blocks
+itemGroup.RedoxiationItems=Redoxiation Items
+
+#Redoxiation Achievements
+achievement.redoxiation.start=New Age
+achievement.redoxiation.blast=Blaster
+achievement.redoxiation.start.desc=Mine some copper ores.
+achievement.redoxiation.blast.desc=Smelt iron ores to molten pig iron in the blast furnace.
+
+
+#Redoxiation GUI
+#BlastFurnace
+gui.redoxiation.blastFurnace.progress=Progress
+gui.redoxiation.blastFurnace.fuelTime=Fuel Time
+gui.redoxiation.blastFurnace.runningTime=s
+
+#Redoxiation Tooltip
+#Lead Tank
+tooltip.redoxiation.leadTank.fluid=Fluid
+tooltip.redoxiation.leadTank.amount=Amount
+tooltip.redoxiation.tank.error=Item Error

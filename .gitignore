@@ -1,0 +1,17 @@
+#
+#			Minecraft Forge
+#
+#
+.gradle/
+.settings/
+bin/
+build/
+eclipse/
+gradle/
+.classpath
+.project
+gradlew
+gradlew.bat
+*.txt
+.idea/
+*.iml

@@ -1,0 +1,163 @@
+﻿#la_VA.lang
+
+#Cubi Redoxiationis
+tile.redoxiation.oreCopper.name=Vena Cupri
+tile.redoxiation.oreTin.name=Vena Stanni
+tile.redoxiation.oreLead.name=Vena Plumbi
+tile.redoxiation.oreSilver.name=Vena Argenti
+tile.redoxiation.oreNickel.name=Vena Nicheli
+tile.redoxiation.orePlatinum.name=Vena Platinii
+tile.redoxiation.oreZinc.name=Vena Zinci
+tile.redoxiation.oreCobalt.name=VenaVena Cobalti
+tile.redoxiation.oreChromium.name=Vena Chromii
+tile.redoxiation.pitchblend.name=Vena Uranii
+tile.redoxiation.limestone.name=Calx
+tile.redoxiation.saltRock.name=Aes Salis
+tile.redoxiation.bauxite.name=Bauxum
+tile.redoxiation.rutile.name=Rutilum
+tile.redoxiation.scheelite.name=Scheelum
+tile.redoxiation.Cryolite.name=Cryolum
+tile.redoxiation.oreSulfur.name=Aes Sulphuris
+tile.redoxiation.oreFerroNickel.name=Vena Pseudo-Ferronickelii
+tile.redoxiation.orePseudoBronze.name=Vena Pseudo-Aeris
+tile.redoxiation.orePseudoBrassOre.name=Vena Pseudo-Orichalci
+tile.redoxiation.argentAurum.name=argentAurum
+tile.redoxiation.pseudoSolder.name=Vena Pseudo-Plumbaturae
+tile.redoxiation.pseudoStellite.name=Vena Pseudo-Stellii
+tile.redoxiation.tntium.name=Tri-Nitro Toluenium
+tile.redoxiation.obsidianIron.name=Ferri Obsius
+tile.redoxiation.obsidianGold.name=Auri Obsius
+tile.redoxiation.obsidianCopper.name=Cupri Obsius
+tile.redoxiation.obsidianTin.name=Stanni Obsius
+tile.redoxiation.obsidianLead.name=Plumbi Obsius
+tile.redoxiation.obsidianSilver.name=Argenti Obsius
+tile.redoxiation.obsidianNickel.name=Nicheli Obsius
+tile.redoxiation.obsidianPlatinum.name=Platinii Obsius
+tile.redoxiation.obsidianZinc.name=Zinci Obsius
+tile.redoxiation.obsidianCobalt.name=Cobalti Obsius
+tile.redoxiation.obsidianChromium.name=Chromii Obsius
+tile.redoxiation.obsidianUranium.name=Uranii Obsius
+tile.redoxiation.obsidianPlutonium.name=Plutonii Obsius
+tile.redoxiation.blastFurnaceBlock.name=Caminus
+tile.redoxiation.dolomite.name=Dolomite
+tile.redoxiation.wire.name=Wire
+tile.redoxiation.leadTank.name=Lead Tank
+
+#Objecti Redoxiationis
+item.redoxiation.MortarAndPestle.name=Mortarium et Pistillum
+item.redoxiation.Calcite.name=Calcium
+item.redoxiation.SaltChunk.name=Lapis Salis
+item.redoxiation.RawBauxite.name=Bauxum Illaboratum
+item.redoxiation.RawRutile.name=Rutilum Illaboratum
+item.redoxiation.RawScheelite.name=Scheelum Illaboratum
+item.redoxiation.crushedOreIron.name=Vena Contrita Ferri
+item.redoxiation.crushedOreGold.name=Vena Contrita Auri
+item.redoxiation.crushedOreCopper.name=Vena Contrita Cupri
+item.redoxiation.crushedOreTin.name=Vena Contrita Stanni
+item.redoxiation.crushedOreLead.name=Vena Contrita Plumbi
+item.redoxiation.crushedOreSilver.name=Vena Contrita Argenti
+item.redoxiation.crushedOrePlatinum.name=Vena Contrita Platinii
+item.redoxiation.crushedOreZinc.name=Vena Contrita Zinci
+item.redoxiation.crushedOreNickel.name=Vena Contrita Nicheli
+item.redoxiation.crushedOreChromium.name=Vena Contrita Chromii
+item.redoxiation.dustOreIron.name=Pulvis Ferri
+item.redoxiation.dustOreGold.name=Pulvis Auri
+item.redoxiation.dustOreCopper.name=Pulvis Cupri
+item.redoxiation.dustOreTin.name=Pulvis Stanni
+item.redoxiation.dustOreLead.name=Pulvis Plumbi
+item.redoxiation.dustOreSilver.name=Pulvis Argenti
+item.redoxiation.dustOrePlatinum.name=Pulvis Platinii
+item.redoxiation.dustOreZinc.name=Pulvis Zinci
+item.redoxiation.dustOreNickel.name=Pulvis Nicheli]
+item.redoxiation.dustOreChromium.name=Pulvis Chromii
+item.redoxiation.dustSalt.name=Sal
+item.redoxiation.dustBauxite.name=Pulvis Aluminae
+item.redoxiation.dustRutile.name=Pulvis Salis Titanii
+item.redoxiation.dustScheelite.name=Pulvis Salis Wolframii
+item.redoxiation.ingotCopper.name=Later Cupri
+item.redoxiation.ingotTin.name=Later Stanni
+item.redoxiation.ingotLead.name=Later Plumbi
+item.redoxiation.ingotSilver.name=Later Argenti
+item.redoxiation.ingotPlatinum.name=Later Platinii
+item.redoxiation.ingotZinc.name=Later Zinci
+item.redoxiation.ingotNikel.name=Later Nicheli
+item.redoxiation.ingotChromium.name=Later Chromii
+item.redoxiation.ingotAluminum.name=Later Aluminii
+item.redoxiation.ingotCobalt.name=Later Cobalti
+item.redoxiation.ingotTitanium.name=Later Titanii
+item.redoxiation.ingotTungsten.name=Later Wolframii
+item.redoxiation.ingotSteel.name=Later Chalybis
+item.redoxiation.nuggetIron.name=Segmen Ferri
+item.redoxiation.nuggetCopper.name=Segmen Cupri
+item.redoxiation.nuggetTin.name=Segmen Stanni
+item.redoxiation.nuggetLead.name=Segmen Plumbi
+item.redoxiation.nuggetSilver.name=Segmen Argenti
+item.redoxiation.nuggetPlatinum.name=Segmen Platinii
+item.redoxiation.nuggetZinc.name=Segmen Platinii
+item.redoxiation.nuggetNickel.name=Segmen Nicheli
+item.redoxiation.nuggetChromium.name=Segmen Chromii
+item.redoxiation.nuggetAluminum.name=Segmen Aluminii
+item.redoxiation.nuggetTitanium.name=Segmen Titanii
+item.redoxiation.nuggetTungsten.name=Segmen Wolframii
+item.redoxiation.nuggetSteel.name=Segmen Chalybis
+item.redoxiation.SulfurChunk.name=Massa Sulphuris
+item.redoxiation.dustSulfur.name=Pulvis Sulphuris
+item.redoxiation.ItemCryolite.name=Cryolum Illaboratum
+item.redoxiation.HotAirBucket.name=Hot Air Bucket
+item.redoxiation.MoltenPigironBucket.name=Molten Pig Iron Bucket
+item.redoxiation.SlagBucket.name=Slag Bucket
+item.redoxiation.DolomitePowder.name=Dolomite Powder
+item.redoxiation.DolomiteShard.name=Dolomite Shard
+
+#Liquida Redoxiationis
+tile.HotAir.name=Aer Ignitus
+tile.MoltenPigiron.name=Ferrum Illiquefactum Depuratum
+
+#Choragia Redoxiationis
+tile.redoxiation.WoodenCog.name=Choragium Arboris
+tile.redoxiation.StoneCog.name=Choraium Saxi
+tile.redoxiation.IronCog.name=Choragium Ferri
+
+#Instrumenta Redoxiationis
+item.redoxiation.WoodenSaw.name=Serra Arboris
+item.redoxiation.IronSaw.name=Serra Ferri
+item.redoxiation.GoldenSaw.name=Serra Auri
+item.redoxiation.DiamondSaw.name=Serra Adamantis
+item.redoxiation.CopperSaw.name=Serra Cupri
+item.redoxiation.BronzeSaw.name=Serra Aeris
+item.redoxiation.SteelSaw.name=Serra Chalybis
+item.redoxiation.DuraluminSaw.name=Serra Duraluminii
+item.redoxiation.TitaniumSaw.name=Serra Titanii
+item.redoxiation.TungstenSaw.name=Serra Wolframii
+item.redoxiation.WoodenScythe.name=Falx Arboris
+item.redoxiation.IronScythe.name=Falx Ferri
+item.redoxiation.GoldenScythe.name=Falx Auri
+item.redoxiation.DiamondScythe.name=Falx Adamantis
+item.redoxiation.CopperScythe.name=Falx Cupri
+item.redoxiation.BronzeScythe.name=Falx Aeris
+item.redoxiation.SteelScythe.name=Falx Chalybis
+item.redoxiation.DuraluminScythe.name=Falx Duraluminii
+item.redoxiation.TitaniumScythe.name=Falx Titanii
+item.redoxiation.TungstenScythe.name=Falx Wolframii
+
+#Reodixation Creative Tabs
+itemGroup.Redoxiation=Redoxiation
+itemGroup.RedoxiationItems=Objecti Redoxiationis
+
+#Facta Redoxiationis
+achievement.redoxiation.start=New Age
+achievement.redoxiation.blast=Caminus
+achievement.redoxiation.start.desc=Foda Saxi Cupri.
+achievement.redoxiation.blast.desc=Depura ferros.
+
+#Redoxiation GUI
+#BlastFurnace
+gui.redoxiation.blastFurnace.progress=Progress
+gui.redoxiation.blastFurnace.fuelTime=Fuel Time
+gui.redoxiation.blastFurnace.runningTime=s
+
+#Redoxiation Tooltip
+#Lead Tank
+tooltip.redoxiation.leadTank.fluid=Fluid
+tooltip.redoxiation.leadTank.amount=Amount
+tooltip.redoxiation.tank.error=Item Error

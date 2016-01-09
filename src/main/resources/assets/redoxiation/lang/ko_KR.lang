@@ -1,0 +1,164 @@
+﻿#ko_KR.lang
+
+#리덕시에이션 블럭
+tile.redoxiation.oreCopper.name=구리 광석
+tile.redoxiation.oreTin.name=주석 광석
+tile.redoxiation.oreLead.name=납 광석
+tile.redoxiation.oreSilver.name=은 광석
+tile.redoxiation.oreNickel.name=니켈 광석
+tile.redoxiation.orePlatinum.name=백금 광석
+tile.redoxiation.oreZinc.name=아연 광석
+tile.redoxiation.oreCobalt.name=코발트 광석
+tile.redoxiation.oreChromium.name=크로뮴 광석
+tile.redoxiation.pitchblend.name=역청 우라늄석
+tile.redoxiation.limestone.name=석회암
+tile.redoxiation.saltRock.name=암염
+tile.redoxiation.bauxite.name=보크사이트
+tile.redoxiation.rutile.name=금홍석
+tile.redoxiation.scheelite.name=회중석
+tile.redoxiation.cryolite.name=빙정석
+tile.redoxiation.oreSulfur.name=유황 광석
+tile.redoxiation.oreFerroNickel.name=네더 페로니켈 광석
+tile.redoxiation.orePseudoBronze.name=네더 가청동 광석
+tile.redoxiation.orePseudoBrassOre.name=네더 가황동 광석
+tile.redoxiation.argentAurum.name=은빛 금
+tile.redoxiation.pseudoSolder.name=네더 가땜납 광석
+tile.redoxiation.pseudoStellite.name=네더 가스텔라이트 광석
+tile.redoxiation.tntium.name=화약석
+tile.redoxiation.obsidianIron.name=철을 함유한 흑요석
+tile.redoxiation.obsidianGold.name=금을 함유한 흑요석
+tile.redoxiation.obsidianCopper.name=구리를 함유한 흑요석
+tile.redoxiation.obsidianTin.name=주석을 함유한 흑요석
+tile.redoxiation.obsidianLead.name=납을 함유한 흑요석
+tile.redoxiation.obsidianSilver.name=은을 함유한 흑요석
+tile.redoxiation.obsidianNickel.name=니켈을 함유한 흑요석
+tile.redoxiation.obsidianPlatinum.name=백금을 함유한 흑요석
+tile.redoxiation.obsidianZinc.name=아연을 함유한 흑요석
+tile.redoxiation.obsidianCobalt.name=코발트를 함유한 흑요석
+tile.redoxiation.obsidianChromium.name=크로뮴을 함유한 흑요석
+tile.redoxiation.obsidianUranium.name=우라늄을 함유한 흑요석
+tile.redoxiation.obsidianPlutonium.name=플루토늄을 함유한 흑요석
+tile.redoxiation.blastFurnaceBlock.name=용광로 블럭
+tile.redoxiation.dolomite.name=백운암
+tile.redoxiation.wire.name=전선
+tile.redoxiation.leadTank.name=납 탱크
+
+#리덕시에이션 아이템
+item.redoxiation.MortarAndPestle.name=막자와 막자사발
+item.redoxiation.Calcite.name=방해석
+item.redoxiation.SaltChunk.name=소금 덩어리
+item.redoxiation.RawBauxite.name=보크사이트 원석
+item.redoxiation.RawRutile.name=금홍석 원석
+item.redoxiation.RawScheelite.name=회중석 원석
+item.redoxiation.crushedOreIron.name=부서진 철 광석
+item.redoxiation.crushedOreGold.name=부서진 금 광석
+item.redoxiation.crushedOreCopper.name=부서진 구리 광석
+item.redoxiation.crushedOreTin.name=부서진 주석 광석
+item.redoxiation.crushedOreLead.name=부서진 납 광석
+item.redoxiation.crushedOreSilver.name=부서진 은 광석
+item.redoxiation.crushedOrePlatinum.name=부서진 백금 광석
+item.redoxiation.crushedOreZinc.name=부서진 아연 광석
+item.redoxiation.crushedOreNickel.name=부서진 니켈 광석
+item.redoxiation.crushedOreChromium.name=부서진 크로뮴 광석
+item.redoxiation.dustOreIron.name=철 광석 가루
+item.redoxiation.dustOreGold.name=금 광석 가루
+item.redoxiation.dustOreCopper.name=구리 광석 가루
+item.redoxiation.dustOreTin.name=주석 광석 가루
+item.redoxiation.dustOreLead.name=납 광석 가루
+item.redoxiation.dustOreSilver.name=은 광석 가루
+item.redoxiation.dustOrePlatinum.name=백금 광석 가루
+item.redoxiation.dustOreZinc.name=아연 광석 가루
+item.redoxiation.dustOreNickel.name=니켈 광석 가루
+item.redoxiation.dustOreChromium.name=크로뮴 광석 가루
+item.redoxiation.dustSalt.name=소금
+item.redoxiation.dustBauxite.name=보크사이트 가루
+item.redoxiation.dustRutile.name=금홍석 가루
+item.redoxiation.dustScheelite.name=회중석 가루
+item.redoxiation.ingotCopper.name=구리 주괴
+item.redoxiation.ingotTin.name=주석 주괴
+item.redoxiation.ingotLead.name=납 주괴
+item.redoxiation.ingotSilver.name=은 주괴
+item.redoxiation.ingotPlatinum.name=백금 주괴
+item.redoxiation.ingotZinc.name=아연 주괴
+item.redoxiation.ingotNickel.name=니켈 주괴
+item.redoxiation.ingotChromium.name=크로뮴 주괴
+item.redoxiation.ingotAluminum.name=알루미늄 주괴
+item.redoxiation.ingotCobalt.name=코발트 주괴
+item.redoxiation.ingotTitanium.name=티타늄 주괴
+item.redoxiation.ingotTungsten.name=텅스텐 주괴
+item.redoxiation.ingotSteel.name=강철 주괴
+item.redoxiation.nuggetIron.name=철 조각
+item.redoxiation.nuggetCopper.name=구리 조각
+item.redoxiation.nuggetTin.name=주석 조각
+item.redoxiation.nuggetLead.name=납 조각
+item.redoxiation.nuggetSilver.name=은 조각
+item.redoxiation.nuggetPlatinum.name=백금 조각
+item.redoxiation.nuggetZinc.name=아연 조각
+item.redoxiation.nuggetNickel.name=니켈 조각
+item.redoxiation.nuggetChromium.name=크로뮴 조각
+item.redoxiation.nuggetAluminum.name=알루미늄 조각
+item.redoxiation.nuggetTitanium.name=티타늄 조각
+item.redoxiation.nuggetTungsten.name=텅스텐 조각
+item.redoxiation.nuggetSteel.name=강철 조각
+item.redoxiation.SulfurChunk.name=유황 덩어리
+item.redoxiation.dustSulfur.name=유황 가루
+item.redoxiation.ItemCryolite.name=빙정석
+item.redoxiation.HotAirBucket.name=열풍 양동이
+item.redoxiation.MoltenPigironBucket.name=녹은 선철 양동이
+item.redoxiation.SlagBucket.name=슬래그 양동이
+item.redoxiation.DolomitePowder.name=백운암 가루
+item.redoxiation.DolomiteShard.name=백운암 조각
+
+#리덕시에이션 액체
+tile.HotAir.name=열풍
+tile.MoltenPigiron.name=녹은 선철
+tile.Slag.name=슬래그
+
+#리덕시에이션 톱니바퀴
+tile.redoxiation.WoodenCog.name=나무 톱니바퀴
+tile.redoxiation.StoneCog.name=돌 톱니바퀴
+tile.redoxiation.IronCog.name=철 톱니바퀴
+
+#리덕시에이션 도구
+item.redoxiation.WoodenSaw.name=나무 톱
+item.redoxiation.IronSaw.name=철 톱
+item.redoxiation.GoldenSaw.name=금 톱
+item.redoxiation.DiamondSaw.name=다이아몬드 톱
+item.redoxiation.CopperSaw.name=구리 톱
+item.redoxiation.BronzeSaw.name=청동 톱
+item.redoxiation.SteelSaw.name=강철 톱
+item.redoxiation.DuraluminSaw.name=두랄루민 톱
+item.redoxiation.TitaniumSaw.name=티타늄강 톱
+item.redoxiation.TungstenSaw.name=텅스텐강 톱
+item.redoxiation.WoodenScythe.name=나무 낫
+item.redoxiation.IronScythe.name=철 낫
+item.redoxiation.GoldenScythe.name=금 낫
+item.redoxiation.DiamondScythe.name=다이아몬드 낫
+item.redoxiation.CopperScythe.name=구리 낫
+item.redoxiation.BronzeScythe.name=청동 낫
+item.redoxiation.SteelScythe.name=강철 낫
+item.redoxiation.DuraluminScythe.name=두랄루민 낫
+item.redoxiation.TitaniumScythe.name=티타늄강 낫
+item.redoxiation.TungstenScythe.name=텅스텐강 낫
+
+#리덕시에이션의 크리에이티브 탭들
+itemGroup.Redoxiation=리덕시에이션 블럭
+itemGroup.RedoxiationItems=리덕시에이션 아이템
+
+#리덕시에이션의 도전 과제
+achievement.redoxiation.start=새로운 시대
+achievement.redoxiation.blast=블래스터
+achievement.redoxiation.start.desc=구리 광석을 캐세요.
+achievement.redoxiation.blast.desc=용광로에서 철 광석을 선철로 녹이세요.
+
+#리덕시에이션 GUI
+#용광로
+gui.redoxiation.blastFurnace.progress=진행상황
+gui.redoxiation.blastFurnace.fuelTime=연료 잔량 시간
+gui.redoxiation.blastFurnace.runningTime=초
+
+#리덕시에이션 툴팁
+#납 탱크
+tooltip.redoxiation.leadTank.fluid=유체
+tooltip.redoxiation.leadTank.amount=용량
+tooltip.redoxiation.tank.error=아이템 에러
