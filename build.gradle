@@ -18,8 +18,8 @@ buildscript {
 apply plugin: 'forge'
 
 version = "Alpha 0.05"
-group= "teamKuiper.redoxiation" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "redoxiation"
+group= "com.teamKuiper.redoxiation" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "Redoxiation"
 
 minecraft {
     version = "1.7.10-10.13.4.1558-1.7.10"
