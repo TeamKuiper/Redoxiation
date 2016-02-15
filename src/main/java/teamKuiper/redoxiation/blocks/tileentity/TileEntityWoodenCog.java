@@ -24,7 +24,6 @@ public class TileEntityWoodenCog extends TileEntity {
 			angvel = 0;
 		}
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-		Redoxiation.logger.info(chunknumber);
 		if (worldObj.isRemote) {
 			rotation += angvel;
 		}
