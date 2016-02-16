@@ -23,7 +23,6 @@ public class TileWire extends TileEntity {
         } else {
             angvel = 0;
         }
-        Redoxiation.logger.info(chunknumber);
         if (worldObj.isRemote) {
             rotation += angvel;
         }

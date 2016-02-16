@@ -28,7 +28,6 @@ public class RenderWirePart extends TileEntitySpecialRenderer {
         float rotation;
         double x, y, z, a, b;
         if (f>=1) {
-            Redoxiation.logger.info("rendertileentityat");
             f-=1;
             TileMultipart tile = (TileMultipart) tileentity;
             WirePart w = (WirePart) tile.partMap((int)f);
@@ -86,7 +85,6 @@ public class RenderWirePart extends TileEntitySpecialRenderer {
                 break;
         }
         } else {
-            Redoxiation.logger.info("lendertileentityat");
             scale = 1.0f;
             rotation = 0.0f;
             x = 0;

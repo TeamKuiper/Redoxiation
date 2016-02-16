@@ -78,7 +78,6 @@ public class RenderWire extends TileEntitySpecialRenderer {
                 b = 0;
                 break;
         }
-        Redoxiation.logger.info("x:" + posX + "  y:" + posY + "  z:" + posZ + "!!!");
         bindTexture(texture);
 
         GL11.glPushMatrix();
