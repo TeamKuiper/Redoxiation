@@ -11,7 +11,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
-import teamKuiper.redoxiation.blocks.tileentity.TileWire;
 import teamKuiper.redoxiation.render.RenderWirePart;
 
 public class WirePart extends McSidedMetaPart {
@@ -109,29 +108,34 @@ public class WirePart extends McSidedMetaPart {
         tag.getInteger("chunknumber");
     }
 
-    @Override
-    public void invalidateConvertedTile() {
-        TileWire tile = (TileWire)this.world().getTileEntity(x(), y(), z());
-        this.scale = tile.getscale();
-        this.rotation = tile.getrotation();
-        this.angvel = tile.getangvel();
-        this.state = tile.getstate();
-        this.chunknumber = tile.getchunknumber();
-    }
+//    @Override
+//    public void invalidateConvertedTile() {
+//        Redoxiation.logger.info("invalidateconvertedtile");
+//        TileWire tile = (TileWire)this.world().getTileEntity(x(), y(), z());
+//        this.scale = tile.getscale();
+//        this.rotation = tile.getrotation();
+//        this.angvel = tile.getangvel();
+//        this.state = tile.getstate();
+//        this.chunknumber = tile.getchunknumber();
+//    }
 
     @Override
     public void onAdded() {
         super.onAdded();
+        Redoxiation.logger.info("onadded");
     }
 
     @Override
     public void onWorldJoin() {
+        Redoxiation.logger.info("onworldjoin");
         rend = new RenderWirePart();
         rend.func_147497_a(TileEntityRendererDispatcher.instance);
     }
 
     @Override
     public void renderDynamic(Vector3 pos, float frame, int pass) {
+        Redoxiation.logger.info("renderdynamic" + x() + ":" + y() + ":" + z());
+        Redoxiation.logger.info("x" + pos.x + "y" + pos.y + "z" + pos.z);
         rend.renderTileEntityAt(tile(), pos.x, pos.y, pos.z, sideForMeta(meta) + 1);
     }
 
