@@ -49,17 +49,17 @@ public class WirePart extends McSidedMetaPart {
     @Override
     public Cuboid6 getBounds() {
         if (meta == 0) {
-            return new Cuboid6(0.3, 0.9, 0.3, 0.7, 1.0, 0.7);
+            return new Cuboid6(0.3125, 0.9375, 0.3125, 0.6875, 1.0, 0.6875);
         } else if (meta == 1) {
-            return new Cuboid6(0.3, 0.0, 0.3, 0.7, 0.1, 0.7);
+            return new Cuboid6(0.3125, 0.0, 0.3125, 0.6875, 0.0625, 0.6875);
         } else if (meta == 2) {
-            return new Cuboid6(0.3, 0.3, 0.9, 0.7, 0.7, 1.0);
+            return new Cuboid6(0.3125, 0.3125, 0.9375, 0.6875, 0.6875, 1.0);
         } else if (meta == 3) {
-            return new Cuboid6(0.3, 0.3, 0.0, 0.7, 0.7, 0.1);
+            return new Cuboid6(0.3125, 0.3125, 0.0, 0.6875, 0.6875, 0.0625);
         } else if (meta == 4) {
-            return new Cuboid6(0.9, 0.3, 0.3, 1.0, 0.7, 0.7);
+            return new Cuboid6(0.9375, 0.3125, 0.3125, 1.0, 0.6875, 0.6875);
         } else if (meta == 5) {
-            return new Cuboid6(0.0, 0.3, 0.3, 0.1, 0.7, 0.7);
+            return new Cuboid6(0.0, 0.3125, 0.3125, 0.0625, 0.6875, 0.6875);
         }
         return null;
     }
