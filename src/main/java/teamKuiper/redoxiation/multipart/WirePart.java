@@ -260,7 +260,7 @@ public class WirePart extends McSidedMetaPart{
     public static WirePart getWirePart(World world, int x, int y, int z, int side) {
         TileEntity tile = world.getTileEntity(x, y, z);
         if(tile instanceof TileMultipart) {
-            TMultiPart part = ((TileMultipart) tile).partMap(side);
+            TMultiPart part = ((TileMultipart) tile).partMap(sideMetaMap[side]);
             if(part instanceof WirePart) {
                 return (WirePart)part;
             }
