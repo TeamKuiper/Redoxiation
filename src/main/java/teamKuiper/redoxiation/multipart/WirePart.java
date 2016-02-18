@@ -185,61 +185,73 @@ public class WirePart extends McSidedMetaPart{
         return null;
     }
 
-    public boolean checkstate(int x, int y, int z, int st) {
-        return true;
-//        return ((world().getBlock(x, y, z) == RedoxiationBlocks.Wire) && (((TileWire) worldObj.getTileEntity(x, y, z)).state != st));
+    public boolean checkstate(int x, int y, int z, int side, int st) {
+        return ((WirePart.getWirePart(world(), x, y, z, side) != null) && ((WirePart.getWirePart(world(), x, y, z, side).state != st)));
     }
-//
-//    public int fill(int x, int y, int z, int checknum, int st) {
-//        checknum++;
-//        TileWire tile = (TileWire) worldObj.getTileEntity(x, y, z);
-//        tile.state = st;
-//        if (checkstate(x + 1, y, z, st)) {
-//            checknum = fill(x + 1, y, z, checknum, st);
-//        }
-//        if (checkstate(x - 1, y, z, st)) {
-//            checknum = fill(x - 1, y, z, checknum, st);
-//        }
-//        if (checkstate(x, y + 1, z, st)) {
-//            checknum = fill(x, y + 1, z, checknum, st);
-//        }
-//        if (checkstate(x, y - 1, z, st)) {
-//            checknum = fill(x, y - 1, z, checknum, st);
-//        }
-//        if (checkstate(x, y, z + 1, st)) {
-//            checknum = fill(x, y, z + 1, checknum, st);
-//        }
-//        if (checkstate(x, y, z - 1, st)) {
-//            checknum = fill(x, y, z - 1, checknum, st);
-//        }
-//
-//        tile.setchunknumber(checknum);
-//        return checknum;
-//    }
-//
-//    public int setfill(int x, int y, int z, int checknum, int st, World world) {
-//        TileEntityWoodenCog tile = (TileEntityWoodenCog) world.getTileEntity(x, y, z);
-//        tile.setstate(st);
-//        tile.setchunknumber(checknum);
-//
-//        if (checkstate(x + 1, y, z, st)) {
-//            setfill(x + 1, y, z, checknum, st, world);
-//        }
-//        if (checkstate(x - 1, y, z, st)) {
-//            setfill(x - 1, y, z, checknum, st, world);
-//        }
-//        if (checkstate(x, y + 1, z, st)) {
-//            setfill(x, y + 1, z, checknum, st, world);
-//        }
-//        if (checkstate(x, y - 1, z, st)) {
-//            setfill(x, y - 1, z, checknum, st, world);
-//        }
-//        if (checkstate(x, y, z + 1, st)) {
-//            setfill(x, y, z + 1, checknum, st, world);
-//        }
-//        if (checkstate(x, y, z - 1, st)) {
-//            setfill(x, y, z - 1, checknum, st, world);
-//        }
-//        return checknum;
-//    }
+
+    public int fill(int x, int y, int z, int side, int checknum, int st) {
+    	int sideMetaMap[]={1,0,3,2,5,4};
+        checknum++;
+        WirePart wire = WirePart.getWirePart(world(), x, y, z, side);
+        wire.state = st;
+        for(int i=0;i<6;i++)
+        {
+        	if ((i != side)&&(i != sideMetaMap[side]))
+        	{
+        		if (checkstate(x, y, z, i, st))
+        		{
+        			checknum = fill(x, y, z, i, checknum, st);
+        		}
+        	}
+        }
+        
+        /*
+        if (checkstate(x + 1, y, z, st)) {
+            checknum = fill(x + 1, y, z, checknum, st);
+        }
+        if (checkstate(x - 1, y, z, st)) {
+            checknum = fill(x - 1, y, z, checknum, st);
+        }
+        if (checkstate(x, y + 1, z, st)) {
+            checknum = fill(x, y + 1, z, checknum, st);
+        }
+        if (checkstate(x, y - 1, z, st)) {
+            checknum = fill(x, y - 1, z, checknum, st);
+        }
+        if (checkstate(x, y, z + 1, st)) {
+            checknum = fill(x, y, z + 1, checknum, st);
+        }
+        if (checkstate(x, y, z - 1, st)) {
+            checknum = fill(x, y, z - 1, checknum, st);*/
+        }
+
+        wire.setchunknumber(checknum);
+        return checknum;
+    }
+
+    public int setfill(int x, int y, int z, int checknum, int st, World world) {
+        TileEntityWoodenCog tile = (TileEntityWoodenCog) world.getTileEntity(x, y, z);
+        tile.setstate(st);
+        tile.setchunknumber(checknum);
+
+        if (checkstate(x + 1, y, z, st)) {
+            setfill(x + 1, y, z, checknum, st, world);
+        }
+        if (checkstate(x - 1, y, z, st)) {
+            setfill(x - 1, y, z, checknum, st, world);
+        }
+        if (checkstate(x, y + 1, z, st)) {
+            setfill(x, y + 1, z, checknum, st, world);
+        }
+        if (checkstate(x, y - 1, z, st)) {
+            setfill(x, y - 1, z, checknum, st, world);
+        }
+        if (checkstate(x, y, z + 1, st)) {
+            setfill(x, y, z + 1, checknum, st, world);
+        }
+        if (checkstate(x, y, z - 1, st)) {
+            setfill(x, y, z - 1, checknum, st, world);
+        }
+        return checknum;
+    }
 }
