@@ -24,7 +24,10 @@ public class WirePart extends McSidedMetaPart{
     private float angvel = 0;
     private int state;
     private int chunknumber = 0;
-    public static int[] sideMetaMap = new int[]{1, 0, 3, 2, 5, 4};
+    public static int[] sideMetaMap = new int[]{1,0,3,2,5,4};
+    public static int[] sidex = new int[]{0,0,0,0,-1,1};
+    public static int[] sidey = new int[]{-1,1,0,0,0,0};
+    public static int[] sidez = new int[]{0,0,-1,1,0,0};
 
     public WirePart() {
         super();
@@ -124,7 +127,87 @@ public class WirePart extends McSidedMetaPart{
 
     @Override
     public void onAdded() {
+    	WirePart wire = WirePart.getWirePart(world(), x(), y(), z(), meta);
+    	int check = wire.fill(x(), y(), z(), meta, 0, 1);
+		wire.setfill(x(), y(), z(), meta, check, 0);
         super.onAdded();
+    }
+    
+    @Override
+    public void onRemoved() {
+    	
+    	int checknum = 0;
+    	int st = 1;
+    	int side = meta;
+    	
+    	for(int i=0;i<6;i++)
+        {
+        	if ((i != side)&&(i != sideMetaMap[side]))
+        	{
+        		if (checkstate(x(), y(), z(), i, st))
+        		{
+        			WirePart.getWirePart(world(), x(), y(), z(), i).fill(x(), y(), z(), i, checknum, st);
+        		}
+        	}
+        }
+        for(int i=0;i<6;i++)
+        {
+        	if ((i != side)&&(i != sideMetaMap[side]))
+        	{
+        		if (checkstate(x()-sidex[i], y()-sidey[i], z()-sidez[i], side, st))
+        		{
+        			WirePart.getWirePart(world(), x()-sidex[i], y()-sidey[i], z()-sidez[i], side).fill(x()-sidex[i], y()-sidey[i], z()-sidez[i], side, checknum, st);
+        		}
+        	}
+        }
+        for(int i=0;i<6;i++)
+        {
+        	if ((i != side)&&(i != sideMetaMap[side]))
+        	{
+        		if (checkstate(x()+sidex[side]-sidex[i], y()+sidey[side]-sidey[i], z()+sidez[side]-sidez[i], i, st))
+        		{
+        			WirePart.getWirePart(world(), x()+sidex[side]-sidex[i], y()+sidey[side]-sidey[i], z()+sidez[side]-sidez[i], i).fill(x()+sidex[side]-sidex[i], y()+sidey[side]-sidey[i], z()+sidez[side]-sidez[i], i, checknum, st);
+        		}
+        	}
+        }
+    	
+        st = 0;
+        
+        for(int i=0;i<6;i++)
+        {
+        	if ((i != side)&&(i != sideMetaMap[side]))
+        	{
+        		if (checkstate(x(), y(), z(), i, st))
+        		{
+        			checknum = WirePart.getWirePart(world(), x(), y(), z(), i).getchunknumber();
+        			WirePart.getWirePart(world(), x(), y(), z(), i).setfill(x(), y(), z(), i, checknum, st);
+        		}
+        	}
+        }
+        for(int i=0;i<6;i++)
+        {
+        	if ((i != side)&&(i != sideMetaMap[side]))
+        	{
+        		if (checkstate(x()-sidex[i], y()-sidey[i], z()-sidez[i], side, st))
+        		{
+        			checknum = WirePart.getWirePart(world(), x()-sidex[i], y()-sidey[i], z()-sidez[i], side).getchunknumber();
+        			WirePart.getWirePart(world(), x()-sidex[i], y()-sidey[i], z()-sidez[i], side).setfill(x()-sidex[i], y()-sidey[i], z()-sidez[i], side, checknum, st);
+        		}
+        	}
+        }
+        for(int i=0;i<6;i++)
+        {
+        	if ((i != side)&&(i != sideMetaMap[side]))
+        	{
+        		if (checkstate(x()+sidex[side]-sidex[i], y()+sidey[side]-sidey[i], z()+sidez[side]-sidez[i], i, st))
+        		{
+        			checknum = WirePart.getWirePart(world(), x()+sidex[side]-sidex[i], y()+sidey[side]-sidey[i], z()+sidez[side]-sidez[i], i).getchunknumber();
+        			WirePart.getWirePart(world(), x()+sidex[side]-sidex[i], y()+sidey[side]-sidey[i], z()+sidez[side]-sidez[i], i).setfill(x()+sidex[side]-sidex[i], y()+sidey[side]-sidey[i], z()+sidez[side]-sidez[i], i, checknum, st);
+        		}
+        	}
+        }
+        
+    	super.onRemoved();
     }
 
     @Override
@@ -190,7 +273,6 @@ public class WirePart extends McSidedMetaPart{
     }
 
     public int fill(int x, int y, int z, int side, int checknum, int st) {
-    	int sideMetaMap[]={1,0,3,2,5,4};
         checknum++;
         WirePart wire = WirePart.getWirePart(world(), x, y, z, side);
         wire.state = st;
@@ -204,86 +286,69 @@ public class WirePart extends McSidedMetaPart{
         		}
         	}
         }
-        if((side==0)||(side==1)||(side==2)||(side==3))
+        for(int i=0;i<6;i++)
         {
-        	if (checkstate(x+1, y, z, side, st))
+        	if ((i != side)&&(i != sideMetaMap[side]))
         	{
-        		checknum = fill(x+1, y, z, side, checknum, st);
-        	}
-        	if (checkstate(x-1, y, z, side, st))
-        	{
-        		checknum = fill(x-1, y, z, side, checknum, st);
+        		if (checkstate(x-sidex[i], y-sidey[i], z-sidez[i], side, st))
+        		{
+        			checknum = fill(x-sidex[i], y-sidey[i], z-sidez[i], side, checknum, st);
+        		}
         	}
         }
-        if((side==4)||(side==5)||(side==2)||(side==3))
+        for(int i=0;i<6;i++)
         {
-        	if (checkstate(x, y+1, z, side, st))
+        	if ((i != side)&&(i != sideMetaMap[side]))
         	{
-        		checknum = fill(x, y+1, z, side, checknum, st);
-        	}
-        	if (checkstate(x, y-1, z, side, st))
-        	{
-        		checknum = fill(x, y-1, z, side, checknum, st);
-        	}
-        }
-        if((side==0)||(side==1)||(side==4)||(side==5))
-        {
-        	if (checkstate(x, y, z+1, side, st))
-        	{
-        		checknum = fill(x, y, z+1, side, checknum, st);
-        	}
-        	if (checkstate(x, y, z-1, side, st))
-        	{
-        		checknum = fill(x, y, z-1, side, checknum, st);
+        		if (checkstate(x+sidex[side]-sidex[i], y+sidey[side]-sidey[i], z+sidez[side]-sidez[i], i, st))
+        		{
+        			checknum = fill(x+sidex[side]-sidex[i], y+sidey[side]-sidey[i], z+sidez[side]-sidez[i], i, checknum, st);
+        		}
         	}
         }
-        /*
-        if (checkstate(x + 1, y, z, st)) {
-            checknum = fill(x + 1, y, z, checknum, st);
-        }
-        if (checkstate(x - 1, y, z, st)) {
-            checknum = fill(x - 1, y, z, checknum, st);
-        }
-        if (checkstate(x, y + 1, z, st)) {
-            checknum = fill(x, y + 1, z, checknum, st);
-        }
-        if (checkstate(x, y - 1, z, st)) {
-            checknum = fill(x, y - 1, z, checknum, st);
-        }
-        if (checkstate(x, y, z + 1, st)) {
-            checknum = fill(x, y, z + 1, checknum, st);
-        }
-        if (checkstate(x, y, z - 1, st)) {
-            checknum = fill(x, y, z - 1, checknum, st);*/
-        }
-
         wire.setchunknumber(checknum);
         return checknum;
     }
 
-    public int setfill(int x, int y, int z, int checknum, int st, World world) {
-        TileEntityWoodenCog tile = (TileEntityWoodenCog) world.getTileEntity(x, y, z);
-        tile.setstate(st);
-        tile.setchunknumber(checknum);
-
-        if (checkstate(x + 1, y, z, st)) {
-            setfill(x + 1, y, z, checknum, st, world);
+    public int setfill(int x, int y, int z, int side, int checknum, int st) {
+    	WirePart wire = WirePart.getWirePart(world(), x, y, z, side);
+        wire.setstate(st);
+        wire.setchunknumber(checknum);
+        
+        for(int i=0;i<6;i++)
+        {
+        	if ((i != side)&&(i != sideMetaMap[side]))
+        	{
+        		if (checkstate(x, y, z, i, st))
+        		{
+        			setfill(x, y, z, i, checknum, st);
+        		}
+        	}
         }
-        if (checkstate(x - 1, y, z, st)) {
-            setfill(x - 1, y, z, checknum, st, world);
+        for(int i=0;i<6;i++)
+        {
+        	if ((i != side)&&(i != sideMetaMap[side]))
+        	{
+        		if (checkstate(x-sidex[i], y-sidey[i], z-sidez[i], side, st))
+        		{
+        			setfill(x-sidex[i], y-sidey[i], z-sidez[i], side, checknum, st);
+        		}
+        	}
         }
-        if (checkstate(x, y + 1, z, st)) {
-            setfill(x, y + 1, z, checknum, st, world);
-        }
-        if (checkstate(x, y - 1, z, st)) {
-            setfill(x, y - 1, z, checknum, st, world);
-        }
-        if (checkstate(x, y, z + 1, st)) {
-            setfill(x, y, z + 1, checknum, st, world);
-        }
-        if (checkstate(x, y, z - 1, st)) {
-            setfill(x, y, z - 1, checknum, st, world);
+        for(int i=0;i<6;i++)
+        {
+        	if ((i != side)&&(i != sideMetaMap[side]))
+        	{
+        		if (checkstate(x+sidex[side]-sidex[i], y+sidey[side]-sidey[i], z+sidez[side]-sidez[i], i, st))
+        		{
+        			setfill(x+sidex[side]-sidex[i], y+sidey[side]-sidey[i], z+sidez[side]-sidez[i], i, checknum, st);
+        		}
+        	}
         }
         return checknum;
     }
+    
+    public void setstate(int state) {
+		this.state = state;
+	}
 }
