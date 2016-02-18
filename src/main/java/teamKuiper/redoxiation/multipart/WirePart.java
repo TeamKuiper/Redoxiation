@@ -17,7 +17,7 @@ import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
 import teamKuiper.redoxiation.blocks.tileentity.TileWire;
 import teamKuiper.redoxiation.render.RenderWirePart;
 
-public class WirePart extends McSidedMetaPart implements FloodFill {
+public class WirePart extends McSidedMetaPart{
     private RenderWirePart rend;
     private float scale = 1.0f;
     private float rotation = 0;
@@ -166,7 +166,7 @@ public class WirePart extends McSidedMetaPart implements FloodFill {
         return state;
     }
 
-    public TileWire getWire(World world, int x, int y, int z, int side) {
+    public static TileWire getWire(World world, int x, int y, int z, int side) {
         TileEntity tile = world.getTileEntity(x, y, z);
         if(tile instanceof TileWire) {
 
@@ -174,7 +174,7 @@ public class WirePart extends McSidedMetaPart implements FloodFill {
         return null;
     }
 
-    public WirePart getWirePart(World world, int x, int y, int z, int side) {
+    public static WirePart getWirePart(World world, int x, int y, int z, int side) {
         TileEntity tile = world.getTileEntity(x, y, z);
         if(tile instanceof TileMultipart) {
             TMultiPart part = ((TileMultipart) tile).partMap(side);
