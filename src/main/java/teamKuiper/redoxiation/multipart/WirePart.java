@@ -204,7 +204,39 @@ public class WirePart extends McSidedMetaPart{
         		}
         	}
         }
-        
+        if((side==0)||(side==1)||(side==2)||(side==3))
+        {
+        	if (checkstate(x+1, y, z, side, st))
+        	{
+        		checknum = fill(x+1, y, z, side, checknum, st);
+        	}
+        	if (checkstate(x-1, y, z, side, st))
+        	{
+        		checknum = fill(x-1, y, z, side, checknum, st);
+        	}
+        }
+        if((side==4)||(side==5)||(side==2)||(side==3))
+        {
+        	if (checkstate(x, y+1, z, side, st))
+        	{
+        		checknum = fill(x, y+1, z, side, checknum, st);
+        	}
+        	if (checkstate(x, y-1, z, side, st))
+        	{
+        		checknum = fill(x, y-1, z, side, checknum, st);
+        	}
+        }
+        if((side==0)||(side==1)||(side==4)||(side==5))
+        {
+        	if (checkstate(x, y, z+1, side, st))
+        	{
+        		checknum = fill(x, y, z+1, side, checknum, st);
+        	}
+        	if (checkstate(x, y, z-1, side, st))
+        	{
+        		checknum = fill(x, y, z-1, side, checknum, st);
+        	}
+        }
         /*
         if (checkstate(x + 1, y, z, st)) {
             checknum = fill(x + 1, y, z, checknum, st);
