@@ -3,10 +3,13 @@ package teamKuiper.redoxiation.multipart;
 import codechicken.lib.vec.BlockCoord;
 import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Vector3;
+import codechicken.multipart.TMultiPart;
+import codechicken.multipart.TileMultipart;
 import codechicken.multipart.minecraft.McSidedMetaPart;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import teamKuiper.redoxiation.Redoxiation;
@@ -14,7 +17,7 @@ import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
 import teamKuiper.redoxiation.blocks.tileentity.TileWire;
 import teamKuiper.redoxiation.render.RenderWirePart;
 
-public class WirePart extends McSidedMetaPart {
+public class WirePart extends McSidedMetaPart implements FloodFill {
     private RenderWirePart rend;
     private float scale = 1.0f;
     private float rotation = 0;
@@ -163,9 +166,29 @@ public class WirePart extends McSidedMetaPart {
         return state;
     }
 
-//    public boolean checkstate(int x, int y, int z, int st) {
+    public TileWire getWire(World world, int x, int y, int z, int side) {
+        TileEntity tile = world.getTileEntity(x, y, z);
+        if(tile instanceof TileWire) {
+
+        }
+        return null;
+    }
+
+    public WirePart getWirePart(World world, int x, int y, int z, int side) {
+        TileEntity tile = world.getTileEntity(x, y, z);
+        if(tile instanceof TileMultipart) {
+            TMultiPart part = ((TileMultipart) tile).partMap(side);
+            if(part instanceof WirePart) {
+                return (WirePart)part;
+            }
+        }
+        return null;
+    }
+
+    public boolean checkstate(int x, int y, int z, int st) {
+        return true;
 //        return ((world().getBlock(x, y, z) == RedoxiationBlocks.Wire) && (((TileWire) worldObj.getTileEntity(x, y, z)).state != st));
-//    }
+    }
 //
 //    public int fill(int x, int y, int z, int checknum, int st) {
 //        checknum++;
