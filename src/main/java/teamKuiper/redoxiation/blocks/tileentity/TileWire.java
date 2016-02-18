@@ -8,7 +8,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
-import teamKuiper.redoxiation.multipart.WirePart;
 
 public class TileWire extends TileEntity {
     private float scale = 1.0f;
@@ -103,8 +102,8 @@ public class TileWire extends TileEntity {
     }
 
     // FloodFill
-    public boolean checkstate(int x, int y, int z, int side, int st) {
-        return ((WirePart.getWirePart(worldObj, x, y, z, side) != null) && (((TileWire) worldObj.getTileEntity(x, y, z)).state != st));
+    public boolean checkstate(int x, int y, int z, int st) {
+        return ((worldObj.getBlock(x, y, z) == RedoxiationBlocks.Wire) && (((TileWire) worldObj.getTileEntity(x, y, z)).state != st));
     }
 
     public int state() {
