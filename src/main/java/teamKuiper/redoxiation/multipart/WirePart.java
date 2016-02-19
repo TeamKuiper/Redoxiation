@@ -25,9 +25,9 @@ public class WirePart extends McSidedMetaPart{
     private int state;
     private int chunknumber = 0;
     public static int[] sideMetaMap = new int[]{1,0,3,2,5,4};
-    public static int[] sidex = new int[]{0,0,0,0,-1,1};
-    public static int[] sidey = new int[]{-1,1,0,0,0,0};
-    public static int[] sidez = new int[]{0,0,-1,1,0,0};
+    public static int[] sidex = new int[]{0,0,0,0,1,-1};
+    public static int[] sidey = new int[]{1,-1,0,0,0,0};
+    public static int[] sidez = new int[]{0,0,1,-1,0,0};
 
     public WirePart() {
         super();
@@ -45,6 +45,7 @@ public class WirePart extends McSidedMetaPart{
             angvel = 0;
         }
         Redoxiation.logger.info(chunknumber);
+        world().markBlockForUpdate(x(), y(), z());
         if (world().isRemote) {
             rotation += angvel;
         }
@@ -260,7 +261,7 @@ public class WirePart extends McSidedMetaPart{
     public static WirePart getWirePart(World world, int x, int y, int z, int side) {
         TileEntity tile = world.getTileEntity(x, y, z);
         if(tile instanceof TileMultipart) {
-            TMultiPart part = ((TileMultipart) tile).partMap(sideMetaMap[side]);
+            TMultiPart part = ((TileMultipart) tile).partMap(side);
             if(part instanceof WirePart) {
                 return (WirePart)part;
             }
