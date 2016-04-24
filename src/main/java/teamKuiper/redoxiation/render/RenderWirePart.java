@@ -106,6 +106,7 @@ public class RenderWirePart extends TileEntitySpecialRenderer {
                 GL11.glRotated(90, a, 0, b);
             }
         }
+        GL11.glRotatef(rotation, 0F, 1F, 0F);
         model.renderAll();
         GL11.glPopMatrix();
         GL11.glPopMatrix();

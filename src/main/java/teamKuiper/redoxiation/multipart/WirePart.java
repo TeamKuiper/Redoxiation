@@ -38,6 +38,11 @@ public class WirePart extends McSidedMetaPart{
     }
 
     @Override
+    public boolean doesTick() {
+        return true;
+    }
+
+    @Override
     public void update() {
         if (chunknumber != 0) {
             angvel = 1 / ((float) chunknumber);
@@ -225,8 +230,8 @@ public class WirePart extends McSidedMetaPart{
         return scale;
     }
 
-    public void setscale(int argV) {
-        scale = argV;
+    public void setscale(float argV) {
+        this.scale = argV;
     }
 
     public float getrotation() {
@@ -234,7 +239,7 @@ public class WirePart extends McSidedMetaPart{
     }
 
     public void setsotation(float argR) {
-        rotation = argR;
+        this.rotation = argR;
     }
 
     public int getchunknumber() {
@@ -247,6 +252,10 @@ public class WirePart extends McSidedMetaPart{
 
     public int getstate() {
         return state;
+    }
+
+    public void setstate(int state) {
+        this.state = state;
     }
 
     public static TileWire getWire(World world, int x, int y, int z, int side) {
@@ -269,7 +278,8 @@ public class WirePart extends McSidedMetaPart{
     }
 
     public boolean checkstate(int x, int y, int z, int side, int st) {
-        return ((WirePart.getWirePart(world(), x, y, z, side) != null) && ((WirePart.getWirePart(world(), x, y, z, side).state != st)));
+        return ((WirePart.getWirePart(world(), x, y, z, side) != null) &&
+                ((WirePart.getWirePart(world(), x, y, z, side).state != st)));
     }
 
     public int fill(int x, int y, int z, int side, int checknum, int st) {
@@ -347,8 +357,5 @@ public class WirePart extends McSidedMetaPart{
         }
         return checknum;
     }
-    
-    public void setstate(int state) {
-		this.state = state;
-	}
+
 }
