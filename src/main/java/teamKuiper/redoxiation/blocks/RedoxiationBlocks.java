@@ -19,11 +19,11 @@ public class RedoxiationBlocks {
 			obsidianGold, obsidianCopper, obsidianTin, obsidianLead,
 			obsidianSilver, obsidianNickel, obsidianPlatinum, obsidianZinc,
 			obsidianCobalt, obsidianChromium, obsidianUranium,
-			obsidianPlutonium, woodenCog, StoneCog, IronCog, wire, lead_tank;
+			obsidianPlutonium, woodenCog, stoneCog, ironCog, wire, lead_tank;
 	
 	public static Fluid hotAir, moltenPigiron, slag;
 	public static BlockFluidClassic hotAirBlock, moltenPigironBlock, slagBlock;
-	public static Block blastFurnaceBlock, FloodFillBlock;
+	public static Block blastFurnaceBlock;
 	
 	public static boolean oreCopper_cfg, oreTin_cfg, oreLead_cfg,
 			oreSilver_cfg, oreNickel_cfg, orePlatinum_cfg, oreZinc_cfg,
@@ -80,13 +80,12 @@ public class RedoxiationBlocks {
 
 		// Cog
 		woodenCog = new BlockWoodenCog();
-		StoneCog = new BlockStoneCog();
-		IronCog = new BlockIronCog();
+		stoneCog = new BlockStoneCog();
+		ironCog = new BlockIronCog();
         wire = new Wire();
 
 		// Machine
 		blastFurnaceBlock = new BlastFurnaceBlock();
-		FloodFillBlock = new FloodFillBlock();
         lead_tank = new LeadTank();
 
 		// Registry
@@ -130,11 +129,10 @@ public class RedoxiationBlocks {
 		GameRegistry.registerBlock(obsidianUranium, "obsidianUranium");
 		GameRegistry.registerBlock(obsidianPlutonium, "obsidianPlutonium");
 		GameRegistry.registerBlock(woodenCog, "WoodenCog");
-		GameRegistry.registerBlock(StoneCog, "StoneCog");
-		GameRegistry.registerBlock(IronCog, "IronCog");
+		GameRegistry.registerBlock(stoneCog, "StoneCog");
+		GameRegistry.registerBlock(ironCog, "IronCog");
         GameRegistry.registerBlock(wire, "wire");
 		GameRegistry.registerBlock(blastFurnaceBlock, "BlastFurnaceBlock");
-		GameRegistry.registerBlock(FloodFillBlock, "FloodFillBlock");
 
 		OreDictionary.registerOre("oreCopper", oreCopper);
 		OreDictionary.registerOre("oreTin", oreTin);
