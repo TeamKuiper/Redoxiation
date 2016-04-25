@@ -398,27 +398,27 @@ public class RedoxiationGenericItems extends Item {
 			crashedObsidian = new RedoxiationGenericItems("crashedObsidian");
     	}
         if(itemHotAirBucket_enable) {
-            itemHotAirBucket = new RedoxiationBucket(RedoxiationBlocks.HotAirBlock, "HotAirBucket");
+            itemHotAirBucket = new RedoxiationBucket(RedoxiationBlocks.hotAirBlock, "HotAirBucket");
             itemHotAirBucket.setUnlocalizedName(Redoxiation.MODID + "." + "HotAirBucket").setContainerItem(Items.bucket);
             GameRegistry.registerItem(itemHotAirBucket, "HotAirBucket");
-            FluidContainerRegistry.registerFluidContainer(RedoxiationBlocks.HotAir, new ItemStack(itemHotAirBucket), new ItemStack(Items.bucket));
-            BucketHandler.INSTANCE.buckets.put(RedoxiationBlocks.HotAirBlock, itemHotAirBucket);
+            FluidContainerRegistry.registerFluidContainer(RedoxiationBlocks.hotAir, new ItemStack(itemHotAirBucket), new ItemStack(Items.bucket));
+            BucketHandler.INSTANCE.buckets.put(RedoxiationBlocks.hotAirBlock, itemHotAirBucket);
             MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
         }
         if(itemMoltenPigironBucket_enable) {
-            itemMoltenPigironBucket = new RedoxiationBucket(RedoxiationBlocks.MoltenPigironBlock, "MoltenPigironBucket");
+            itemMoltenPigironBucket = new RedoxiationBucket(RedoxiationBlocks.moltenPigironBlock, "MoltenPigironBucket");
             itemMoltenPigironBucket.setUnlocalizedName(Redoxiation.MODID + "." + "MoltenPigironBucket").setContainerItem(Items.bucket);
             GameRegistry.registerItem(itemMoltenPigironBucket, "MoltenPigironBucket");
-            FluidContainerRegistry.registerFluidContainer(RedoxiationBlocks.MoltenPigiron, new ItemStack(itemMoltenPigironBucket), new ItemStack(Items.bucket));
-            BucketHandler.INSTANCE.buckets.put(RedoxiationBlocks.MoltenPigironBlock, itemMoltenPigironBucket);
+            FluidContainerRegistry.registerFluidContainer(RedoxiationBlocks.moltenPigiron, new ItemStack(itemMoltenPigironBucket), new ItemStack(Items.bucket));
+            BucketHandler.INSTANCE.buckets.put(RedoxiationBlocks.moltenPigironBlock, itemMoltenPigironBucket);
             MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
         }
         if(itemSlagBucket_enable) {
-            itemSlagBucket = new RedoxiationBucket(RedoxiationBlocks.SlagBlock, "SlagBucket");
+            itemSlagBucket = new RedoxiationBucket(RedoxiationBlocks.slagBlock, "SlagBucket");
             itemSlagBucket.setUnlocalizedName(Redoxiation.MODID + "." + "SlagBucket").setContainerItem(Items.bucket);
             GameRegistry.registerItem(itemSlagBucket, "SlagBucket");
-            FluidContainerRegistry.registerFluidContainer(RedoxiationBlocks.Slag, new ItemStack(itemSlagBucket), new ItemStack(Items.bucket));
-            BucketHandler.INSTANCE.buckets.put(RedoxiationBlocks.SlagBlock, itemSlagBucket);
+            FluidContainerRegistry.registerFluidContainer(RedoxiationBlocks.slag, new ItemStack(itemSlagBucket), new ItemStack(Items.bucket));
+            BucketHandler.INSTANCE.buckets.put(RedoxiationBlocks.slagBlock, itemSlagBucket);
             MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
 		}
 		Redoxiation.logger.info("Item Registry Complete. Starting Tileentity proxy.");

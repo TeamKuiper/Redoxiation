@@ -34,7 +34,7 @@ public class RegisterBlockPart implements IPartFactory, IPartConverter
 
     @Override
     public Iterable<Block> blockTypes() {
-        return Arrays.asList(RedoxiationBlocks.Wire);
+        return Arrays.asList(RedoxiationBlocks.wire);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class RegisterBlockPart implements IPartFactory, IPartConverter
     {
         Block b = world.getBlock(pos.x, pos.y, pos.z);
         int meta = world.getBlockMetadata(pos.x, pos.y, pos.z);
-        if(b == RedoxiationBlocks.Wire)
+        if(b == RedoxiationBlocks.wire)
             return new WirePart(meta);
 
         return null;

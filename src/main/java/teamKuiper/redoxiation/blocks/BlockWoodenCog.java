@@ -44,7 +44,7 @@ public class BlockWoodenCog extends BlockContainer {
 	}
 
 	public boolean checkstate(int x, int y, int z, int st, World world) {
-		return ((world.getBlock(x, y, z) == RedoxiationBlocks.WoodenCog) && (((TileEntityWoodenCog) world.getTileEntity(x, y, z)).state() != st));
+		return ((world.getBlock(x, y, z) == RedoxiationBlocks.woodenCog) && (((TileEntityWoodenCog) world.getTileEntity(x, y, z)).state() != st));
 	}
 
 	public void onBlockAdded(World world, int x, int y, int z) {

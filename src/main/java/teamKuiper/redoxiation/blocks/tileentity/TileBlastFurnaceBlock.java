@@ -488,10 +488,10 @@ public class TileBlastFurnaceBlock extends TileEntity implements IInventory {
 			if (itemStacks[outputSlot] == null) {
 				if (outputSlot == FIRST_OUTPUT_SLOT) {
 					itemStacks[outputSlot] = new ItemStack(
-							RedoxiationBlocks.MoltenPigironBlock, 3);
+							RedoxiationBlocks.moltenPigironBlock, 3);
 				} else {
 					itemStacks[outputSlot] = new ItemStack(
-							RedoxiationBlocks.SlagBlock, 3);
+							RedoxiationBlocks.slagBlock, 3);
 				}
 			} else {
 				if (itemStacks[outputSlot].stackSize > getInventoryStackLimit() - 3) {
@@ -511,7 +511,7 @@ public class TileBlastFurnaceBlock extends TileEntity implements IInventory {
 		if (item == Item.getItemFromBlock(Blocks.iron_ore)
 				|| item == Items.coal
 				|| item == RedoxiationGenericItems.Calcite) {
-			return new ItemStack(RedoxiationBlocks.MoltenPigironBlock);
+			return new ItemStack(RedoxiationBlocks.moltenPigironBlock);
 		}
 		return null;
 	}
@@ -521,7 +521,7 @@ public class TileBlastFurnaceBlock extends TileEntity implements IInventory {
 	public static short getItemBurnTime(ItemStack stack) {
 		int burntime = 0;
 		if (stack.getItem() == Item
-				.getItemFromBlock(RedoxiationBlocks.HotAirBlock)) {
+				.getItemFromBlock(RedoxiationBlocks.hotAirBlock)) {
 			burntime = 1600;
 		}
 		return (short) MathHelper.clamp_int(burntime, 0, Short.MAX_VALUE);
@@ -613,7 +613,7 @@ public class TileBlastFurnaceBlock extends TileEntity implements IInventory {
 	// slots
 	static public boolean isItemValidForFuelSlot(ItemStack itemStack) {
 		Item item = itemStack.getItem();
-		return item == Item.getItemFromBlock(RedoxiationBlocks.HotAirBlock);
+		return item == Item.getItemFromBlock(RedoxiationBlocks.hotAirBlock);
 	}
 
 	// Return true if the given stack is allowed to be inserted in the given

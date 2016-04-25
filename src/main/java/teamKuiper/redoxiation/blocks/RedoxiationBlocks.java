@@ -19,11 +19,11 @@ public class RedoxiationBlocks {
 			obsidianGold, obsidianCopper, obsidianTin, obsidianLead,
 			obsidianSilver, obsidianNickel, obsidianPlatinum, obsidianZinc,
 			obsidianCobalt, obsidianChromium, obsidianUranium,
-			obsidianPlutonium, WoodenCog, StoneCog, IronCog, Wire, lead_tank;
+			obsidianPlutonium, woodenCog, StoneCog, IronCog, wire, lead_tank;
 	
-	public static Fluid HotAir, MoltenPigiron, Slag;
-	public static BlockFluidClassic HotAirBlock, MoltenPigironBlock, SlagBlock;
-	public static Block BlastFurnaceBlock, FloodFillBlock;
+	public static Fluid hotAir, moltenPigiron, slag;
+	public static BlockFluidClassic hotAirBlock, moltenPigironBlock, slagBlock;
+	public static Block blastFurnaceBlock, FloodFillBlock;
 	
 	public static boolean oreCopper_cfg, oreTin_cfg, oreLead_cfg,
 			oreSilver_cfg, oreNickel_cfg, orePlatinum_cfg, oreZinc_cfg,
@@ -79,13 +79,13 @@ public class RedoxiationBlocks {
 		obsidianPlutonium = new RedoxiationOre("obsidianPlutonium", 3, 50.0F, 2000.0F);
 
 		// Cog
-		WoodenCog = new BlockWoodenCog();
+		woodenCog = new BlockWoodenCog();
 		StoneCog = new BlockStoneCog();
 		IronCog = new BlockIronCog();
-        Wire = new Wire();
+        wire = new Wire();
 
 		// Machine
-		BlastFurnaceBlock = new BlastFurnaceBlock();
+		blastFurnaceBlock = new BlastFurnaceBlock();
 		FloodFillBlock = new FloodFillBlock();
         lead_tank = new LeadTank();
 
@@ -129,11 +129,11 @@ public class RedoxiationBlocks {
 		GameRegistry.registerBlock(obsidianChromium, "obsidianChromium");
 		GameRegistry.registerBlock(obsidianUranium, "obsidianUranium");
 		GameRegistry.registerBlock(obsidianPlutonium, "obsidianPlutonium");
-		GameRegistry.registerBlock(WoodenCog, "WoodenCog");
+		GameRegistry.registerBlock(woodenCog, "WoodenCog");
 		GameRegistry.registerBlock(StoneCog, "StoneCog");
 		GameRegistry.registerBlock(IronCog, "IronCog");
-        GameRegistry.registerBlock(Wire, "wire");
-		GameRegistry.registerBlock(BlastFurnaceBlock, "BlastFurnaceBlock");
+        GameRegistry.registerBlock(wire, "wire");
+		GameRegistry.registerBlock(blastFurnaceBlock, "BlastFurnaceBlock");
 		GameRegistry.registerBlock(FloodFillBlock, "FloodFillBlock");
 
 		OreDictionary.registerOre("oreCopper", oreCopper);
@@ -175,30 +175,30 @@ public class RedoxiationBlocks {
 		OreDictionary.registerOre("oreobsidianPlutonium", obsidianPlutonium);
 
 		// Fluids
-		HotAir = new Fluid("HotAir").setLuminosity(0).setDensity(-10).setTemperature(1473).setViscosity(2000).setGaseous(true);
-		MoltenPigiron = new Fluid("MoltenPigiron").setLuminosity(15).setDensity(7874).setTemperature(1900).setViscosity(2000).setGaseous(false);
-		Slag = new Fluid("Slag").setLuminosity(15).setDensity(7874).setTemperature(1900).setViscosity(2000).setGaseous(false);
+		hotAir = new Fluid("HotAir").setLuminosity(0).setDensity(-10).setTemperature(1473).setViscosity(2000).setGaseous(true);
+		moltenPigiron = new Fluid("MoltenPigiron").setLuminosity(15).setDensity(7874).setTemperature(1900).setViscosity(2000).setGaseous(false);
+		slag = new Fluid("Slag").setLuminosity(15).setDensity(7874).setTemperature(1900).setViscosity(2000).setGaseous(false);
 
 		// Fluid Registry
 
 		// Block Fluids
 		//Hot Air
-		FluidRegistry.registerFluid(HotAir);
-		HotAirBlock = (BlockFluidClassic) new BlockHotAir(HotAir, Material.lava).setBlockName("HotAir");
-		GameRegistry.registerBlock(HotAirBlock, "FluidHotAir");
-		HotAir.setUnlocalizedName(HotAirBlock.getUnlocalizedName());
+		FluidRegistry.registerFluid(hotAir);
+		hotAirBlock = (BlockFluidClassic) new BlockHotAir(hotAir, Material.lava).setBlockName("HotAir");
+		GameRegistry.registerBlock(hotAirBlock, "FluidHotAir");
+		hotAir.setUnlocalizedName(hotAirBlock.getUnlocalizedName());
 		
 		//MoltenPigIron
-		FluidRegistry.registerFluid(MoltenPigiron);
-		MoltenPigironBlock = (BlockFluidClassic) new BlockMoltenPigiron(MoltenPigiron, Material.lava).setBlockName("MoltenPigiron");
-		GameRegistry.registerBlock(MoltenPigironBlock, "FluidMoltenPigiron");
-		MoltenPigiron.setUnlocalizedName(MoltenPigironBlock.getUnlocalizedName());
+		FluidRegistry.registerFluid(moltenPigiron);
+		moltenPigironBlock = (BlockFluidClassic) new BlockMoltenPigiron(moltenPigiron, Material.lava).setBlockName("MoltenPigiron");
+		GameRegistry.registerBlock(moltenPigironBlock, "FluidMoltenPigiron");
+		moltenPigiron.setUnlocalizedName(moltenPigironBlock.getUnlocalizedName());
 		
 		//Slag
-		FluidRegistry.registerFluid(Slag);
-		SlagBlock = (BlockFluidClassic) new BlockSlag(Slag, Material.lava).setBlockName("Slag");
-		GameRegistry.registerBlock(SlagBlock, "FluidSlag");
-		Slag.setUnlocalizedName(Slag.getUnlocalizedName());
+		FluidRegistry.registerFluid(slag);
+		slagBlock = (BlockFluidClassic) new BlockSlag(slag, Material.lava).setBlockName("Slag");
+		GameRegistry.registerBlock(slagBlock, "FluidSlag");
+		slag.setUnlocalizedName(slagBlock.getUnlocalizedName());
 		// Fluids End
 		
 		Redoxiation.logger.info("Block Registry Complete. Starting Item Registry");

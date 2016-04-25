@@ -79,7 +79,7 @@ public class TileEntityWoodenCog extends TileEntity {
 
 	// FloodFill
 	public boolean checkstate(int x, int y, int z, int st) {
-		return ((worldObj.getBlock(x, y, z) == RedoxiationBlocks.WoodenCog) && (((TileEntityWoodenCog) worldObj.getTileEntity(x, y, z)).state != st));
+		return ((worldObj.getBlock(x, y, z) == RedoxiationBlocks.woodenCog) && (((TileEntityWoodenCog) worldObj.getTileEntity(x, y, z)).state != st));
 	}
 
 	public int state() {

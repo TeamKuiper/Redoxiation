@@ -44,7 +44,7 @@ public class RedoxiationAchievements {
 		// new Achievement(Name, Name, xCode(?), yCode(?), display item,
 		// required achievement)
 		addAchivement("redoxiation.start", new Achievement("redoxiation.start", "redoxiation.start", 0, 0, RedoxiationGenericItems.ingotCopper, null));
-		addAchivement("redoxiation.blast", new Achievement("redoxiation.blast", "redoxiation.blast", 1, 2, RedoxiationBlocks.BlastFurnaceBlock, getAchievement("redoxiation.start")));
+		addAchivement("redoxiation.blast", new Achievement("redoxiation.blast", "redoxiation.blast", 1, 2, RedoxiationBlocks.blastFurnaceBlock, getAchievement("redoxiation.start")));
 	}
 
 	public static void registerAchievementPane() {

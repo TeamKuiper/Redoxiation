@@ -103,7 +103,7 @@ public class TileWire extends TileEntity {
 
     // FloodFill
     public boolean checkstate(int x, int y, int z, int st) {
-        return ((worldObj.getBlock(x, y, z) == RedoxiationBlocks.Wire) && (((TileWire) worldObj.getTileEntity(x, y, z)).state != st));
+        return ((worldObj.getBlock(x, y, z) == RedoxiationBlocks.wire) && (((TileWire) worldObj.getTileEntity(x, y, z)).state != st));
     }
 
     public int state() {

@@ -12,7 +12,7 @@ public class RedoxiationConfigHandler {
 	public static final String CATEGORY_ITEMS = "items";
 	public static final String CATEGORY_TOOLS = "tools";
 	public static String comment = "";
-	public static void InitConfig(){
+	public static void initConfig(){
 		RedoxiationEventHandler oregen = new RedoxiationEventHandler();
 		RedoxiationGenericItems items = null;
 		config.load();

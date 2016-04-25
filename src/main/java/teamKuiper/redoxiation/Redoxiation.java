@@ -68,13 +68,13 @@ public class Redoxiation {
 	public static org.apache.logging.log4j.Logger logger;
 
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
+	public void preinit(FMLPreInitializationEvent event) {
 		logger = event.getModLog();
 		logger.info("Hello World!");
 		
 		// Simple Config
 		config = new Configuration(event.getSuggestedConfigurationFile());
-		RedoxiationConfigHandler.InitConfig();
+		RedoxiationConfigHandler.initConfig();
 		
 		// Config end
 		RedoxiationBlocks.registerBlocks();
@@ -102,7 +102,7 @@ public class Redoxiation {
     }
 
 	@EventHandler
-	public void Init(FMLInitializationEvent event) {
+	public void init(FMLInitializationEvent event) {
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 		if (RedoxiationAchievements.isachivenable) {
 			RedoxiationAchievements.registerAchievementPane();
@@ -112,7 +112,7 @@ public class Redoxiation {
 	}
 
 	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
+	public void postinit(FMLPostInitializationEvent event) {
 
 	}
 

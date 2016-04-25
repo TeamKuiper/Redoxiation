@@ -55,7 +55,7 @@ public class MultiPartEventHandler {
         if(heldBlock == Blocks.air)
             return false;
 
-        if(heldBlock == RedoxiationBlocks.Wire)
+        if(heldBlock == RedoxiationBlocks.wire)
             part = WirePart.placement(world, pos, hit.sideHit);
 
         if(part == null)

@@ -78,7 +78,7 @@ public class WirePart extends McSidedMetaPart{
 
     @Override
     public Block getBlock() {
-        return RedoxiationBlocks.Wire;
+        return RedoxiationBlocks.wire;
     }
 
     @Override
