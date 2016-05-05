@@ -36,7 +36,7 @@ public class Limestone extends Block {
 		if (fortune > 0) {
 			int j = random.nextInt(fortune + 5) - 1;
 			if (j > 0) {
-				return j++;
+				return j+1;
 			}
 		}
 		return 3;

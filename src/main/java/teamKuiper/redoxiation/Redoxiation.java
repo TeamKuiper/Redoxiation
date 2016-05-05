@@ -1,6 +1,7 @@
 package teamKuiper.redoxiation;
 
 import codechicken.lib.packet.PacketCustom;
+import codechicken.multipart.minecraft.McMultipartCPH;
 import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.creativetab.CreativeTabs;
@@ -95,10 +96,9 @@ public class Redoxiation {
             new RegisterBlockPart().init();
         }
         MinecraftForge.EVENT_BUS.register(new MultiPartEventHandler());
+        MinecraftForge.EVENT_BUS.register(new teamKuiper.redoxiation.EventHandler());
 
         PacketCustom.assignHandler(this, new PacketHandler());
-//        if(FMLCommonHandler.instance().getSide().isClient())
-//            PacketCustom.assignHandler(this, new McMultipartCPH());
     }
 
 	@EventHandler

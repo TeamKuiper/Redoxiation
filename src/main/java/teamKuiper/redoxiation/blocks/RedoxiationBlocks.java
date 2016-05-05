@@ -19,7 +19,7 @@ public class RedoxiationBlocks {
 			obsidianGold, obsidianCopper, obsidianTin, obsidianLead,
 			obsidianSilver, obsidianNickel, obsidianPlatinum, obsidianZinc,
 			obsidianCobalt, obsidianChromium, obsidianUranium,
-			obsidianPlutonium, woodenCog, stoneCog, ironCog, wire, lead_tank;
+			obsidianPlutonium, woodenCog, stoneCog, ironCog, wire, lead_tank, cog;
 	
 	public static Fluid hotAir, moltenPigiron, slag;
 	public static BlockFluidClassic hotAirBlock, moltenPigironBlock, slagBlock;
@@ -83,6 +83,7 @@ public class RedoxiationBlocks {
 		stoneCog = new BlockStoneCog();
 		ironCog = new BlockIronCog();
         wire = new Wire();
+        cog = new Cog();
 
 		// Machine
 		blastFurnaceBlock = new BlastFurnaceBlock();
@@ -132,6 +133,7 @@ public class RedoxiationBlocks {
 		GameRegistry.registerBlock(stoneCog, "StoneCog");
 		GameRegistry.registerBlock(ironCog, "IronCog");
         GameRegistry.registerBlock(wire, "wire");
+        GameRegistry.registerBlock(cog, "cog");
 		GameRegistry.registerBlock(blastFurnaceBlock, "BlastFurnaceBlock");
 
 		OreDictionary.registerOre("oreCopper", oreCopper);

@@ -11,8 +11,6 @@ import teamKuiper.redoxiation.blocks.tileentity.TileEntityWoodenCog;
 
 public class CommandCommon implements ICommand {
 	private List aliases;
-	private TileEntityWoodenCog wcog;
-
 	public CommandCommon() {
 		this.aliases = new ArrayList();
 		this.aliases.add("redox");
