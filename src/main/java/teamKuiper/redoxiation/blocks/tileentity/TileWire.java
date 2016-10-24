@@ -43,7 +43,7 @@ public class TileWire extends TileEntity {
         return rotation;
     }
 
-    public void setsotation(float argR) {
+    public void setrotation(float argR) {
         rotation = argR;
     }
 

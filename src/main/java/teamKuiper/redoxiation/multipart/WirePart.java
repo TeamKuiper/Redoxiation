@@ -49,7 +49,6 @@ public class WirePart extends McSidedMetaPart{
         } else {
             angvel = 0;
         }
-        Redoxiation.logger.info(chunknumber);
         if (world().isRemote) {
             rotation += angvel;
         }
@@ -238,7 +237,7 @@ public class WirePart extends McSidedMetaPart{
         return rotation;
     }
 
-    public void setsotation(float argR) {
+    public void setrotation(float argR) {
         this.rotation = argR;
     }
 
