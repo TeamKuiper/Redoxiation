@@ -1,5 +1,6 @@
 package teamKuiper.redoxiation.blocks.tileentity;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -17,6 +18,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
+import teamKuiper.redoxiation.blocks.MultiblockChecker;
 import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
 import teamKuiper.redoxiation.items.RedoxiationGenericItems;
 
@@ -89,25 +91,17 @@ public class TileBlastFurnaceBlock extends TileEntity implements IInventory {
 
 	/** Check that structure is properly formed */
 	public boolean checkMultiBlockForm() {
-		int i = 0;
-		// Scan a 3x3x3 area, starting with the bottom left corner
-		for (int x = xCoord - 1; x < xCoord + 2; x++)
-			for (int y = yCoord; y < yCoord + 3; y++)
-				for (int z = zCoord - 1; z < zCoord + 2; z++) {
-					TileEntity tile = worldObj.getTileEntity(x, y, z);
-					// Make sure tile isn't null, is an instance of the same
-					// Tile, and isn't already a part of a multiblock
-					if (tile != null && (tile instanceof TileBlastFurnaceBlock)) {
-						if (this.isMaster()) {
-							if (((TileBlastFurnaceBlock) tile).hasMaster())
-								i++;
-						} else if (!((TileBlastFurnaceBlock) tile).hasMaster())
-							i++;
-					}
-				}
-		// check if there are 26 blocks present ((3*3*3) - 1) and check that
-		// center block is empty
-		return i > 25 && worldObj.isAirBlock(xCoord, yCoord + 1, zCoord);
+		Block[][][] blocks = {{{RedoxiationBlocks.blastFurnaceBlock, RedoxiationBlocks.blastFurnaceBlock, RedoxiationBlocks.blastFurnaceBlock},
+								{RedoxiationBlocks.blastFurnaceBlock, RedoxiationBlocks.blastFurnaceBlock, RedoxiationBlocks.blastFurnaceBlock},
+								{RedoxiationBlocks.blastFurnaceBlock, RedoxiationBlocks.blastFurnaceBlock, RedoxiationBlocks.blastFurnaceBlock}},
+								{{RedoxiationBlocks.blastFurnaceBlock, RedoxiationBlocks.blastFurnaceBlock, RedoxiationBlocks.blastFurnaceBlock},
+								{RedoxiationBlocks.blastFurnaceBlock, Blocks.air, RedoxiationBlocks.blastFurnaceBlock},
+								{RedoxiationBlocks.blastFurnaceBlock, RedoxiationBlocks.blastFurnaceBlock, RedoxiationBlocks.blastFurnaceBlock}},
+								{{RedoxiationBlocks.blastFurnaceBlock, RedoxiationBlocks.blastFurnaceBlock, RedoxiationBlocks.blastFurnaceBlock},
+								{RedoxiationBlocks.blastFurnaceBlock, RedoxiationBlocks.blastFurnaceBlock, RedoxiationBlocks.blastFurnaceBlock},
+								{RedoxiationBlocks.blastFurnaceBlock, RedoxiationBlocks.blastFurnaceBlock, RedoxiationBlocks.blastFurnaceBlock}}};
+		
+		return MultiblockChecker.checkMultiBlockWithBlocks(worldObj, xCoord, yCoord, zCoord, 1, 0, 1, 1, 2, 1, blocks);
 	}
 
 	/** Setup all the blocks in the structure */
