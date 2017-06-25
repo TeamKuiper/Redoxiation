@@ -27,6 +27,7 @@ public class MultiblockChecker {
 					if(world.getBlock(xPos - xMinus + x, yPos - yMinus + y, zPos - zMinus + z) != blocks[x][y][z]) {
 						return false;
 					}
+				}
 			}
 		}
 		return true;
