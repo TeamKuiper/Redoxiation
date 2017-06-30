@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
@@ -27,8 +28,12 @@ public class TNTium extends Block {
 	public void onBlockDestroyedByPlayer(World world, int x, int y, int z,
 			int meta) {
 		Random random = new Random();
-		if (random.nextInt(4) >= 3) {
-			world.createExplosion(null, x, y, z, 2, true);
+		if(!Minecraft.getMinecraft().thePlayer.capabilities.isCreativeMode) {
+			if(!world.isRemote){
+				if (random.nextInt(4) >= 3) {
+					world.createExplosion(null, x, y, z, 2, true);
+				}
+			}
 		}
 
 	}
