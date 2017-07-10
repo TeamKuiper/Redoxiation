@@ -133,11 +133,11 @@ public class ContainerBlastFurnace extends Container {
         if (sourceSlotIndex >= VANILLA_FIRST_SLOT_INDEX && sourceSlotIndex < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
             // This is a vanilla container slot so merge the stack into one of the furnace slots
             // If the stack is smeltable try to merge merge the stack into the input slots
-            if (TileBlastFurnaceBlock.getSmeltingResultForItem(sourceStack) != null){
+            if (tileBlastFurnace.getSmeltingResultForItem(sourceStack) != null){
                 if (!mergeItemStack(sourceStack, FIRST_INPUT_SLOT_INDEX, FIRST_INPUT_SLOT_INDEX + INPUT_SLOTS_COUNT, false)){
                     return null;
                 }
-            }	else if (TileBlastFurnaceBlock.getItemBurnTime(sourceStack) > 0) {
+            }	else if (tileBlastFurnace.getItemBurnTime(sourceStack) > 0) {
                 if (!mergeItemStack(sourceStack, FIRST_FUEL_SLOT_INDEX, FIRST_FUEL_SLOT_INDEX + FUEL_SLOTS_COUNT, true)) {
                     // Setting the boolean to true places the stack in the bottom slot first
                     return null;
@@ -223,7 +223,7 @@ public class ContainerBlastFurnace extends Container {
         // if this function returns false, the player won't be able to insert the given item into this slot
         @Override
         public boolean isItemValid(ItemStack stack) {
-            return TileBlastFurnaceBlock.isItemValidForFuelSlot(stack);
+            return tileBlastFurnace.isItemValidForFuelSlot(stack);
         }
     }
 
@@ -236,7 +236,7 @@ public class ContainerBlastFurnace extends Container {
         // if this function returns false, the player won't be able to insert the given item into this slot
         @Override
         public boolean isItemValid(ItemStack stack) {
-            return TileBlastFurnaceBlock.isItemValidForInputSlot(stack);
+            return tileBlastFurnace.isItemValidForInputSlot(stack);
         }
     }
 
