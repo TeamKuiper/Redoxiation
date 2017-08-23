@@ -449,9 +449,6 @@ public class MultiblockTileEntityBase extends TileEntity implements IInventory {
 		for(int x = 0; x < existItems.length; x++) {
 			existItems[x] = false;
 		}
-
-		// finds the first input slot which is smeltable and whose result fits
-		// into an output slot (stacking if possible)
 		
 		recipe:
 		for(int x = 0; x < recipe.length / 2; x++) {
@@ -480,32 +477,11 @@ public class MultiblockTileEntityBase extends TileEntity implements IInventory {
 		if(!canSmelt) {
 			return false;
 		}
-		
-		/*for (int inputSlot = FIRST_INPUT_SLOT; inputSlot < FIRST_INPUT_SLOT
-				+ INPUT_SLOTS_COUNT; inputSlot++) {
-			if (itemStacks[inputSlot] != null) {
-				if (itemStacks[inputSlot].getItem() == Item
-						.getItemFromBlock(Blocks.iron_ore)
-						&& itemStacks[inputSlot].stackSize >= 4) {
-					hasIronOre = true;
-				}
-				if (itemStacks[inputSlot].getItem() == Items.coal
-						&& itemStacks[inputSlot].stackSize >= 17) {
-					hasCarbon = true;
-				}
-				if (itemStacks[inputSlot].getItem() == RedoxiationGenericItems.Calcite
-						&& itemStacks[inputSlot].stackSize >= 11) {
-					hasCalcite = true;
-				}
-			}
-		}
-		if (!(hasIronOre && hasCarbon && hasCalcite)) {
-			return false;
-		}*/
 
 		for (int outputSlot = FIRST_OUTPUT_SLOT; outputSlot < FIRST_OUTPUT_SLOT + OUTPUT_SLOTS_COUNT; outputSlot++) {
 			if (itemStacks[outputSlot] != null) {
-				if (itemStacks[outputSlot].stackSize > getInventoryStackLimit() - recipe[smeltNum + 1][outputSlot - FIRST_OUTPUT_SLOT].stackSize) {
+				if (itemStacks[outputSlot] == recipe[smeltNum + 1][outputSlot - FIRST_OUTPUT_SLOT] && 
+						itemStacks[outputSlot].stackSize > getInventoryStackLimit() - recipe[smeltNum + 1][outputSlot - FIRST_OUTPUT_SLOT].stackSize) {
 					return false;
 				}
 			}
@@ -525,56 +501,16 @@ public class MultiblockTileEntityBase extends TileEntity implements IInventory {
 				itemStacks[inputSlot] = null;
 			}
 		}
-		
-		
-		/*for (int inputSlot = FIRST_INPUT_SLOT; inputSlot < FIRST_INPUT_SLOT
-				+ INPUT_SLOTS_COUNT; inputSlot++) {
-			if (itemStacks[inputSlot].getItem() == Item
-					.getItemFromBlock(Blocks.iron_ore)) {
-				itemStacks[inputSlot].stackSize -= 4;
-			}
-			if (itemStacks[inputSlot].getItem() == Items.coal
-					&& itemStacks[inputSlot].stackSize >= 17) {
-				itemStacks[inputSlot].stackSize -= 17;
-			}
-			if (itemStacks[inputSlot].getItem() == RedoxiationGenericItems.Calcite
-					&& itemStacks[inputSlot].stackSize >= 11) {
-				itemStacks[inputSlot].stackSize -= 11;
-			}
-			if (itemStacks[inputSlot].stackSize <= 0) {
-				itemStacks[inputSlot] = null;
-			}
-		}*/
 			
-				
 		for (int outputSlot = FIRST_OUTPUT_SLOT; outputSlot < FIRST_OUTPUT_SLOT + OUTPUT_SLOTS_COUNT; outputSlot++) {
 			if (itemStacks[outputSlot] == null) {
 				if(recipe[smeltNum + 1][outputSlot - FIRST_OUTPUT_SLOT] != null) {
-					itemStacks[outputSlot] = recipe[smeltNum + 1][outputSlot - FIRST_OUTPUT_SLOT];
+					itemStacks[outputSlot] = new ItemStack(recipe[smeltNum + 1][outputSlot - FIRST_OUTPUT_SLOT].getItem(), recipe[smeltNum + 1][outputSlot - FIRST_OUTPUT_SLOT].stackSize);
 				}
 			} else {
 				itemStacks[outputSlot].stackSize += recipe[smeltNum + 1][outputSlot - FIRST_OUTPUT_SLOT].stackSize;
 			}
 		}
-			
-			
-			
-			/*for (int outputSlot = FIRST_OUTPUT_SLOT; outputSlot < FIRST_OUTPUT_SLOT + OUTPUT_SLOTS_COUNT; outputSlot++) {
-			if (itemStacks[outputSlot] == null) {
-					if (outputSlot == FIRST_OUTPUT_SLOT) {
-					itemStacks[outputSlot] = new ItemStack(
-								RedoxiationBlocks.moltenPigironBlock, 3);
-					} else {
-					itemStacks[outputSlot] = new ItemStack(
-								RedoxiationBlocks.slagBlock, 3);
-					}
-				} else {
-					if (itemStacks[outputSlot].stackSize > getInventoryStackLimit() - 3) {
-						itemStacks[outputSlot].stackSize = getInventoryStackLimit();
-					}	
-					itemStacks[outputSlot].stackSize += 3;
-				}
-			}*/
 			
 		markDirty();
 		return true;
