@@ -480,7 +480,7 @@ public class MultiblockTileEntityBase extends TileEntity implements IInventory {
 
 		for (int outputSlot = FIRST_OUTPUT_SLOT; outputSlot < FIRST_OUTPUT_SLOT + OUTPUT_SLOTS_COUNT; outputSlot++) {
 			if (itemStacks[outputSlot] != null) {
-				if (itemStacks[outputSlot] == recipe[smeltNum + 1][outputSlot - FIRST_OUTPUT_SLOT] && 
+				if (itemStacks[outputSlot].getItem().getUnlocalizedName() == recipe[smeltNum + 1][outputSlot - FIRST_OUTPUT_SLOT].getItem().getUnlocalizedName() || 
 						itemStacks[outputSlot].stackSize > getInventoryStackLimit() - recipe[smeltNum + 1][outputSlot - FIRST_OUTPUT_SLOT].stackSize) {
 					return false;
 				}
