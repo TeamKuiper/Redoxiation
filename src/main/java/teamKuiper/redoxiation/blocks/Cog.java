@@ -1,6 +1,5 @@
 package teamKuiper.redoxiation.blocks;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -23,7 +22,6 @@ public class Cog extends BlockContainer {
         setHarvestLevel("pickaxe", 2);
         setHardness(2.0F);
         setResistance(10.0F);
-        GameRegistry.registerTileEntity(TileCog.class, Redoxiation.MODID + "." + name);
     }
 
     public TileEntity createNewTileEntity(World world, int meta) {

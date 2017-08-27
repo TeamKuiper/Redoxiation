@@ -16,11 +16,13 @@ public class ClientProxy extends CommonProxy{
 		TileEntitySpecialRenderer renderIronCog = new RenderIronCog();
         TileEntitySpecialRenderer renderWire = new RenderWire();
         TileEntitySpecialRenderer renderLeadTank = new RenderLeadTank();
+        TileEntitySpecialRenderer renderPipeCopper = new RenderPipeCopper();
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWoodenCog.class, renderWoodenCog);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStoneCog.class, renderStoneCog);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityIronCog.class, renderIronCog);
         ClientRegistry.bindTileEntitySpecialRenderer(TileWire.class, renderWire);
         ClientRegistry.bindTileEntitySpecialRenderer(TileLeadTank.class, renderLeadTank);
+        ClientRegistry.bindTileEntitySpecialRenderer(TilePipeCopper.class, renderPipeCopper);
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(RedoxiationBlocks.stoneCog), new ItemRenderStoneCog(renderStoneCog, new TileEntityStoneCog()));
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(RedoxiationBlocks.ironCog), new ItemRenderIronCog(renderIronCog, new TileEntityIronCog()));
 	}

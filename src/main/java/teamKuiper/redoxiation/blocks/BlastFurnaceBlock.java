@@ -1,21 +1,20 @@
 package teamKuiper.redoxiation.blocks;
 
-import cpw.mods.fml.common.registry.GameRegistry;
+import java.util.Random;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.achievement.RedoxiationAchievements;
 import teamKuiper.redoxiation.blocks.gui.GUIs;
 import teamKuiper.redoxiation.blocks.tileentity.TileBlastFurnaceBlock;
-
-import java.util.Random;
 
 public class BlastFurnaceBlock extends BlockContainer {
 	Random random = new Random();
@@ -27,7 +26,6 @@ public class BlastFurnaceBlock extends BlockContainer {
 		setCreativeTab(Redoxiation.tabRedoxiation);
 		setBlockName("redoxiation.blastFurnaceBlock");
 		setBlockTextureName(Redoxiation.MODID + ":" + name);
-		GameRegistry.registerTileEntity(TileBlastFurnaceBlock.class, Redoxiation.MODID + ".blastFurnaceBlock");
 	}
 
 	@Override
