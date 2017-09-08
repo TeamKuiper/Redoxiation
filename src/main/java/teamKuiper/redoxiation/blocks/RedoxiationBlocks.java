@@ -8,6 +8,14 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import teamKuiper.redoxiation.Redoxiation;
+import teamKuiper.redoxiation.blocks.tileentity.TileBlastFurnaceBlock;
+import teamKuiper.redoxiation.blocks.tileentity.TileCog;
+import teamKuiper.redoxiation.blocks.tileentity.TileEntityIronCog;
+import teamKuiper.redoxiation.blocks.tileentity.TileEntityStoneCog;
+import teamKuiper.redoxiation.blocks.tileentity.TileEntityWoodenCog;
+import teamKuiper.redoxiation.blocks.tileentity.TileLeadTank;
+import teamKuiper.redoxiation.blocks.tileentity.TilePipeCopper;
+import teamKuiper.redoxiation.blocks.tileentity.TileWire;
 
 public class RedoxiationBlocks {
 
@@ -19,7 +27,7 @@ public class RedoxiationBlocks {
 			obsidianGold, obsidianCopper, obsidianTin, obsidianLead,
 			obsidianSilver, obsidianNickel, obsidianPlatinum, obsidianZinc,
 			obsidianCobalt, obsidianChromium, obsidianUranium,
-			obsidianPlutonium, woodenCog, stoneCog, ironCog, wire, lead_tank, cog;
+			obsidianPlutonium, woodenCog, stoneCog, ironCog, wire, tankLead, cog, pipeCopper;
 	
 	public static Fluid hotAir, moltenPigiron, slag;
 	public static BlockFluidClassic hotAirBlock, moltenPigironBlock, slagBlock;
@@ -87,7 +95,8 @@ public class RedoxiationBlocks {
 
 		// Machine
 		blastFurnaceBlock = new BlastFurnaceBlock();
-        lead_tank = new LeadTank();
+        tankLead = new LeadTank();
+        pipeCopper = new BlockPipeCopper();
 
 		// Registry
 
@@ -135,6 +144,8 @@ public class RedoxiationBlocks {
         GameRegistry.registerBlock(wire, "wire");
         GameRegistry.registerBlock(cog, "cog");
 		GameRegistry.registerBlock(blastFurnaceBlock, "BlastFurnaceBlock");
+        GameRegistry.registerBlock(tankLead, "tankLead");
+		GameRegistry.registerBlock(pipeCopper, "pipeCopper");
 
 		OreDictionary.registerOre("oreCopper", oreCopper);
 		OreDictionary.registerOre("oreTin", oreTin);
@@ -173,6 +184,18 @@ public class RedoxiationBlocks {
 		OreDictionary.registerOre("oreobsidianChromium", obsidianChromium);
 		OreDictionary.registerOre("oreobsidianUranium", obsidianUranium);
 		OreDictionary.registerOre("oreobsidianPlutonium", obsidianPlutonium);
+		
+		// Tile Entities
+        GameRegistry.registerTileEntity(TileWire.class, Redoxiation.MODID + ".wire");
+        GameRegistry.registerTileEntity(TileCog.class, Redoxiation.MODID + ".cog");
+		GameRegistry.registerTileEntity(TileEntityWoodenCog.class, Redoxiation.MODID + ".WoodenCog");
+		GameRegistry.registerTileEntity(TileEntityStoneCog.class, Redoxiation.MODID + ".StoneCog");
+		GameRegistry.registerTileEntity(TileEntityIronCog.class, Redoxiation.MODID + ".IronCog");
+		GameRegistry.registerTileEntity(TileBlastFurnaceBlock.class, Redoxiation.MODID + ".blastFurnaceBlock");
+        GameRegistry.registerTileEntity(TileLeadTank.class, Redoxiation.MODID + ".tankLead");
+        GameRegistry.registerTileEntity(TilePipeCopper.class, Redoxiation.MODID + ".pipeCopper");
+        
+		
 
 		// Fluids
 		hotAir = new Fluid("HotAir").setLuminosity(0).setDensity(-10).setTemperature(1473).setViscosity(2000).setGaseous(true);

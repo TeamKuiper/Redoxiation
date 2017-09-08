@@ -43,7 +43,7 @@ public class Utils {
     }
 
     public static ItemStack getTankStackFromTile(TileLeadTank tank, boolean keepFluid) {
-        ItemStack stack = new ItemStack(RedoxiationBlocks.lead_tank);
+        ItemStack stack = new ItemStack(RedoxiationBlocks.tankLead);
         stack.setTagCompound(new NBTTagCompound());
         FluidStack fluid = tank.tank.getFluid();
         if (fluid != null && keepFluid) {
@@ -121,7 +121,7 @@ public class Utils {
     }
 
     public static ItemStack getTankStackFromData() {
-        ItemStack stack = new ItemStack(Item.getItemFromBlock(RedoxiationBlocks.lead_tank));
+        ItemStack stack = new ItemStack(Item.getItemFromBlock(RedoxiationBlocks.tankLead));
         NBTTagCompound tag = new NBTTagCompound();
         stack.setTagCompound(tag);
         return stack;

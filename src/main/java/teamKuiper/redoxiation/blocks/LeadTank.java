@@ -1,11 +1,7 @@
 package teamKuiper.redoxiation.blocks;
 
 import java.util.Random;
-import cpw.mods.fml.common.registry.GameRegistry;
-import teamKuiper.redoxiation.Redoxiation;
-import teamKuiper.redoxiation.Utils;
-import teamKuiper.redoxiation.items.ItemBlockLeadTank;
-import teamKuiper.redoxiation.blocks.tileentity.TileLeadTank;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -22,10 +18,13 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
+import teamKuiper.redoxiation.Redoxiation;
+import teamKuiper.redoxiation.Utils;
+import teamKuiper.redoxiation.blocks.tileentity.TileLeadTank;
 
 public class LeadTank extends Block implements ITileEntityProvider {
 
-    String name = "leadTank";
+    String name = "tankLead";
     public static IIcon icon;
 
     public LeadTank() {
@@ -33,8 +32,6 @@ public class LeadTank extends Block implements ITileEntityProvider {
         setBlockName(Redoxiation.MODID + "." + name);
         setBlockTextureName(Redoxiation.MODID + ":" + name);
         setCreativeTab(Redoxiation.tabRedoxiation);
-        GameRegistry.registerBlock(this, ItemBlockLeadTank.class, name);
-        GameRegistry.registerTileEntity(TileLeadTank.class, Redoxiation.MODID + "." + name);
     }
  
     @Override

@@ -1,6 +1,5 @@
 package teamKuiper.redoxiation.blocks;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
@@ -14,7 +13,6 @@ public class BlockIronCog extends BlockContainer {
 		super(Material.iron);
 		setCreativeTab(Redoxiation.tabRedoxiation);
 		setBlockName("IronCog");
-		GameRegistry.registerTileEntity(TileEntityIronCog.class, Redoxiation.MODID + ".IronCog");
 	}
 
 	@Override
