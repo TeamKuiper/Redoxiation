@@ -12,6 +12,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import teamKuiper.redoxiation.PacketHandler;
 import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.blocks.tileentity.TileWire;
+import teamKuiper.redoxiation.blocks.tileentity.TileWire;
 import teamKuiper.redoxiation.multipart.WirePart;
 
 public class Wire extends BlockContainer {
@@ -46,7 +47,77 @@ public class Wire extends BlockContainer {
     public void onBlockAdded(World world, int x, int y, int z) {
         if(world.isRemote)
             new PacketCustom(PacketHandler.channel, 1).sendToServer();
+		TileWire tile = (TileWire) world.getTileEntity(x, y, z);
+		int check = tile.fill(x, y, z, 0, false, 1);
+		tile.setfill(x, y, z, check, true);
     }
+    
+    public boolean checkstate(int x, int y, int z, boolean st, World world) {
+		return ((world.getBlock(x, y, z) == RedoxiationBlocks.wire) && (((TileWire) world.getTileEntity(x, y, z)).state() != st));
+	}
+    
+    public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
+
+		int check = 0;
+
+		if (checkstate(x+1, y, z, false, world))
+		{
+			((TileWire)world.getTileEntity(x+1, y, z)).fill(x+1, y, z, 0, false, 1);
+		}
+		if (checkstate(x-1, y, z, false, world))
+		{
+			((TileWire)world.getTileEntity(x-1, y, z)).fill(x-1, y, z, 0, false, 1);
+		}
+		if (checkstate(x, y+1, z, false, world))
+		{
+			((TileWire)world.getTileEntity(x, y+1, z)).fill(x, y+1, z, 0, false, 1);
+		}
+		if (checkstate(x, y-1, z, false, world))
+		{
+			((TileWire)world.getTileEntity(x, y-1, z)).fill(x, y-1, z, 0, false, 1);
+		}
+		if (checkstate(x, y, z+1, false, world))
+		{
+			((TileWire)world.getTileEntity(x, y, z+1)).fill(x, y, z+1, 0, false, 1);
+		}
+		if (checkstate(x, y, z-1, false, world))
+		{
+			((TileWire)world.getTileEntity(x, y, z-1)).fill(x, y, z-1, 0, false, 1);
+		}
+		
+		
+		if (checkstate(x+1, y, z, true, world))
+		{
+			check = ((TileWire)world.getTileEntity(x+1, y, z)).getchunknumber();
+			((TileWire)world.getTileEntity(x+1, y, z)).setfill(x+1, y, z, check, true);
+		}
+		if (checkstate(x-1, y, z, true, world))
+		{
+			check = ((TileWire)world.getTileEntity(x-1, y, z)).getchunknumber();
+			((TileWire)world.getTileEntity(x-1, y, z)).setfill(x-1, y, z, check, true);
+		}
+		if (checkstate(x, y+1, z, true, world))
+		{
+			check = ((TileWire)world.getTileEntity(x, y+1, z)).getchunknumber();
+			((TileWire)world.getTileEntity(x, y+1, z)).setfill(x, y+1, z, check, true);
+		}
+		if (checkstate(x, y-1, z, true, world))
+		{
+			check = ((TileWire)world.getTileEntity(x, y-1, z)).getchunknumber();
+			((TileWire)world.getTileEntity(x, y-1, z)).setfill(x, y-1, z, check, true);
+		}
+		if (checkstate(x, y, z+1, true, world))
+		{
+			check = ((TileWire)world.getTileEntity(x, y, z+1)).getchunknumber();
+			((TileWire)world.getTileEntity(x, y, z+1)).setfill(x, y, z+1, check, true);
+		}
+		if (checkstate(x, y, z-1, true, world))
+		{
+			check = ((TileWire)world.getTileEntity(x, y, z-1)).getchunknumber();
+			((TileWire)world.getTileEntity(x, y, z-1)).setfill(x, y, z-1, check, true);
+		}
+		
+	}
 
     @Override
     public int getRenderType() {

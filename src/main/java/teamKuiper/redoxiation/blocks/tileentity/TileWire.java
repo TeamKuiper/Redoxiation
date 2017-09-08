@@ -181,8 +181,8 @@ public class TileWire extends TileEntity {
         return checknum;
     }
 
-    public int setfill(int x, int y, int z, int checknum, boolean st, World world) {
-        TileWire tile = (TileWire) world.getTileEntity(x, y, z);
+    public int setfill(int x, int y, int z, int checknum, boolean st) {
+        TileWire tile = (TileWire) worldObj.getTileEntity(x, y, z);
         tile.setstate(st);
         tile.setchunknumber(checknum);
         tile.setrotation(0);
@@ -191,22 +191,22 @@ public class TileWire extends TileEntity {
         	tile.setmultiply(0);
         }
         if (checkstate(x + 1, y, z, st)) {
-            setfill(x + 1, y, z, checknum, st, world);
+            setfill(x + 1, y, z, checknum, st);
         }
         if (checkstate(x - 1, y, z, st)) {
-            setfill(x - 1, y, z, checknum, st, world);
+            setfill(x - 1, y, z, checknum, st);
         }
         if (checkstate(x, y + 1, z, st)) {
-            setfill(x, y + 1, z, checknum, st, world);
+            setfill(x, y + 1, z, checknum, st);
         }
         if (checkstate(x, y - 1, z, st)) {
-            setfill(x, y - 1, z, checknum, st, world);
+            setfill(x, y - 1, z, checknum, st);
         }
         if (checkstate(x, y, z + 1, st)) {
-            setfill(x, y, z + 1, checknum, st, world);
+            setfill(x, y, z + 1, checknum, st);
         }
         if (checkstate(x, y, z - 1, st)) {
-            setfill(x, y, z - 1, checknum, st, world);
+            setfill(x, y, z - 1, checknum, st);
         }
         return checknum;
     }
