@@ -9,7 +9,10 @@ import codechicken.multipart.minecraft.McSidedMetaPart;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import teamKuiper.redoxiation.Redoxiation;
@@ -22,12 +25,13 @@ public class WirePart extends McSidedMetaPart{
     private float scale = 1.0f;
     private float rotation = 0;
     private float angvel = 0;
-    private int state;
+    private float multiply = 1;
+    private boolean state;
     private int chunknumber = 0;
     public static int[] sideMetaMap = new int[]{1,0,3,2,5,4};
-    public static int[] sidex = new int[]{0,0,0,0,-1,1};
-    public static int[] sidey = new int[]{-1,1,0,0,0,0};
-    public static int[] sidez = new int[]{0,0,-1,1,0,0};
+    public static int[] sidex = new int[]{0,0,0,0,1,-1};
+    public static int[] sidey = new int[]{1,-1,0,0,0,0};
+    public static int[] sidez = new int[]{0,0,1,-1,0,0};
 
     public WirePart() {
         super();
@@ -45,7 +49,7 @@ public class WirePart extends McSidedMetaPart{
     @Override
     public void update() {
         if (chunknumber != 0) {
-            angvel = 1 / ((float) chunknumber);
+            angvel = multiply / ((float) chunknumber);
         } else {
             angvel = 0;
         }
@@ -55,22 +59,25 @@ public class WirePart extends McSidedMetaPart{
         if (rotation >= 360) {
             rotation = rotation - 360;
         }
+        else if (rotation <0) {
+        	rotation = rotation + 360;
+        }
     }
 
     @Override
     public Cuboid6 getBounds() {
         if (meta == 0) {
-            return new Cuboid6(0.3125, 0.9375, 0.3125, 0.6875, 1.0, 0.6875);
+            return new Cuboid6(0.3125, 0.875, 0.3125, 0.6875, 1.0, 0.6875);
         } else if (meta == 1) {
-            return new Cuboid6(0.3125, 0.0, 0.3125, 0.6875, 0.0625, 0.6875);
+            return new Cuboid6(0.3125, 0.0, 0.3125, 0.6875, 0.125, 0.6875);
         } else if (meta == 2) {
-            return new Cuboid6(0.3125, 0.3125, 0.9375, 0.6875, 0.6875, 1.0);
+            return new Cuboid6(0.3125, 0.3125, 0.875, 0.6875, 0.6875, 1.0);
         } else if (meta == 3) {
-            return new Cuboid6(0.3125, 0.3125, 0.0, 0.6875, 0.6875, 0.0625);
+            return new Cuboid6(0.3125, 0.3125, 0.0, 0.6875, 0.6875, 0.125);
         } else if (meta == 4) {
-            return new Cuboid6(0.9375, 0.3125, 0.3125, 1.0, 0.6875, 0.6875);
+            return new Cuboid6(0.875, 0.3125, 0.3125, 1.0, 0.6875, 0.6875);
         } else if (meta == 5) {
-            return new Cuboid6(0.0, 0.3125, 0.3125, 0.0625, 0.6875, 0.6875);
+            return new Cuboid6(0.0, 0.3125, 0.3125, 0.125, 0.6875, 0.6875);
         }
         return null;
     }
@@ -105,7 +112,7 @@ public class WirePart extends McSidedMetaPart{
         tag.setFloat("scale", scale);
         tag.setFloat("rotation", rotation);
         tag.setFloat("angvel", angvel);
-        tag.setInteger("state", state);
+        tag.setBoolean("state", state);
         tag.setInteger("chunknumber", chunknumber);
     }
 
@@ -132,8 +139,8 @@ public class WirePart extends McSidedMetaPart{
     @Override
     public void onAdded() {
     	WirePart wire = WirePart.getWirePart(world(), x(), y(), z(), meta);
-    	int check = wire.fill(x(), y(), z(), meta, 0, 1);
-		wire.setfill(x(), y(), z(), meta, check, 0);
+    	int check = wire.fill(x(), y(), z(), meta, 0, false, 1);
+		wire.setfill(x(), y(), z(), meta, check, true);
         super.onAdded();
     }
     
@@ -141,7 +148,7 @@ public class WirePart extends McSidedMetaPart{
     public void onRemoved() {
     	
     	int checknum = 0;
-    	int st = 1;
+    	boolean st = false;
     	int side = meta;
     	
     	for(int i=0;i<6;i++)
@@ -150,7 +157,7 @@ public class WirePart extends McSidedMetaPart{
         	{
         		if (checkstate(x(), y(), z(), i, st))
         		{
-        			WirePart.getWirePart(world(), x(), y(), z(), i).fill(x(), y(), z(), i, checknum, st);
+        			WirePart.getWirePart(world(), x(), y(), z(), i).fill(x(), y(), z(), i, checknum, st, 1);
         		}
         	}
         }
@@ -160,7 +167,7 @@ public class WirePart extends McSidedMetaPart{
         	{
         		if (checkstate(x()-sidex[i], y()-sidey[i], z()-sidez[i], side, st))
         		{
-        			WirePart.getWirePart(world(), x()-sidex[i], y()-sidey[i], z()-sidez[i], side).fill(x()-sidex[i], y()-sidey[i], z()-sidez[i], side, checknum, st);
+        			WirePart.getWirePart(world(), x()-sidex[i], y()-sidey[i], z()-sidez[i], side).fill(x()-sidex[i], y()-sidey[i], z()-sidez[i], side, checknum, st, 1);
         		}
         	}
         }
@@ -170,12 +177,12 @@ public class WirePart extends McSidedMetaPart{
         	{
         		if (checkstate(x()+sidex[side]-sidex[i], y()+sidey[side]-sidey[i], z()+sidez[side]-sidez[i], i, st))
         		{
-        			WirePart.getWirePart(world(), x()+sidex[side]-sidex[i], y()+sidey[side]-sidey[i], z()+sidez[side]-sidez[i], i).fill(x()+sidex[side]-sidex[i], y()+sidey[side]-sidey[i], z()+sidez[side]-sidez[i], i, checknum, st);
+        			WirePart.getWirePart(world(), x()+sidex[side]-sidex[i], y()+sidey[side]-sidey[i], z()+sidez[side]-sidez[i], i).fill(x()+sidex[side]-sidex[i], y()+sidey[side]-sidey[i], z()+sidez[side]-sidez[i], i, checknum, st, 1);
         		}
         	}
         }
     	
-        st = 0;
+        st = true;
         
         for(int i=0;i<6;i++)
         {
@@ -249,18 +256,26 @@ public class WirePart extends McSidedMetaPart{
         this.chunknumber = chunknumber;
     }
 
-    public int getstate() {
+    public boolean getstate() {
         return state;
     }
 
-    public void setstate(int state) {
+    public void setstate(boolean state) {
         this.state = state;
+    }
+    
+    public float getmultiply() {
+        return multiply;
+    }
+
+    public void setmultiply(float argR) {
+    	multiply = argR;
     }
 
     public static TileWire getWire(World world, int x, int y, int z, int side) {
         TileEntity tile = world.getTileEntity(x, y, z);
         if(tile instanceof TileWire) {
-
+        	return (TileWire)tile;
         }
         return null;
     }
@@ -276,22 +291,65 @@ public class WirePart extends McSidedMetaPart{
         return null;
     }
 
-    public boolean checkstate(int x, int y, int z, int side, int st) {
+    public boolean checkstate(int x, int y, int z, int side, boolean st) {
         return ((WirePart.getWirePart(world(), x, y, z, side) != null) &&
                 ((WirePart.getWirePart(world(), x, y, z, side).state != st)));
     }
+    
+    public boolean checkstuck(int x, int y, int z, int side, boolean st, float mul) {
+    	return ((WirePart.getWirePart(world(), x, y, z, side) != null) &&
+                ((WirePart.getWirePart(world(), x, y, z, side).state != st)) && ((WirePart.getWirePart(world(), x, y, z, side).multiply != -mul)));
+    }
 
-    public int fill(int x, int y, int z, int side, int checknum, int st) {
-        checknum++;
+    public int fill(int x, int y, int z, int side, int checknum, boolean st, float mul) {
+    	if (checknum == -1)
+    	{
+    		checknum = -1;
+    	}
+    	else
+    	{
+    		checknum++;
+    	}
         WirePart wire = WirePart.getWirePart(world(), x, y, z, side);
         wire.state = st;
+        wire.multiply = -mul;
+        for(int i=0;i<6;i++)
+        {
+        	if ((i != side)&&(i != sideMetaMap[side]))
+        	{
+        		if (checkstuck(x, y, z, i, !st, wire.multiply))
+        		{
+        			checknum = -1;
+        		}
+        	}
+        }
+        for(int i=0;i<6;i++)
+        {
+        	if ((i != side)&&(i != sideMetaMap[side]))
+        	{
+        		if (checkstuck(x-sidex[i], y-sidey[i], z-sidez[i], side, !st, wire.multiply))
+        		{
+        			checknum = -1;
+        		}
+        	}
+        }
+        for(int i=0;i<6;i++)
+        {
+        	if ((i != side)&&(i != sideMetaMap[side]))
+        	{
+        		if (checkstuck(x+sidex[side]-sidex[i], y+sidey[side]-sidey[i], z+sidez[side]-sidez[i], i, !st, wire.multiply))
+        		{
+        			checknum = -1;
+        		}
+        	}
+        }
         for(int i=0;i<6;i++)
         {
         	if ((i != side)&&(i != sideMetaMap[side]))
         	{
         		if (checkstate(x, y, z, i, st))
         		{
-        			checknum = fill(x, y, z, i, checknum, st);
+        			checknum = fill(x, y, z, i, checknum, st, wire.multiply);
         		}
         	}
         }
@@ -301,7 +359,7 @@ public class WirePart extends McSidedMetaPart{
         	{
         		if (checkstate(x-sidex[i], y-sidey[i], z-sidez[i], side, st))
         		{
-        			checknum = fill(x-sidex[i], y-sidey[i], z-sidez[i], side, checknum, st);
+        			checknum = fill(x-sidex[i], y-sidey[i], z-sidez[i], side, checknum, st, wire.multiply);
         		}
         	}
         }
@@ -311,7 +369,7 @@ public class WirePart extends McSidedMetaPart{
         	{
         		if (checkstate(x+sidex[side]-sidex[i], y+sidey[side]-sidey[i], z+sidez[side]-sidez[i], i, st))
         		{
-        			checknum = fill(x+sidex[side]-sidex[i], y+sidey[side]-sidey[i], z+sidez[side]-sidez[i], i, checknum, st);
+        			checknum = fill(x+sidex[side]-sidex[i], y+sidey[side]-sidey[i], z+sidez[side]-sidez[i], i, checknum, st, wire.multiply);
         		}
         	}
         }
@@ -319,11 +377,15 @@ public class WirePart extends McSidedMetaPart{
         return checknum;
     }
 
-    public int setfill(int x, int y, int z, int side, int checknum, int st) {
+    public int setfill(int x, int y, int z, int side, int checknum, boolean st) {
     	WirePart wire = WirePart.getWirePart(world(), x, y, z, side);
         wire.setstate(st);
         wire.setchunknumber(checknum);
-        
+        wire.setrotation(0);
+        if (checknum == -1)
+        {
+        	wire.setmultiply(0);
+        }
         for(int i=0;i<6;i++)
         {
         	if ((i != side)&&(i != sideMetaMap[side]))

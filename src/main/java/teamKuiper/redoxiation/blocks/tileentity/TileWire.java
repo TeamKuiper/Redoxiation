@@ -13,21 +13,26 @@ public class TileWire extends TileEntity {
     private float scale = 1.0f;
     private float rotation = 0;
     private float angvel = 0;
-    private int state;
+    private boolean state;
     private int chunknumber = 0;
+    private float multiply = 1;
 
     @Override
     public void updateEntity() {
         if (chunknumber != 0) {
-            angvel = 1 / ((float) chunknumber);
+            angvel = multiply / ((float) chunknumber);
         } else {
             angvel = 0;
         }
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         if (worldObj.isRemote) {
             rotation += angvel;
         }
         if (rotation >= 360) {
             rotation = rotation - 360;
+        }
+        else if (rotation <0) {
+        	rotation = rotation + 360;
         }
     }
 
@@ -35,7 +40,7 @@ public class TileWire extends TileEntity {
         return scale;
     }
 
-    public void setscale(int argV) {
+    public void setscale(float argV) {
         scale = argV;
     }
 
@@ -46,6 +51,14 @@ public class TileWire extends TileEntity {
     public void setrotation(float argR) {
         rotation = argR;
     }
+    
+    public float getmultiply() {
+        return multiply;
+    }
+
+    public void setmultiply(float argR) {
+    	multiply = argR;
+    }
 
     public int getchunknumber() {
         return chunknumber;
@@ -55,11 +68,11 @@ public class TileWire extends TileEntity {
         this.chunknumber = chunknumber;
     }
 
-    public int getstate() {
+    public boolean getstate() {
         return state;
     }
 
-    public void setstate(int state) {
+    public void setstate(boolean state) {
         this.state = state;
     }
     public float getangvel() {
@@ -77,6 +90,7 @@ public class TileWire extends TileEntity {
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
         angvel = compound.getFloat("angvel");
+        scale = compound.getFloat("scale");
         chunknumber = compound.getInteger("chunknumber");
     }
 
@@ -84,6 +98,7 @@ public class TileWire extends TileEntity {
     public void writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
         compound.setFloat("angvel", angvel);
+        compound.setFloat("scale", scale);
         compound.setInteger("chunknumber", chunknumber);
     }
 
@@ -102,46 +117,79 @@ public class TileWire extends TileEntity {
     }
 
     // FloodFill
-    public boolean checkstate(int x, int y, int z, int st) {
+    public boolean checkstate(int x, int y, int z, boolean st) {
         return ((worldObj.getBlock(x, y, z) == RedoxiationBlocks.wire) && (((TileWire) worldObj.getTileEntity(x, y, z)).state != st));
     }
+    
+    public boolean checkstuck(int x, int y, int z, boolean st, float mul) {
+    	return ((worldObj.getBlock(x, y, z) == RedoxiationBlocks.wire) && (((TileWire) worldObj.getTileEntity(x, y, z)).state != st) && (((TileWire) worldObj.getTileEntity(x, y, z)).multiply != -mul));
+    }
 
-    public int state() {
+    public boolean state() {
         return state;
     }
 
-    public int fill(int x, int y, int z, int checknum, int st) {
-        checknum++;
+    public int fill(int x, int y, int z, int checknum, boolean st, float mul) {
+    	if (checknum == -1)
+    	{
+    		checknum = -1;
+    	}
+    	else
+    	{
+    		checknum++;
+    	}
         TileWire tile = (TileWire) worldObj.getTileEntity(x, y, z);
         tile.state = st;
+        tile.multiply = -mul;
+        if (checkstuck(x+1, y, z, !st, tile.multiply)) {
+        	checknum = -1;
+        }
+        else if (checkstuck(x-1, y, z, !st, tile.multiply)) {
+        	checknum = -1;
+        }
+        else if (checkstuck(x, y+1, z, !st, tile.multiply)) {
+        	checknum = -1;
+        }
+        else if (checkstuck(x, y-1, z, !st, tile.multiply)) {
+        	checknum = -1;
+        }
+        else if (checkstuck(x, y, z+1, !st, tile.multiply)) {
+        	checknum = -1;
+        }
+        else if (checkstuck(x, y, z-1, !st, tile.multiply)) {
+        	checknum = -1;
+        }
         if (checkstate(x + 1, y, z, st)) {
-            checknum = fill(x + 1, y, z, checknum, st);
+            checknum = fill(x + 1, y, z, checknum, st, tile.multiply);
         }
         if (checkstate(x - 1, y, z, st)) {
-            checknum = fill(x - 1, y, z, checknum, st);
+            checknum = fill(x - 1, y, z, checknum, st, tile.multiply);
         }
         if (checkstate(x, y + 1, z, st)) {
-            checknum = fill(x, y + 1, z, checknum, st);
+            checknum = fill(x, y + 1, z, checknum, st, tile.multiply);
         }
         if (checkstate(x, y - 1, z, st)) {
-            checknum = fill(x, y - 1, z, checknum, st);
+            checknum = fill(x, y - 1, z, checknum, st, tile.multiply);
         }
         if (checkstate(x, y, z + 1, st)) {
-            checknum = fill(x, y, z + 1, checknum, st);
+            checknum = fill(x, y, z + 1, checknum, st, tile.multiply);
         }
         if (checkstate(x, y, z - 1, st)) {
-            checknum = fill(x, y, z - 1, checknum, st);
+            checknum = fill(x, y, z - 1, checknum, st, tile.multiply);
         }
-
         tile.setchunknumber(checknum);
         return checknum;
     }
 
-    public int setfill(int x, int y, int z, int checknum, int st, World world) {
-        TileEntityWoodenCog tile = (TileEntityWoodenCog) world.getTileEntity(x, y, z);
+    public int setfill(int x, int y, int z, int checknum, boolean st, World world) {
+        TileWire tile = (TileWire) world.getTileEntity(x, y, z);
         tile.setstate(st);
         tile.setchunknumber(checknum);
-
+        tile.setrotation(0);
+        if (checknum == -1)
+        {
+        	tile.setmultiply(0);
+        }
         if (checkstate(x + 1, y, z, st)) {
             setfill(x + 1, y, z, checknum, st, world);
         }

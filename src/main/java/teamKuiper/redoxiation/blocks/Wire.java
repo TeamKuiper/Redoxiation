@@ -13,6 +13,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import teamKuiper.redoxiation.PacketHandler;
 import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.blocks.tileentity.TileWire;
+import teamKuiper.redoxiation.multipart.WirePart;
 
 public class Wire extends BlockContainer {
 
@@ -39,8 +40,8 @@ public class Wire extends BlockContainer {
     }
 
     @Override
-    public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata) {
-        return side;
+    public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta) {
+		return side;
     }
 
     @Override
@@ -92,17 +93,17 @@ public class Wire extends BlockContainer {
     public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
         int l = world.getBlockMetadata(x, y, z);
         if (l == 0) {
-            this.setBlockBounds(0.3125f, 0.9375f, 0.3125f, 0.6875f, 1.0f, 0.6875f);
+            this.setBlockBounds(0.3125f, 0.875f, 0.3125f, 0.6875f, 1.0f, 0.6875f);
         } else if (l == 1) {
-            this.setBlockBounds(0.3125f, 0.0f, 0.3125f, 0.6875f, 0.0625f, 0.6875f);
+            this.setBlockBounds(0.3125f, 0.0f, 0.3125f, 0.6875f, 0.125f, 0.6875f);
         } else if (l == 2) {
-            this.setBlockBounds(0.3125f, 0.3125f, 0.9375f, 0.6875f, 0.6875f, 1.0f);
+            this.setBlockBounds(0.3125f, 0.3125f, 0.875f, 0.6875f, 0.6875f, 1.0f);
         } else if (l == 3) {
-            this.setBlockBounds(0.3125f, 0.3125f, 0.0f, 0.6875f, 0.6875f, 0.0625f);
+            this.setBlockBounds(0.3125f, 0.3125f, 0.0f, 0.6875f, 0.6875f, 0.125f);
         } else if (l == 4) {
-            this.setBlockBounds(0.9375f, 0.3125f, 0.3125f, 1.0f, 0.6875f, 0.6875f);
+            this.setBlockBounds(0.875f, 0.3125f, 0.3125f, 1.0f, 0.6875f, 0.6875f);
         } else if (l == 5) {
-            this.setBlockBounds(0.0f, 0.3125f, 0.3125f, 0.0625f, 0.6875f, 0.6875f);
+            this.setBlockBounds(0.0f, 0.3125f, 0.3125f, 0.125f, 0.6875f, 0.6875f);
         }
     }
 
