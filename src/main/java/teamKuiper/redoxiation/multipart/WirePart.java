@@ -109,7 +109,7 @@ public class WirePart extends McSidedMetaPart{
     @Override
     public void save(NBTTagCompound tag) {
         super.save(tag);
-        tag.setFloat("scale", scale);
+        tag.setFloat("multiply", multiply);
         tag.setFloat("rotation", rotation);
         tag.setFloat("angvel", angvel);
         tag.setBoolean("state", state);
@@ -119,7 +119,7 @@ public class WirePart extends McSidedMetaPart{
     @Override
     public void load(NBTTagCompound tag) {
         super.load(tag);
-        tag.getFloat("scale");
+        tag.getFloat("multiply");
         tag.getFloat("rotation");
         tag.getFloat("angvel");
         tag.getInteger("state");
