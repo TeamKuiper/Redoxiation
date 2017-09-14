@@ -11,9 +11,6 @@ import teamKuiper.redoxiation.items.RedoxiationGenericItems;
 
 public class RedoxiationRecipes extends RecipesMain{
 
-	Item CalciteR = RedoxiationGenericItems.Calcite;
-	Item crashedNetherrack = RedoxiationGenericItems.crashedNetherrack;
-	
 	public static void RecipeLists() {
 		GameRegistry.addRecipe(new ItemStack(Blocks.obsidian), new Object[]{
     		"AAA",
