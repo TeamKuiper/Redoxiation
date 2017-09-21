@@ -16,6 +16,7 @@ import teamKuiper.redoxiation.items.RedoxiationGenericItems;
 import teamKuiper.redoxiation.multipart.MultiPartEventHandler;
 import teamKuiper.redoxiation.multipart.RegisterBlockPart;
 import teamKuiper.redoxiation.proxy.CommonProxy;
+import teamKuiper.redoxiation.recipes.RecipesMain;
 import teamKuiper.redoxiation.recipes.RedoxiationRecipes;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -29,7 +30,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = Redoxiation.MODID, version = Redoxiation.VERSION, name = Redoxiation.NAME, dependencies="after:ForgeMultipart" )
-public class Redoxiation extends RedoxiationRecipes {
+public class Redoxiation {
 	@Instance(Redoxiation.MODID)
 	public static Redoxiation instance;
 
@@ -73,7 +74,8 @@ public class Redoxiation extends RedoxiationRecipes {
 	public void preinit(FMLPreInitializationEvent event) {
 		logger = event.getModLog();
 		logger.info("Hello World!");
-        
+        RedoxiationRecipes.RecipesMember();
+		
 		// Simple Config
 		config = new Configuration(event.getSuggestedConfigurationFile());
 		RedoxiationConfigHandler.initConfig();
@@ -99,9 +101,7 @@ public class Redoxiation extends RedoxiationRecipes {
         MinecraftForge.EVENT_BUS.register(new MultiPartEventHandler());
         MinecraftForge.EVENT_BUS.register(new teamKuiper.redoxiation.EventHandler());
 
-        PacketCustom.assignHandler(this, new PacketHandler());
-        RecipeLists();
-    }
+        PacketCustom.assignHandler(this, new PacketHandler());    }
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
