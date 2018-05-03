@@ -4,14 +4,14 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import teamKuiper.redoxiation.Redoxiation;
-import teamKuiper.redoxiation.blocks.tileentity.TileBlastFurnaceBlock;
+import teamKuiper.redoxiation.blocks.tileentity.TileConverterBlock;
 
-public class BlastFurnaceBlock extends MachineBlockBase {
+public class ConverterBlock extends MachineBlockBase {
+
+	String name = "converterBlock";
 	
-	String name = "blastFurnaceBlock";
-
-	public BlastFurnaceBlock() {
-		super(Material.wood, new TileBlastFurnaceBlock());
+	protected ConverterBlock() {
+		super(Material.rock, new TileConverterBlock());
 		setCreativeTab(Redoxiation.tabRedoxiation);
 		setBlockName("redoxiation." + name);
 		setBlockTextureName(Redoxiation.MODID + ":" + name);
@@ -19,7 +19,7 @@ public class BlastFurnaceBlock extends MachineBlockBase {
 	
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileBlastFurnaceBlock();
+		return new TileConverterBlock();
 	}
 
 }

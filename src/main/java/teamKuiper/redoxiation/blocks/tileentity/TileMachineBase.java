@@ -20,7 +20,7 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
 
-public class MultiblockTileEntityBase extends TileEntity implements IInventory {
+public class TileMachineBase extends TileEntity implements IInventory {
 
 	Block block;
 	private int[][] emptyPos;
@@ -33,9 +33,12 @@ public class MultiblockTileEntityBase extends TileEntity implements IInventory {
 	private int masterX, masterY, masterZ;
 
 	Item[] fuel;
+	private int[] burnTime;
 	ItemStack[][] recipe;
+	private String inventoryName;
 	
-	MultiblockTileEntityBase(Block block, int xMinus, int yMinus, int zMinus, int xPlus, int yPlus, int zPlus, int[][] emptyPos, Item[] fuel, ItemStack[][] recipe) {
+	TileMachineBase(String inventoryName, Block block, int xMinus, int yMinus, int zMinus, int xPlus, int yPlus, int zPlus, int[][] emptyPos, Item[] fuel, int[] burnTime, ItemStack[][] recipe) {
+		this.inventoryName = inventoryName;
 		this.block = block;
 		this.xMinus = xMinus;
 		this.yMinus = yMinus;
@@ -45,7 +48,12 @@ public class MultiblockTileEntityBase extends TileEntity implements IInventory {
 		this.zPlus = zPlus;
 		this.emptyPos = emptyPos;
 		this.fuel = fuel;
+		this.burnTime = burnTime;
 		this.recipe = recipe;
+	}
+	
+	public int[] getSlotCount() {
+		return new int[]{1, recipe[0].length, recipe[1].length};
 	}
 	
 	@Override
@@ -114,11 +122,19 @@ public class MultiblockTileEntityBase extends TileEntity implements IInventory {
 			for (int y = yCoord - yMinus; y <= yCoord + yPlus; y++) {
 				for (int z = zCoord - zMinus; z <= zCoord + zPlus; z++) {
 					//check Block
+					//System.out.println(x + " " + y + " " + z + " " + worldObj.getBlock(x, y, z).getUnlocalizedName());
+					boolean isEmpty = false;
 					for(int i = 0; i < emptyPos.length; i++) {
-						if(worldObj.getBlock(x, y, z) != ((xCoord + emptyPos[i][0] == x && yCoord + emptyPos[i][1] == y && zCoord + emptyPos[i][2] == z) ? Blocks.air : block)) {
-							return false;
+						if(xCoord + emptyPos[i][0] == x && yCoord + emptyPos[i][1] == y && zCoord + emptyPos[i][2] == z) {
+							isEmpty = true;
+							break;
 						}
+						
 					}
+					if(isEmpty ? worldObj.getBlock(x, y, z) == Blocks.air : worldObj.getBlock(x, y, z).equals(block)) {
+						return false;
+					}
+					System.out.println(x + ", " + y + ", " + z + ":" + isEmpty);
 				}
 			}
 		}
@@ -133,11 +149,11 @@ public class MultiblockTileEntityBase extends TileEntity implements IInventory {
 					TileEntity tile = worldObj.getTileEntity(x, y, z);
 					// Check if block is bottom center block
 					boolean master = (x == xCoord && y == yCoord && z == zCoord);
-					if (tile != null && (tile instanceof TileBlastFurnaceBlock)) {
-						((TileBlastFurnaceBlock) tile).setMasterCoords(xCoord, yCoord, zCoord);
-						((TileBlastFurnaceBlock) tile).setHasMaster(true);
-						((TileBlastFurnaceBlock) tile).setIsMaster(master);
-						((TileBlastFurnaceBlock) tile).hasmastercheck = true;
+					if (tile != null && this.getClass().isInstance(tile)) {
+						((TileMachineBase) tile).setMasterCoords(xCoord, yCoord, zCoord);
+						((TileMachineBase) tile).setHasMaster(true);
+						((TileMachineBase) tile).setIsMaster(master);
+						((TileMachineBase) tile).hasmastercheck = true;
 					}
 				}
 			}
@@ -166,8 +182,8 @@ public class MultiblockTileEntityBase extends TileEntity implements IInventory {
 			for (int y = yCoord - yMinus; y <= yCoord + yPlus; y++) {
 				for (int z = zCoord - zMinus; z <= zCoord + zPlus; z++) {
 					TileEntity tile = worldObj.getTileEntity(x, y, z);
-					if (tile != null && (tile instanceof MultiblockTileEntityBase)) {
-						((MultiblockTileEntityBase) tile).reset();
+					if (tile != null && (this.getClass().isInstance(tile))) {
+						((TileMachineBase) tile).reset();
 					}
 				}
 			}
@@ -419,7 +435,7 @@ public class MultiblockTileEntityBase extends TileEntity implements IInventory {
 	 * 
 	 * @return true if smelting is possible
 	 */
-	private boolean canSmelt() {
+	public boolean canSmelt() {
 		return smeltItem(false);
 	}
 
@@ -525,7 +541,13 @@ public class MultiblockTileEntityBase extends TileEntity implements IInventory {
 	// returns the number of ticks the given item will burn. Returns 0 if the
 	// given item is not a valid fuel
 	public short getItemBurnTime(ItemStack stack) {
-		return 0;
+		int burntime = 0;
+		for(int x = 0; x < fuel.length; x++) {
+			if (stack.getItem() == fuel[x]) {
+				burntime = this.burnTime[x];
+			}
+		}
+		return (short) MathHelper.clamp_int(burntime, 0, Short.MAX_VALUE);
 	}
 
 	// Gets the number of slots in the inventory
@@ -613,6 +635,12 @@ public class MultiblockTileEntityBase extends TileEntity implements IInventory {
 	// Unlike the vanilla furnace, we allow anything to be placed in the fuel
 	// slots
 	public boolean isItemValidForFuelSlot(ItemStack itemStack) {
+		Item item = itemStack.getItem();
+		for(int x = 0; x < fuel.length; x++) {
+			if(item == fuel[x]) {
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -621,6 +649,14 @@ public class MultiblockTileEntityBase extends TileEntity implements IInventory {
 	// Unlike the vanilla furnace, we allow anything to be placed in the fuel
 	// slots
 	public boolean isItemValidForInputSlot(ItemStack itemStack) {
+		Item item = itemStack.getItem();
+		for(int x = 0; x < recipe.length; x += 2) {
+			for(int y = 0; y < recipe[x].length; y++) {
+				if(item == recipe[x][y].getItem()) {
+					return true;
+				}
+			}
+		}
 		return false;
 	}
 
@@ -653,7 +689,7 @@ public class MultiblockTileEntityBase extends TileEntity implements IInventory {
 	// the GUI
 	@Override
 	public String getInventoryName() {
-		return null;
+		return inventoryName;
 	}
 
 	@Override
@@ -735,8 +771,8 @@ public class MultiblockTileEntityBase extends TileEntity implements IInventory {
 
 	/**
 	 * This method removes the entire contents of the given slot and returns it.
-	 * Used by containers such as crafting tables which return any items in
-	 * their slots when you close the GUI
+	 * Used by containers such as crafting tables which return any items in their
+	 * slots when you close the GUI
 	 */
 	@Override
 	public ItemStack getStackInSlotOnClosing(int slotIndex) {

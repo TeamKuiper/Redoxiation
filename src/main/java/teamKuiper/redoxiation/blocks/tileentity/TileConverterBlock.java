@@ -1,17 +1,14 @@
 package teamKuiper.redoxiation.blocks.tileentity;
 
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
-import teamKuiper.redoxiation.items.RedoxiationGenericItems;
 
-public class TileBlastFurnaceBlock extends TileMachineBase {
-
-	private static String inventoryName = "BlastFurnace";
-	private static Block block = RedoxiationBlocks.blastFurnaceBlock;
+public class TileConverterBlock extends TileMachineBase {
+	
+	private static String inventoryName = "Converter";
+	private static Block block = RedoxiationBlocks.converterBlock;
 	private static int[][] emptyPos = { { 0, 1, 0 } };
 	private static int xMinus = 1;
 	private static int yMinus = 0;
@@ -22,11 +19,10 @@ public class TileBlastFurnaceBlock extends TileMachineBase {
 	private static Item[] fuel = { Item.getItemFromBlock(RedoxiationBlocks.hotAirBlock) };
 	private static int[] burnTime = { 1600 };
 	private static ItemStack[][] recipe = {
-			{ new ItemStack(Blocks.iron_ore, 4), new ItemStack(Items.coal, 17),
-					new ItemStack(RedoxiationGenericItems.Calcite, 11) },
-			{ new ItemStack(RedoxiationBlocks.moltenPigironBlock, 3), new ItemStack(RedoxiationBlocks.slagBlock, 3) } };
+			{new ItemStack(RedoxiationBlocks.moltenPigironBlock, 1)},
+			{new ItemStack(RedoxiationBlocks.moltenPigironBlock, 3)}};
 
-	public TileBlastFurnaceBlock() {
+	public TileConverterBlock() {
 		super(inventoryName, block, xMinus, yMinus, zMinus, xPlus, yPlus, zPlus, emptyPos, fuel, burnTime, recipe);
 	}
 }

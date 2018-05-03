@@ -31,7 +31,7 @@ public class RedoxiationBlocks {
 	
 	public static Fluid hotAir, moltenPigiron, slag;
 	public static BlockFluidClassic hotAirBlock, moltenPigironBlock, slagBlock;
-	public static Block blastFurnaceBlock;
+	public static Block blastFurnaceBlock, converterBlock;
 	
 	public static boolean oreCopper_cfg, oreTin_cfg, oreLead_cfg,
 			oreSilver_cfg, oreNickel_cfg, orePlatinum_cfg, oreZinc_cfg,
@@ -95,6 +95,7 @@ public class RedoxiationBlocks {
 
 		// Machine
 		blastFurnaceBlock = new BlastFurnaceBlock();
+		converterBlock = new ConverterBlock();
         tankLead = new LeadTank();
         pipeCopper = new BlockPipeCopper();
 
@@ -144,6 +145,7 @@ public class RedoxiationBlocks {
         GameRegistry.registerBlock(wire, "wire");
         GameRegistry.registerBlock(cog, "cog");
 		GameRegistry.registerBlock(blastFurnaceBlock, "BlastFurnaceBlock");
+		//GameRegistry.registerBlock(converterBlock, "ConverterBlock");
         GameRegistry.registerBlock(tankLead, "tankLead");
 		GameRegistry.registerBlock(pipeCopper, "pipeCopper");
 
