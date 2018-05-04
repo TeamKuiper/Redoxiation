@@ -41,7 +41,7 @@ public class TileWire extends TileEntity {
     }
 
     public void setscale(float argV) {
-        scale = argV;
+        this.scale = argV;
     }
 
     public float getrotation() {
@@ -49,7 +49,7 @@ public class TileWire extends TileEntity {
     }
 
     public void setrotation(float argR) {
-        rotation = argR;
+        this.rotation = argR;
     }
     
     public float getmultiply() {
@@ -57,7 +57,7 @@ public class TileWire extends TileEntity {
     }
 
     public void setmultiply(float argR) {
-    	multiply = argR;
+    	this.multiply = argR;
     }
 
     public int getchunknumber() {
@@ -90,15 +90,24 @@ public class TileWire extends TileEntity {
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
         angvel = compound.getFloat("angvel");
-        scale = compound.getFloat("scale");
-        chunknumber = compound.getInteger("chunknumber");
+        multiply = compound.getFloat("multiply");
+        int chunk = compound.getInteger("chunknumber");
+        if (chunk == chunknumber)
+        {
+        	chunknumber = chunk;
+        }
+        else
+        {
+        	chunknumber = chunk;
+        	rotation = 0;
+        }
     }
 
     @Override
     public void writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
         compound.setFloat("angvel", angvel);
-        compound.setFloat("scale", scale);
+        compound.setFloat("multiply", multiply);
         compound.setInteger("chunknumber", chunknumber);
     }
 
@@ -140,7 +149,7 @@ public class TileWire extends TileEntity {
     	}
         TileWire tile = (TileWire) worldObj.getTileEntity(x, y, z);
         tile.state = st;
-        tile.multiply = -mul;
+        tile.setmultiply(-mul);
         if (checkstuck(x+1, y, z, !st, tile.multiply)) {
         	checknum = -1;
         }
@@ -185,7 +194,6 @@ public class TileWire extends TileEntity {
         TileWire tile = (TileWire) worldObj.getTileEntity(x, y, z);
         tile.setstate(st);
         tile.setchunknumber(checknum);
-        tile.setrotation(0);
         if (checknum == -1)
         {
         	tile.setmultiply(0);

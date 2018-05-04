@@ -28,6 +28,7 @@ import teamKuiper.redoxiation.items.RedoxiationGenericItems;
 import teamKuiper.redoxiation.multipart.MultiPartEventHandler;
 import teamKuiper.redoxiation.multipart.RegisterBlockPart;
 import teamKuiper.redoxiation.proxy.CommonProxy;
+import teamKuiper.redoxiation.recipes.RedoxiationRecipes;
 
 @Mod(modid = Redoxiation.MODID, version = Redoxiation.VERSION, name = Redoxiation.NAME, dependencies="after:ForgeMultipart" )
 public class Redoxiation {
@@ -70,6 +71,7 @@ public class Redoxiation {
 	public void preinit(FMLPreInitializationEvent event) {
 		logger = event.getModLog();
 		logger.info("Hello World!");
+        RedoxiationRecipes.RecipesMember();
 		
 		// Simple Config
 		config = new Configuration(event.getSuggestedConfigurationFile());
@@ -96,8 +98,7 @@ public class Redoxiation {
         MinecraftForge.EVENT_BUS.register(new MultiPartEventHandler());
         MinecraftForge.EVENT_BUS.register(new teamKuiper.redoxiation.EventHandler());
 
-        PacketCustom.assignHandler(this, new PacketHandler());
-    }
+        PacketCustom.assignHandler(this, new PacketHandler());    }
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
