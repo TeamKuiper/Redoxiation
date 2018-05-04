@@ -133,13 +133,14 @@ public class TileMachineBase extends TileEntity implements IInventory {
 						}
 						
 					}
-					System.out.println(x + ", " + y + ", " + z + ":" + worldObj.getBlock(x, y, z).getUnlocalizedName() + ":" + block + ":" + isEmpty + "," + (isEmpty ? worldObj.getBlock(x, y, z) == Blocks.air : worldObj.getBlock(x, y, z).equals(block)));
+					//System.out.println(x + ", " + y + ", " + z + ":" + worldObj.getBlock(x, y, z).getUnlocalizedName() + ":" + block + ":" + isEmpty + "," + (isEmpty ? worldObj.getBlock(x, y, z) == Blocks.air : worldObj.getBlock(x, y, z).equals(block)));
 					if(isEmpty ? !(worldObj.getBlock(x, y, z) == Blocks.air) : !worldObj.getBlock(x, y, z).equals(block)) {
 						return false;
 					}
 				}
 			}
 		}
+		System.out.println(true);
 		return true;
 	}
 
@@ -147,7 +148,15 @@ public class TileMachineBase extends TileEntity implements IInventory {
 	public void setupStructure() {
 		for (int x = xCoord - xMinus; x <= xCoord + xPlus; x++) {
 			for (int y = yCoord - yMinus; y <= yCoord + yPlus; y++) {
+				nextLoop:
 				for (int z = zCoord - zMinus; z <= zCoord + zPlus; z++) {
+					for (int i = 0; i < emptyPos.length; i++) {
+						if (xCoord + emptyPos[i][0] == x && yCoord + emptyPos[i][1] == y
+								&& zCoord + emptyPos[i][2] == z) {
+							continue nextLoop;
+						}
+					}
+
 					TileEntity tile = worldObj.getTileEntity(x, y, z);
 					// Check if block is bottom center block
 					boolean master = (x == xCoord && y == yCoord && z == zCoord);
@@ -157,6 +166,7 @@ public class TileMachineBase extends TileEntity implements IInventory {
 						((TileMachineBase) tile).setIsMaster(master);
 						((TileMachineBase) tile).hasmastercheck = true;
 					}
+
 				}
 			}
 		}
@@ -182,7 +192,15 @@ public class TileMachineBase extends TileEntity implements IInventory {
 	public void resetStructure() {
 		for (int x = xCoord - xMinus; x <= xCoord + xPlus; x++) {
 			for (int y = yCoord - yMinus; y <= yCoord + yPlus; y++) {
+				nextLoop:
 				for (int z = zCoord - zMinus; z <= zCoord + zPlus; z++) {
+					for (int i = 0; i < emptyPos.length; i++) {
+						if (xCoord + emptyPos[i][0] == x && yCoord + emptyPos[i][1] == y
+								&& zCoord + emptyPos[i][2] == z) {
+							continue nextLoop;
+						}
+					}
+					
 					TileEntity tile = worldObj.getTileEntity(x, y, z);
 					if (tile != null && (this.getClass().isInstance(tile))) {
 						((TileMachineBase) tile).reset();

@@ -11,7 +11,7 @@ public class ConverterBlock extends MachineBlockBase {
 	String name = "converterBlock";
 	
 	protected ConverterBlock() {
-		super(Material.rock, new TileConverterBlock());
+		super(Material.rock, TileConverterBlock.class);
 		setCreativeTab(Redoxiation.tabRedoxiation);
 		setBlockName("redoxiation." + name);
 		setBlockTextureName(Redoxiation.MODID + ":" + name);

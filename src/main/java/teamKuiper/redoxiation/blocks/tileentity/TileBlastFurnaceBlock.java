@@ -11,7 +11,7 @@ import teamKuiper.redoxiation.items.RedoxiationGenericItems;
 public class TileBlastFurnaceBlock extends TileMachineBase {
 
 	private static String inventoryName = "BlastFurnace";
-	private static Block block;
+	private static Block block = RedoxiationBlocks.blastFurnaceBlock;
 	private static int[][] emptyPos = { { 0, 1, 0 } };
 	private static int xMinus = 1;
 	private static int yMinus = 0;
@@ -26,13 +26,7 @@ public class TileBlastFurnaceBlock extends TileMachineBase {
 					new ItemStack(RedoxiationGenericItems.Calcite, 11) },
 			{ new ItemStack(RedoxiationBlocks.moltenPigironBlock, 3), new ItemStack(RedoxiationBlocks.slagBlock, 3) } };
 
-	static {
-		block = RedoxiationBlocks.blastFurnaceBlock;
-	}
-	
 	public TileBlastFurnaceBlock() {
 		super(inventoryName, block, xMinus, yMinus, zMinus, xPlus, yPlus, zPlus, emptyPos, fuel, burnTime, recipe);
-
-		System.out.println(block);
 	}
 }

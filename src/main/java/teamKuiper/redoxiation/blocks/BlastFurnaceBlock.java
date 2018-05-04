@@ -11,7 +11,7 @@ public class BlastFurnaceBlock extends MachineBlockBase {
 	String name = "blastFurnaceBlock";
 
 	public BlastFurnaceBlock() {
-		super(Material.wood, new TileBlastFurnaceBlock());
+		super(Material.wood, TileBlastFurnaceBlock.class);
 		setCreativeTab(Redoxiation.tabRedoxiation);
 		setBlockName("redoxiation." + name);
 		setBlockTextureName(Redoxiation.MODID + ":" + name);

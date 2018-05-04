@@ -14,15 +14,14 @@ import net.minecraft.world.World;
 import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.achievement.RedoxiationAchievements;
 import teamKuiper.redoxiation.blocks.gui.GUIs;
-import teamKuiper.redoxiation.blocks.tileentity.TileBlastFurnaceBlock;
 import teamKuiper.redoxiation.blocks.tileentity.TileMachineBase;
 
 public class MachineBlockBase extends BlockContainer {
 
 	Random random = new Random();
-	TileMachineBase machineTile;
+	Class<? extends TileMachineBase> machineTile;
 
-	protected MachineBlockBase(Material p_i45386_1_, TileMachineBase tile) {
+	protected MachineBlockBase(Material p_i45386_1_, Class<? extends TileMachineBase> tile) {
 		super(p_i45386_1_);
 		machineTile = tile;
 	}
@@ -30,7 +29,7 @@ public class MachineBlockBase extends BlockContainer {
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
 		TileEntity tile = world.getTileEntity(x, y, z);
-		if (tile != null && tile.getClass().isInstance(machineTile)) {
+		if (tile != null && machineTile.isInstance(tile)) {
 			TileMachineBase multiBlock = (TileMachineBase) tile;
 			if (multiBlock.hasMaster()) {
 				if (multiBlock.isMaster()) {
@@ -103,7 +102,7 @@ public class MachineBlockBase extends BlockContainer {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float hitX, float hitY, float hitZ) {
 		if (!world.isRemote) {
-			if (world.getTileEntity(x, y, z).getClass().isInstance(machineTile)) {
+			if (machineTile.isInstance(world.getTileEntity(x, y, z))) {
 				TileMachineBase tile = (TileMachineBase) world.getTileEntity(x, y, z);
 				if (tile.hasmastercheck) {
 					int mx = tile.getMasterX();
