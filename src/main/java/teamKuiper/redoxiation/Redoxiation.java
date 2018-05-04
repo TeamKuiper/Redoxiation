@@ -1,9 +1,21 @@
 package teamKuiper.redoxiation;
 
 import codechicken.lib.packet.PacketCustom;
-import codechicken.multipart.minecraft.McMultipartCPH;
-import cpw.mods.fml.common.*;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.Mod.Metadata;
+import cpw.mods.fml.common.ModMetadata;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
@@ -16,16 +28,6 @@ import teamKuiper.redoxiation.items.RedoxiationGenericItems;
 import teamKuiper.redoxiation.multipart.MultiPartEventHandler;
 import teamKuiper.redoxiation.multipart.RegisterBlockPart;
 import teamKuiper.redoxiation.proxy.CommonProxy;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.Metadata;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = Redoxiation.MODID, version = Redoxiation.VERSION, name = Redoxiation.NAME, dependencies="after:ForgeMultipart" )
 public class Redoxiation {
@@ -44,8 +46,6 @@ public class Redoxiation {
 	public static Configuration config;
 
 	public static final CreativeTabs tabRedoxiation = new CreativeTabs("Redoxiation") {
-		private static final String __OBFID = "CL_00000080";
-
 		@SideOnly(Side.CLIENT)
 		public Item getTabIconItem() {
 			return Item.getItemFromBlock(RedoxiationBlocks.oreCopper);
@@ -53,8 +53,6 @@ public class Redoxiation {
 	};
 
 	public static final CreativeTabs tabRedoxiationitems = new CreativeTabs("RedoxiationItems") {
-		private static final String __OBFID = "CL_00000081";
-
 		@SideOnly(Side.CLIENT)
 		public Item getTabIconItem() {
 			return RedoxiationGenericItems.Calcite;

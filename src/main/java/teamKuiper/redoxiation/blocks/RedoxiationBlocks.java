@@ -95,6 +95,7 @@ public class RedoxiationBlocks {
 
 		// Machine
 		blastFurnaceBlock = new BlastFurnaceBlock();
+		System.out.println(blastFurnaceBlock);
 		converterBlock = new ConverterBlock();
         tankLead = new LeadTank();
         pipeCopper = new BlockPipeCopper();
@@ -193,7 +194,9 @@ public class RedoxiationBlocks {
 		GameRegistry.registerTileEntity(TileEntityWoodenCog.class, Redoxiation.MODID + ".WoodenCog");
 		GameRegistry.registerTileEntity(TileEntityStoneCog.class, Redoxiation.MODID + ".StoneCog");
 		GameRegistry.registerTileEntity(TileEntityIronCog.class, Redoxiation.MODID + ".IronCog");
+		System.out.println(blastFurnaceBlock);
 		GameRegistry.registerTileEntity(TileBlastFurnaceBlock.class, Redoxiation.MODID + ".blastFurnaceBlock");
+		System.out.println(blastFurnaceBlock);
         GameRegistry.registerTileEntity(TileLeadTank.class, Redoxiation.MODID + ".tankLead");
         GameRegistry.registerTileEntity(TilePipeCopper.class, Redoxiation.MODID + ".pipeCopper");
         

@@ -50,6 +50,7 @@ public class TileMachineBase extends TileEntity implements IInventory {
 		this.fuel = fuel;
 		this.burnTime = burnTime;
 		this.recipe = recipe;
+		System.out.println(this.block);
 	}
 	
 	public int[] getSlotCount() {
@@ -118,6 +119,7 @@ public class TileMachineBase extends TileEntity implements IInventory {
 
 	/** Check that structure is properly formed */
 	public boolean checkMultiBlockForm() {
+		System.out.println();
 		for (int x = xCoord - xMinus; x <= xCoord + xPlus; x++) {
 			for (int y = yCoord - yMinus; y <= yCoord + yPlus; y++) {
 				for (int z = zCoord - zMinus; z <= zCoord + zPlus; z++) {
@@ -131,10 +133,10 @@ public class TileMachineBase extends TileEntity implements IInventory {
 						}
 						
 					}
-					if(isEmpty ? worldObj.getBlock(x, y, z) == Blocks.air : worldObj.getBlock(x, y, z).equals(block)) {
+					System.out.println(x + ", " + y + ", " + z + ":" + worldObj.getBlock(x, y, z).getUnlocalizedName() + ":" + block + ":" + isEmpty + "," + (isEmpty ? worldObj.getBlock(x, y, z) == Blocks.air : worldObj.getBlock(x, y, z).equals(block)));
+					if(isEmpty ? !(worldObj.getBlock(x, y, z) == Blocks.air) : !worldObj.getBlock(x, y, z).equals(block)) {
 						return false;
 					}
-					System.out.println(x + ", " + y + ", " + z + ":" + isEmpty);
 				}
 			}
 		}
