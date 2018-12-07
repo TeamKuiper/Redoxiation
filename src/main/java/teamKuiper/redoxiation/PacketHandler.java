@@ -13,7 +13,7 @@ public class PacketHandler implements IServerPacketHandler {
     public void handlePacket(PacketCustom packet, EntityPlayerMP sender, INetHandlerPlayServer nethandler) {
         switch (packet.getType()) {
             case 1:
-                MultiPartEventHandler.place(sender, sender.worldObj);
+                MultiPartEventHandler.place(sender, sender.world);
                 break;
         }
     }

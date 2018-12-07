@@ -12,8 +12,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 import teamKuiper.redoxiation.PacketHandler;
 import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.blocks.tileentity.TileWire;
-import teamKuiper.redoxiation.blocks.tileentity.TileWire;
-import teamKuiper.redoxiation.multipart.WirePart;
 
 public class Wire extends BlockContainer {
 

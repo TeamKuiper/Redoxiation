@@ -1,19 +1,19 @@
 package teamKuiper.redoxiation.blocks.gui;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.blocks.container.ContainerBlastFurnace;
 import teamKuiper.redoxiation.blocks.tileentity.TileBlastFurnaceBlock;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GuiBlastFurnace extends GuiContainer {

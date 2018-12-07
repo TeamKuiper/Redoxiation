@@ -1,9 +1,9 @@
 package teamKuiper.redoxiation.blocks.gui;
 
-import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.IGuiHandler;
 import teamKuiper.redoxiation.blocks.container.ContainerBlastFurnace;
 import teamKuiper.redoxiation.blocks.tileentity.TileBlastFurnaceBlock;
 

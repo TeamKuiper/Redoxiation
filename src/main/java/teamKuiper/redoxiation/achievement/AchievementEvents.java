@@ -3,8 +3,8 @@ package teamKuiper.redoxiation.achievement;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class AchievementEvents {
 	@SubscribeEvent

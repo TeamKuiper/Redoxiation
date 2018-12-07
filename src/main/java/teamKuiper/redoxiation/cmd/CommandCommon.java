@@ -1,13 +1,12 @@
 package teamKuiper.redoxiation.cmd;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentTranslation;
-import teamKuiper.redoxiation.blocks.tileentity.TileEntityWoodenCog;
 
 public class CommandCommon implements ICommand {
 	private List aliases;

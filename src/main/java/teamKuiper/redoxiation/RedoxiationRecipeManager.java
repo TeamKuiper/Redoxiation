@@ -1,9 +1,9 @@
 package teamKuiper.redoxiation;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
 import teamKuiper.redoxiation.items.RedoxiationGenericItems;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class RedoxiationRecipeManager {
 	

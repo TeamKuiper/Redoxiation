@@ -1,16 +1,16 @@
 package teamKuiper.redoxiation.multipart;
 
+import java.util.Arrays;
+
 import codechicken.lib.vec.BlockCoord;
 import codechicken.multipart.MultiPartRegistry;
-import codechicken.multipart.MultiPartRegistry.IPartFactory;
 import codechicken.multipart.MultiPartRegistry.IPartConverter;
+import codechicken.multipart.MultiPartRegistry.IPartFactory;
 import codechicken.multipart.TMultiPart;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
-
-import java.util.Arrays;
 
 public class RegisterBlockPart implements IPartFactory, IPartConverter
 {
