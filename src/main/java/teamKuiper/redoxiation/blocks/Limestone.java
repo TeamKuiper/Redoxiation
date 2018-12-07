@@ -13,9 +13,8 @@ public class Limestone extends Block {
 	String name = "limestone";
 
 	public Limestone() {
-		super(Material.rock);
-		setBlockName(Redoxiation.MODID + "." + name);
-		setBlockTextureName(Redoxiation.MODID + ":" + name);
+		super(Material.ROCK);
+		setRegistryName(Redoxiation.MODID, Redoxiation.MODID + "." + name);
 		setCreativeTab(Redoxiation.tabRedoxiation);
 		setHarvestLevel("pickaxe", 1);
 		setHardness(2.0F);
@@ -32,7 +31,6 @@ public class Limestone extends Block {
 	}
 
 	public int quantityDroppedWithBonus(int fortune, Random random) {
-
 		if (fortune > 0) {
 			int j = random.nextInt(fortune + 5) - 1;
 			if (j > 0) {

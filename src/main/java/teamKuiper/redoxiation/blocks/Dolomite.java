@@ -13,9 +13,8 @@ public class Dolomite extends Block {
 	String name = "dolomite";
 
 	public Dolomite() {
-		super(Material.rock);
-		setBlockName(Redoxiation.MODID + "." + name);
-		setBlockTextureName(Redoxiation.MODID + ":" + name);
+		super(Material.ROCK);
+		setRegistryName(Redoxiation.MODID, Redoxiation.MODID + "." + name);
 		setCreativeTab(Redoxiation.tabRedoxiation);
 		setHarvestLevel("pickaxe", 1);
 		setHardness(2.0F);

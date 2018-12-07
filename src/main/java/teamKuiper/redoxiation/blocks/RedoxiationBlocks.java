@@ -2,9 +2,16 @@ package teamKuiper.redoxiation.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import teamKuiper.redoxiation.Redoxiation;
@@ -37,8 +44,17 @@ public class RedoxiationBlocks {
 			oreSilver_cfg, oreNickel_cfg, orePlatinum_cfg, oreZinc_cfg,
 			oreCobalt_cfg, oreChromium_cfg, pitchblend_cfg, rutile_cfg,
 			scheelite_cfg, bauxite_cfg, limestone_cfg, cryolite_cfg, oreSulfur_cfg;
+	
+	public static Block[] blocks = {oreCopper, oreTin, oreLead, oreSilver, oreNickel, orePlatinum, oreZinc,
+			oreCobalt, oreChromium, pitchblend, limestone, dolomite, saltRock, bauxite, rutile, scheelite, cryolite,
+			oreSulfur, oreFerroNickel, orePseudoBronze, orePseudoBrassOre, argentAurum, pseudoSolder,
+			pseudoStellite, tntium, obsidianIron, obsidianGold, obsidianCopper, obsidianTin, obsidianLead,
+			obsidianSilver, obsidianNickel, obsidianPlatinum, obsidianZinc, obsidianCobalt, obsidianChromium,
+			obsidianUranium, obsidianPlutonium, woodenCog, stoneCog, ironCog, wire, cog, blastFurnaceBlock,
+			tankLead, pipeCopper, hotAirBlock, moltenPigironBlock, slagBlock};
 
-	public static void registerBlocks() {
+	public void initBlocks() {
+
 		// Blocks
 		// Normal Ore Name, Harvest level, Hardness, Resistance
 		oreCopper = new RedoxiationOre("oreCopper", 1, 2.5F, 5.0F);
@@ -98,56 +114,15 @@ public class RedoxiationBlocks {
 		converterBlock = new ConverterBlock();
         tankLead = new LeadTank();
         pipeCopper = new BlockPipeCopper();
+        
+		// Fluids
+		hotAir = new Fluid("hotAir", new ResourceLocation(Redoxiation.MODID, "fluids/hotair_still"), new ResourceLocation(Redoxiation.MODID, "fluids/hotair_flow")).setLuminosity(0).setDensity(-10).setTemperature(1473).setViscosity(2000).setGaseous(true);
+		moltenPigiron = new Fluid("moltenPigiron", new ResourceLocation(Redoxiation.MODID, "fluids/moltenpigiron_still"), new ResourceLocation(Redoxiation.MODID, "fluids/moltenpigiron_flow")).setLuminosity(15).setDensity(7874).setTemperature(1900).setViscosity(2000).setGaseous(false);
+		slag = new Fluid("slag", new ResourceLocation(Redoxiation.MODID, "fluids/slag_still"), new ResourceLocation(Redoxiation.MODID, "fluids/slag_flow")).setLuminosity(15).setDensity(7874).setTemperature(1900).setViscosity(2000).setGaseous(false);
 
-		// Registry
-
-		GameRegistry.registerBlock(oreCopper, "oreCopper");
-		GameRegistry.registerBlock(oreTin, "oreTin");
-		GameRegistry.registerBlock(oreLead, "oreLead");
-		GameRegistry.registerBlock(oreSilver, "oreSilver");
-		GameRegistry.registerBlock(oreNickel, "oreNickel");
-		GameRegistry.registerBlock(orePlatinum, "orePlatinum");
-		GameRegistry.registerBlock(oreZinc, "oreZinc");
-		GameRegistry.registerBlock(oreCobalt, "oreCobalt");
-		GameRegistry.registerBlock(oreChromium, "oreChromium");
-		GameRegistry.registerBlock(pitchblend, "pitchblend");
-		GameRegistry.registerBlock(limestone, "limestone");
-		GameRegistry.registerBlock(dolomite, "dolomite");
-		GameRegistry.registerBlock(saltRock, "saltRock");
-		GameRegistry.registerBlock(bauxite, "bauxite");
-		GameRegistry.registerBlock(rutile, "rutile");
-		GameRegistry.registerBlock(scheelite, "scheelite");
-		GameRegistry.registerBlock(cryolite, "cryolite");
-		GameRegistry.registerBlock(oreSulfur, "oreSulfur");
-		GameRegistry.registerBlock(oreFerroNickel, "oreFerroNickel");
-		GameRegistry.registerBlock(orePseudoBronze, "orePseudoBronze");
-		GameRegistry.registerBlock(orePseudoBrassOre, "orePseudoBrassOre");
-		GameRegistry.registerBlock(argentAurum, "argentAurum");
-		GameRegistry.registerBlock(pseudoSolder, "pseudoSolder");
-		GameRegistry.registerBlock(pseudoStellite, "pseudoStellite");
-		GameRegistry.registerBlock(tntium, "TNTium");
-		GameRegistry.registerBlock(obsidianIron, "obsidianIron");
-		GameRegistry.registerBlock(obsidianGold, "obsidianGold");
-		GameRegistry.registerBlock(obsidianCopper, "obsidianCopper");
-		GameRegistry.registerBlock(obsidianTin, "obsidianTin");
-		GameRegistry.registerBlock(obsidianLead, "obsidianLead");
-		GameRegistry.registerBlock(obsidianSilver, "obsidianSilver");
-		GameRegistry.registerBlock(obsidianNickel, "obsidianNickel");
-		GameRegistry.registerBlock(obsidianPlatinum, "obsidianPlatinum");
-		GameRegistry.registerBlock(obsidianZinc, "obsidianZinc");
-		GameRegistry.registerBlock(obsidianCobalt, "obsidianCobalt");
-		GameRegistry.registerBlock(obsidianChromium, "obsidianChromium");
-		GameRegistry.registerBlock(obsidianUranium, "obsidianUranium");
-		GameRegistry.registerBlock(obsidianPlutonium, "obsidianPlutonium");
-		GameRegistry.registerBlock(woodenCog, "WoodenCog");
-		GameRegistry.registerBlock(stoneCog, "StoneCog");
-		GameRegistry.registerBlock(ironCog, "IronCog");
-        GameRegistry.registerBlock(wire, "wire");
-        GameRegistry.registerBlock(cog, "cog");
-		GameRegistry.registerBlock(blastFurnaceBlock, "BlastFurnaceBlock");
-		//GameRegistry.registerBlock(converterBlock, "ConverterBlock");
-        GameRegistry.registerBlock(tankLead, "tankLead");
-		GameRegistry.registerBlock(pipeCopper, "pipeCopper");
+	}
+	
+	public void setOreDictionary() {
 
 		OreDictionary.registerOre("oreCopper", oreCopper);
 		OreDictionary.registerOre("oreTin", oreTin);
@@ -186,46 +161,58 @@ public class RedoxiationBlocks {
 		OreDictionary.registerOre("oreobsidianChromium", obsidianChromium);
 		OreDictionary.registerOre("oreobsidianUranium", obsidianUranium);
 		OreDictionary.registerOre("oreobsidianPlutonium", obsidianPlutonium);
-		
-		// Tile Entities
-        GameRegistry.registerTileEntity(TileWire.class, Redoxiation.MODID + ".wire");
-        GameRegistry.registerTileEntity(TileCog.class, Redoxiation.MODID + ".cog");
-		GameRegistry.registerTileEntity(TileEntityWoodenCog.class, Redoxiation.MODID + ".WoodenCog");
-		GameRegistry.registerTileEntity(TileEntityStoneCog.class, Redoxiation.MODID + ".StoneCog");
-		GameRegistry.registerTileEntity(TileEntityIronCog.class, Redoxiation.MODID + ".IronCog");
-		GameRegistry.registerTileEntity(TileBlastFurnaceBlock.class, Redoxiation.MODID + ".blastFurnaceBlock");
-        GameRegistry.registerTileEntity(TileLeadTank.class, Redoxiation.MODID + ".tankLead");
-        GameRegistry.registerTileEntity(TilePipeCopper.class, Redoxiation.MODID + ".pipeCopper");
-        
-		
-
-		// Fluids
-		hotAir = new Fluid("HotAir").setLuminosity(0).setDensity(-10).setTemperature(1473).setViscosity(2000).setGaseous(true);
-		moltenPigiron = new Fluid("MoltenPigiron").setLuminosity(15).setDensity(7874).setTemperature(1900).setViscosity(2000).setGaseous(false);
-		slag = new Fluid("Slag").setLuminosity(15).setDensity(7874).setTemperature(1900).setViscosity(2000).setGaseous(false);
-
-		// Fluid Registry
-
+	}
+	
+	@SubscribeEvent
+	public void registerBlocks(RegistryEvent.Register<Block> event) {
 		// Block Fluids
-		//Hot Air
 		FluidRegistry.registerFluid(hotAir);
-		hotAirBlock = (BlockFluidClassic) new BlockHotAir(hotAir, Material.lava).setBlockName("HotAir");
-		GameRegistry.registerBlock(hotAirBlock, "FluidHotAir");
+		hotAirBlock = (BlockFluidClassic) new BlockHotAir(hotAir, Material.LAVA).setRegistryName(Redoxiation.MODID, "HotAir");
 		hotAir.setUnlocalizedName(hotAirBlock.getUnlocalizedName());
 		
-		//MoltenPigIron
 		FluidRegistry.registerFluid(moltenPigiron);
-		moltenPigironBlock = (BlockFluidClassic) new BlockMoltenPigiron(moltenPigiron, Material.lava).setBlockName("MoltenPigiron");
-		GameRegistry.registerBlock(moltenPigironBlock, "FluidMoltenPigiron");
+		moltenPigironBlock = (BlockFluidClassic) new BlockMoltenPigiron(moltenPigiron, Material.LAVA).setRegistryName(Redoxiation.MODID, "MoltenPigiron");
 		moltenPigiron.setUnlocalizedName(moltenPigironBlock.getUnlocalizedName());
 		
-		//Slag
 		FluidRegistry.registerFluid(slag);
-		slagBlock = (BlockFluidClassic) new BlockSlag(slag, Material.lava).setBlockName("Slag");
-		GameRegistry.registerBlock(slagBlock, "FluidSlag");
+		slagBlock = (BlockFluidClassic) new BlockSlag(slag, Material.LAVA).setRegistryName(Redoxiation.MODID, "Slag");
 		slag.setUnlocalizedName(slagBlock.getUnlocalizedName());
-		// Fluids End
+		
+		// Register
+		event.getRegistry().registerAll(blocks);
+		//GameRegistry.registerBlock(converterBlock, "ConverterBlock");
+
+		// Tile Entities
+        GameRegistry.registerTileEntity(TileWire.class, wire.getRegistryName());
+        GameRegistry.registerTileEntity(TileCog.class, cog.getRegistryName());
+		GameRegistry.registerTileEntity(TileEntityWoodenCog.class, woodenCog.getRegistryName());
+		GameRegistry.registerTileEntity(TileEntityStoneCog.class, stoneCog.getRegistryName());
+		GameRegistry.registerTileEntity(TileEntityIronCog.class, ironCog.getRegistryName());
+		GameRegistry.registerTileEntity(TileBlastFurnaceBlock.class, blastFurnaceBlock.getRegistryName());
+        GameRegistry.registerTileEntity(TileLeadTank.class, tankLead.getRegistryName());
+        GameRegistry.registerTileEntity(TilePipeCopper.class, pipeCopper.getRegistryName());
+        
+		
 		
 		Redoxiation.logger.info("Block Registry Complete. Starting Item Registry");
+	}
+	
+	@SubscribeEvent
+	public void registerBlockItems(RegistryEvent.Register<Item> event) {
+		for(Block block : blocks) {
+			event.getRegistry().registerAll(Item.getItemFromBlock(block));
+		}
+	}
+
+	@SubscribeEvent
+	public void registerRenders(ModelRegistryEvent event) {
+		for(Block block : blocks) {
+			registerRender(Item.getItemFromBlock(block));
+		}
+	}
+	
+	private void registerRender(Item item) {
+		ModelLoader.setCustomModelResourceLocation(item, 0,
+				new ModelResourceLocation(item.getRegistryName(), "inventory"));
 	}
 }

@@ -13,9 +13,8 @@ public class OreSulfur extends Block {
 	String name = "oreSulfur";
 
 	public OreSulfur() {
-		super(Material.rock);
-		setBlockName(Redoxiation.MODID + "." + name);
-		setBlockTextureName(Redoxiation.MODID + ":" + name);
+		super(Material.ROCK);
+		setRegistryName(Redoxiation.MODID, Redoxiation.MODID + "." + name);
 		setCreativeTab(Redoxiation.tabRedoxiation);
 		setHarvestLevel("pickaxe", 2);
 		setHardness(2.0F);

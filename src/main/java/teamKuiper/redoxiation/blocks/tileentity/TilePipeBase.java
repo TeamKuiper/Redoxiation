@@ -1,11 +1,11 @@
 package teamKuiper.redoxiation.blocks.tileentity;
 
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
 
 public class TilePipeBase extends TileEntity {
 
-	public ForgeDirection[] connections = new ForgeDirection[6];
+	public EnumFacing[] connections = new EnumFacing[6];
 
 	public TilePipeBase() {
 
@@ -19,49 +19,49 @@ public class TilePipeBase extends TileEntity {
 		if (this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) != null
 				&& this.worldObj.getTileEntity(xCoord, yCoord + 1, zCoord).getBlockType() == this.worldObj
 						.getTileEntity(xCoord, yCoord, zCoord).getBlockType()) {
-			connections[0] = ForgeDirection.UP;
+			connections[0] = EnumFacing.UP;
 		} else {
 			connections[0] = null;
 		}
 		if (this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) != null
 				&& this.worldObj.getTileEntity(xCoord, yCoord - 1, zCoord).getBlockType() == this.worldObj
 						.getTileEntity(xCoord, yCoord, zCoord).getBlockType()) {
-			connections[1] = ForgeDirection.DOWN;
+			connections[1] = EnumFacing.DOWN;
 		} else {
 			connections[1] = null;
 		}
 		if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord - 1) != null
 				&& this.worldObj.getTileEntity(xCoord, yCoord, zCoord - 1).getBlockType() == this.worldObj
 						.getTileEntity(xCoord, yCoord, zCoord).getBlockType()) {
-			connections[2] = ForgeDirection.NORTH;
+			connections[2] = EnumFacing.NORTH;
 		} else {
 			connections[2] = null;
 		}
 		if (this.worldObj.getTileEntity(xCoord + 1, yCoord, zCoord) != null
 				&& this.worldObj.getTileEntity(xCoord + 1, yCoord, zCoord).getBlockType() == this.worldObj
 						.getTileEntity(xCoord, yCoord, zCoord).getBlockType()) {
-			connections[3] = ForgeDirection.EAST;
+			connections[3] = EnumFacing.EAST;
 		} else {
 			connections[3] = null;
 		}
 		if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord + 1) != null
 				&& this.worldObj.getTileEntity(xCoord, yCoord, zCoord + 1).getBlockType() == this.worldObj
 						.getTileEntity(xCoord, yCoord, zCoord).getBlockType()) {
-			connections[4] = ForgeDirection.SOUTH;
+			connections[4] = EnumFacing.SOUTH;
 		} else {
 			connections[4] = null;
 		}
 		if (this.worldObj.getTileEntity(xCoord - 1, yCoord, zCoord) != null
 				&& this.worldObj.getTileEntity(xCoord - 1, yCoord, zCoord).getBlockType() == this.worldObj
 						.getTileEntity(xCoord, yCoord, zCoord).getBlockType()) {
-			connections[5] = ForgeDirection.WEST;
+			connections[5] = EnumFacing.WEST;
 		} else {
 			connections[5] = null;
 		}
 	}
 	
-	public boolean onlyOneOpposite(ForgeDirection[] directions) {
-		ForgeDirection mainDirection = null;
+	public boolean onlyOneOpposite(EnumFacing[] directions) {
+		EnumFacing mainDirection = null;
 		boolean isOpposite = false;
 		
 		for(int x = 0; x < directions.length; x++) {
@@ -81,13 +81,13 @@ public class TilePipeBase extends TileEntity {
 		return isOpposite;
 	}
 	
-	public boolean isOpposite(ForgeDirection firstDirection, ForgeDirection secondDirection) {
-		if((firstDirection == ForgeDirection.UP && secondDirection == ForgeDirection.DOWN)
-				|| (firstDirection == ForgeDirection.DOWN && secondDirection == ForgeDirection.UP)
-				|| (firstDirection == ForgeDirection.SOUTH && secondDirection == ForgeDirection.NORTH)
-				|| (firstDirection == ForgeDirection.NORTH && secondDirection == ForgeDirection.SOUTH)
-				|| (firstDirection == ForgeDirection.EAST && secondDirection == ForgeDirection.WEST)
-				|| (firstDirection == ForgeDirection.WEST && secondDirection == ForgeDirection.EAST)) {
+	public boolean isOpposite(EnumFacing firstDirection, EnumFacing secondDirection) {
+		if((firstDirection == EnumFacing.UP && secondDirection == EnumFacing.DOWN)
+				|| (firstDirection == EnumFacing.DOWN && secondDirection == EnumFacing.UP)
+				|| (firstDirection == EnumFacing.SOUTH && secondDirection == EnumFacing.NORTH)
+				|| (firstDirection == EnumFacing.NORTH && secondDirection == EnumFacing.SOUTH)
+				|| (firstDirection == EnumFacing.EAST && secondDirection == EnumFacing.WEST)
+				|| (firstDirection == EnumFacing.WEST && secondDirection == EnumFacing.EAST)) {
 			return true;
 		}
 		return false;

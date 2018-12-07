@@ -7,11 +7,8 @@ import teamKuiper.redoxiation.Redoxiation;
 public class RedoxiationOre extends Block {
 
 	public RedoxiationOre(String name, int harvestlevel, float hardness, float resistance) {
-
-		super(Material.rock);
-
-		setBlockName(Redoxiation.MODID + "." + name);
-		setBlockTextureName(Redoxiation.MODID + ":" + name);
+		super(Material.ROCK);
+		setRegistryName(Redoxiation.MODID, Redoxiation.MODID + "." + name);
 		setCreativeTab(Redoxiation.tabRedoxiation);
 		setHarvestLevel("pickaxe", harvestlevel);
 		setHardness(hardness);

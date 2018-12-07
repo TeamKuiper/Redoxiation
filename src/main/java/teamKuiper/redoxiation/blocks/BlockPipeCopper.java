@@ -11,7 +11,7 @@ public class BlockPipeCopper extends BlockPipeBase {
 	
 	public BlockPipeCopper() {
 		super();
-		setBlockName(Redoxiation.MODID + "." + NAME);
+		setRegistryName(Redoxiation.MODID, Redoxiation.MODID + "." + NAME);
 		setCreativeTab(Redoxiation.tabRedoxiation);
 		setHarvestLevel("pickaxe", 1);
 		setHardness(2.0F);

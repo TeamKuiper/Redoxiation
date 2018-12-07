@@ -5,16 +5,18 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
@@ -28,9 +30,8 @@ public class LeadTank extends Block implements ITileEntityProvider {
     public static IIcon icon;
 
     public LeadTank() {
-        super(Material.glass);
-        setBlockName(Redoxiation.MODID + "." + name);
-        setBlockTextureName(Redoxiation.MODID + ":" + name);
+        super(Material.GLASS);
+        setRegistryName(Redoxiation.MODID, Redoxiation.MODID + "." + name);
         setCreativeTab(Redoxiation.tabRedoxiation);
     }
  
@@ -49,20 +50,20 @@ public class LeadTank extends Block implements ITileEntityProvider {
         return new TileLeadTank();
     }
 
-    @Override
-    public boolean isOpaqueCube() {
-        return false;
-    }
+	@Override
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
+	}
 
-    @Override
-    public int getRenderType() {
-        return -1;
-    }
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
 
-    @Override
-    public boolean renderAsNormalBlock() {
-        return false;
-    }
+	@Override
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
 
     @Override
     public int getRenderBlockPass() {
@@ -86,9 +87,9 @@ public class LeadTank extends Block implements ITileEntityProvider {
             FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(stack);
             TileLeadTank tank = (TileLeadTank) world.getTileEntity(x, y, z);
             if (liquid != null) {
-                int amount = tank.fill(ForgeDirection.UNKNOWN, liquid, false);
+                int amount = tank.fill(EnumFacing.UNKNOWN, liquid, false);
                 if (amount == liquid.amount) {
-                    tank.fill(ForgeDirection.UNKNOWN, liquid, true);
+                    tank.fill(EnumFacing.UNKNOWN, liquid, true);
                     if (!player.capabilities.isCreativeMode)
                         player.inventory.setInventorySlotContents(player.inventory.currentItem, Utils.useItemSafely(stack));
 
@@ -100,12 +101,12 @@ public class LeadTank extends Block implements ITileEntityProvider {
                 } else
                     return true;
             } else if (FluidContainerRegistry.isBucket(stack)) {
-                FluidTankInfo[] tanks = tank.getTankInfo(ForgeDirection.UNKNOWN);
+                FluidTankInfo[] tanks = tank.getTankInfo(EnumFacing.UNKNOWN);
                 if (tanks[0] != null) {
                     FluidStack fillFluid = tanks[0].fluid;
                     ItemStack fillStack = FluidContainerRegistry.fillFluidContainer(fillFluid, stack);
                     if (fillStack != null) {
-                        tank.drain(ForgeDirection.UNKNOWN, FluidContainerRegistry.getFluidForFilledItem(fillStack).amount, true);
+                        tank.drain(EnumFacing.UNKNOWN, FluidContainerRegistry.getFluidForFilledItem(fillStack).amount, true);
                         if (!player.capabilities.isCreativeMode) {
                             if (stack.stackSize == 1)
                                 player.inventory.setInventorySlotContents(player.inventory.currentItem, fillStack);

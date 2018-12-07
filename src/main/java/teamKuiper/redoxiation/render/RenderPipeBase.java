@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.common.util.EnumFacing;
 import teamKuiper.redoxiation.blocks.tileentity.TilePipeBase;
 
 public class RenderPipeBase extends TileEntitySpecialRenderer {
@@ -42,22 +42,22 @@ public class RenderPipeBase extends TileEntitySpecialRenderer {
 		GL11.glTranslated(-translationX, -translationY, -translationZ);
 	}
 
-	public void drawConnector(ForgeDirection direction) {
+	public void drawConnector(EnumFacing direction) {
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
 		{
 			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-			if (direction.equals(ForgeDirection.UP)) {
+			if (direction.equals(EnumFacing.UP)) {
 				// rotate
-			} else if (direction.equals(ForgeDirection.DOWN)) {
+			} else if (direction.equals(EnumFacing.DOWN)) {
 				GL11.glRotatef(180, 1, 0, 0);
-			} else if (direction.equals(ForgeDirection.SOUTH)) {
+			} else if (direction.equals(EnumFacing.SOUTH)) {
 				GL11.glRotatef(90, 1, 0, 0);
-			} else if (direction.equals(ForgeDirection.NORTH)) {
+			} else if (direction.equals(EnumFacing.NORTH)) {
 				GL11.glRotatef(270, 1, 0, 0);
-			} else if (direction.equals(ForgeDirection.WEST)) {
+			} else if (direction.equals(EnumFacing.WEST)) {
 				GL11.glRotatef(90, 0, 0, 1);
-			} else if (direction.equals(ForgeDirection.EAST)) {
+			} else if (direction.equals(EnumFacing.EAST)) {
 				GL11.glRotatef(270, 0, 0, 1);
 			}
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
@@ -94,17 +94,17 @@ public class RenderPipeBase extends TileEntitySpecialRenderer {
 		tessellator.draw();
 
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-		if (direction.equals(ForgeDirection.UP)) {
+		if (direction.equals(EnumFacing.UP)) {
 			// rotate
-		} else if (direction.equals(ForgeDirection.DOWN)) {
+		} else if (direction.equals(EnumFacing.DOWN)) {
 			GL11.glRotatef(-180, 1, 0, 0);
-		} else if (direction.equals(ForgeDirection.SOUTH)) {
+		} else if (direction.equals(EnumFacing.SOUTH)) {
 			GL11.glRotatef(-90, 1, 0, 0);
-		} else if (direction.equals(ForgeDirection.NORTH)) {
+		} else if (direction.equals(EnumFacing.NORTH)) {
 			GL11.glRotatef(-270, 1, 0, 0);
-		} else if (direction.equals(ForgeDirection.WEST)) {
+		} else if (direction.equals(EnumFacing.WEST)) {
 			GL11.glRotatef(-90, 0, 0, 1);
-		} else if (direction.equals(ForgeDirection.EAST)) {
+		} else if (direction.equals(EnumFacing.EAST)) {
 			GL11.glRotatef(-270, 0, 0, 1);
 		}
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);

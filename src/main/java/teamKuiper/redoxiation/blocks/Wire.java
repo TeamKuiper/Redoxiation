@@ -5,10 +5,12 @@ import codechicken.lib.packet.PacketCustom;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 import teamKuiper.redoxiation.PacketHandler;
 import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.blocks.tileentity.TileWire;
@@ -18,9 +20,8 @@ public class Wire extends BlockContainer {
     String name = "wire";
 
     public Wire() {
-        super(Material.rock);
-        setBlockName(Redoxiation.MODID + "." + name);
-        setBlockTextureName(Redoxiation.MODID + ":" + name);
+        super(Material.ROCK);
+        setRegistryName(Redoxiation.MODID, Redoxiation.MODID + "." + name);
         setCreativeTab(Redoxiation.tabRedoxiation);
         setHarvestLevel("pickaxe", 2);
         setHardness(2.0F);
@@ -31,10 +32,20 @@ public class Wire extends BlockContainer {
         return  new TileWire();
     }
 
-    @Override
-    public boolean renderAsNormalBlock() {
-        return false;
-    }
+	@Override
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
+	}
+
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
+	
+	@Override
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
 
     @Override
     public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta) {
@@ -118,28 +129,19 @@ public class Wire extends BlockContainer {
 	}
 
     @Override
-    public int getRenderType() {
-        return -1;
-    }
-
-    public boolean isOpaqueCube() {
-        return false;
-    }
-
-    @Override
     public boolean canPlaceBlockOnSide(World world, int x, int y, int z, int side) {
-        ForgeDirection dir = ForgeDirection.getOrientation(side).getOpposite();
+        EnumFacing dir = EnumFacing.getOrientation(side).getOpposite();
         return world.isSideSolid(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, dir.getOpposite());
     }
 
     @Override
     public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-        return world.isSideSolid(x - 1, y, z, ForgeDirection.EAST) ||
-                world.isSideSolid(x + 1, y, z, ForgeDirection.WEST) ||
-                world.isSideSolid(x, y, z - 1, ForgeDirection.SOUTH) ||
-                world.isSideSolid(x, y, z + 1, ForgeDirection.NORTH) ||
-                world.isSideSolid(x, y - 1, z, ForgeDirection.UP) ||
-                world.isSideSolid(x, y + 1, z, ForgeDirection.DOWN);
+        return world.isSideSolid(x - 1, y, z, EnumFacing.EAST) ||
+                world.isSideSolid(x + 1, y, z, EnumFacing.WEST) ||
+                world.isSideSolid(x, y, z - 1, EnumFacing.SOUTH) ||
+                world.isSideSolid(x, y, z + 1, EnumFacing.NORTH) ||
+                world.isSideSolid(x, y - 1, z, EnumFacing.UP) ||
+                world.isSideSolid(x, y + 1, z, EnumFacing.DOWN);
     }
 
     @Override

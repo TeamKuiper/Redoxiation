@@ -15,9 +15,8 @@ public class TNTium extends Block {
 	String name = "tntium";
 
 	public TNTium() {
-		super(Material.rock);
-		setBlockName(Redoxiation.MODID + "." + name);
-		setBlockTextureName(Redoxiation.MODID + ":" + name);
+		super(Material.ROCK);
+		setRegistryName(Redoxiation.MODID, Redoxiation.MODID + "." + name);
 		setCreativeTab(Redoxiation.tabRedoxiation);
 		setHarvestLevel("pickaxe", 2);
 		setHardness(3.0F);
@@ -28,7 +27,7 @@ public class TNTium extends Block {
 	public void onBlockDestroyedByPlayer(World world, int x, int y, int z,
 			int meta) {
 		Random random = new Random();
-		if(!Minecraft.getMinecraft().thePlayer.capabilities.isCreativeMode) {
+		if(!Minecraft.getMinecraft().player.capabilities.isCreativeMode) {
 			if(!world.isRemote){
 				if (random.nextInt(4) >= 3) {
 					world.createExplosion(null, x, y, z, 2, true);
@@ -39,7 +38,7 @@ public class TNTium extends Block {
 	}
 
 	public Item getItemDropped(int meta, Random rand, int fortune) {
-		return Items.gunpowder;
+		return Items.GUNPOWDER;
 	}
 
 	public int quantityDropped(Random rand) {
