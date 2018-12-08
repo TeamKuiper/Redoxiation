@@ -12,16 +12,17 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagIntArray;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 
-public class TileMachineBase extends TileEntity implements IInventory {
+public class TileMachineBase extends TileEntity implements IInventory, ITickable {
 
 	Block block;
 	private int[][] emptyPos;
@@ -58,8 +59,8 @@ public class TileMachineBase extends TileEntity implements IInventory {
 	}
 	
 	@Override
-	public void updateEntity() {
-		if (!worldObj.isRemote) {
+	public void update() {
+		if (!world.isRemote) {
 			if (hasMaster()) {
 				hasmastercheck = true;
 				if (isMaster()) {
@@ -111,14 +112,18 @@ public class TileMachineBase extends TileEntity implements IInventory {
 		int numberBurning = numberOfBurningFuelSlots();
 		if (cachedNumberOfBurningSlots != numberBurning) {
 			cachedNumberOfBurningSlots = numberBurning;
-			if (worldObj.isRemote) {
-				worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+			if (world.isRemote) {
+				world.markBlockForUpdate(pos);
 			}
 		}
 	}
 
 	/** Check that structure is properly formed */
 	public boolean checkMultiBlockForm() {
+		int xCoord = pos.getX();
+		int yCoord = pos.getY();
+		int zCoord = pos.getZ();
+		
 		for (int x = xCoord - xMinus; x <= xCoord + xPlus; x++) {
 			for (int y = yCoord - yMinus; y <= yCoord + yPlus; y++) {
 				for (int z = zCoord - zMinus; z <= zCoord + zPlus; z++) {
@@ -131,7 +136,8 @@ public class TileMachineBase extends TileEntity implements IInventory {
 						}
 						
 					}
-					if(isEmpty ? !(worldObj.getBlock(x, y, z) == Blocks.air) : !worldObj.getBlock(x, y, z).equals(block)) {
+					Block block = world.getBlockState(new BlockPos(x, y, z)).getBlock();
+					if(isEmpty ? !(block == Blocks.AIR) : !block.equals(block)) {
 						return false;
 					}
 				}
@@ -142,6 +148,10 @@ public class TileMachineBase extends TileEntity implements IInventory {
 
 	/** Setup all the blocks in the structure */
 	public void setupStructure() {
+		int xCoord = pos.getX();
+		int yCoord = pos.getY();
+		int zCoord = pos.getZ();
+		
 		for (int x = xCoord - xMinus; x <= xCoord + xPlus; x++) {
 			for (int y = yCoord - yMinus; y <= yCoord + yPlus; y++) {
 				nextLoop:
@@ -153,11 +163,11 @@ public class TileMachineBase extends TileEntity implements IInventory {
 						}
 					}
 
-					TileEntity tile = worldObj.getTileEntity(x, y, z);
+					TileEntity tile = world.getTileEntity(pos);
 					// Check if block is bottom center block
 					boolean master = (x == xCoord && y == yCoord && z == zCoord);
 					if (tile != null && this.getClass().isInstance(tile)) {
-						((TileMachineBase) tile).setMasterCoords(xCoord, yCoord, zCoord);
+						((TileMachineBase) tile).setMasterCoords(new BlockPos(xCoord, yCoord, zCoord));
 						((TileMachineBase) tile).setHasMaster(true);
 						((TileMachineBase) tile).setIsMaster(master);
 						((TileMachineBase) tile).hasmastercheck = true;
@@ -179,11 +189,15 @@ public class TileMachineBase extends TileEntity implements IInventory {
 
 	/** Check that the master exists */
 	public boolean checkForMaster() {
-		return worldObj.getBlock(masterPos) == block;
+		return world.getBlockState(masterPos).getBlock() == block;
 	}
 
 	/** Reset all the parts of the structure */
 	public void resetStructure() {
+		int xCoord = pos.getX();
+		int yCoord = pos.getY();
+		int zCoord = pos.getZ();
+		
 		for (int x = xCoord - xMinus; x <= xCoord + xPlus; x++) {
 			for (int y = yCoord - yMinus; y <= yCoord + yPlus; y++) {
 				nextLoop:
@@ -195,7 +209,7 @@ public class TileMachineBase extends TileEntity implements IInventory {
 						}
 					}
 					
-					TileEntity tile = worldObj.getTileEntity(x, y, z);
+					TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
 					if (tile != null && (this.getClass().isInstance(tile))) {
 						((TileMachineBase) tile).reset();
 					}
@@ -352,7 +366,7 @@ public class TileMachineBase extends TileEntity implements IInventory {
 			return 0;
 		double fraction = burnTimeRemaining[fuelSlot]
 				/ (double) burnTimeInitialValue[fuelSlot];
-		return MathHelper.clamp_double(fraction, 0.0, 1.0);
+		return MathHelper.clamp(fraction, 0.0, 1.0);
 	}
 
 	/**
@@ -389,7 +403,7 @@ public class TileMachineBase extends TileEntity implements IInventory {
 	 */
 	public double fractionOfCookTimeComplete() {
 		double fraction = cookTime / (double) COOK_TIME_FOR_COMPLETION;
-		return MathHelper.clamp_double(fraction, 0.0, 1.0);
+		return MathHelper.clamp(fraction, 0.0, 1.0);
 	}
 
 	/**
@@ -415,7 +429,7 @@ public class TileMachineBase extends TileEntity implements IInventory {
 					// burnTimeRemaining & burnTimeInitialValue to the
 					// item's burn time and decrease the stack size
 					burnTimeRemaining[i] = burnTimeInitialValue[i] = getItemBurnTime(itemStacks[fuelSlotNumber]);
-					--itemStacks[fuelSlotNumber].stackSize;
+					itemStacks[fuelSlotNumber].setCount(itemStacks[fuelSlotNumber].getCount() - 1);
 					++burningCount;
 					inventoryChanged = true;
 					// If the stack size now equals 0 set the slot contents to
@@ -424,7 +438,7 @@ public class TileMachineBase extends TileEntity implements IInventory {
 					// consumed. If the item dose not have
 					// a container item getContainerItem returns null which sets
 					// the slot contents to null
-					if (itemStacks[fuelSlotNumber].stackSize == 0) {
+					if (itemStacks[fuelSlotNumber].getCount() == 0) {
 						itemStacks[fuelSlotNumber] = itemStacks[fuelSlotNumber]
 								.getItem().getContainerItem(
 										itemStacks[fuelSlotNumber]);
@@ -483,7 +497,7 @@ public class TileMachineBase extends TileEntity implements IInventory {
 							continue;
 						}
 						if (itemStacks[inputSlot].getItem()	== recipe[x*2][y].getItem()
-								&& itemStacks[inputSlot].stackSize >= recipe[x*2][y].stackSize) {
+								&& itemStacks[inputSlot].getCount() >= recipe[x*2][y].getCount()) {
 							existItems[y] = true;
 						}
 					}
@@ -505,7 +519,7 @@ public class TileMachineBase extends TileEntity implements IInventory {
 		for (int outputSlot = FIRST_OUTPUT_SLOT; outputSlot < FIRST_OUTPUT_SLOT + OUTPUT_SLOTS_COUNT; outputSlot++) {
 			if (itemStacks[outputSlot] != null) {
 				if (itemStacks[outputSlot].getItem().getUnlocalizedName() == recipe[smeltNum + 1][outputSlot - FIRST_OUTPUT_SLOT].getItem().getUnlocalizedName() || 
-						itemStacks[outputSlot].stackSize > getInventoryStackLimit() - recipe[smeltNum + 1][outputSlot - FIRST_OUTPUT_SLOT].stackSize) {
+						itemStacks[outputSlot].getCount() > getInventoryStackLimit() - recipe[smeltNum + 1][outputSlot - FIRST_OUTPUT_SLOT].getCount()) {
 					return false;
 				}
 			}
@@ -518,10 +532,10 @@ public class TileMachineBase extends TileEntity implements IInventory {
 		for (int inputSlot = FIRST_INPUT_SLOT; inputSlot < FIRST_INPUT_SLOT + INPUT_SLOTS_COUNT; inputSlot++) {
 			for(int y = 0; y < recipe[smeltNum].length; y++) {
 				if (itemStacks[inputSlot].getItem() == recipe[smeltNum][y].getItem()) {
-					itemStacks[inputSlot].stackSize -= recipe[smeltNum][y].stackSize;
+					itemStacks[inputSlot].setCount(itemStacks[inputSlot].getCount() - recipe[smeltNum][y].getCount());
 				}
 			}
-			if (itemStacks[inputSlot].stackSize <= 0) {
+			if (itemStacks[inputSlot].getCount() <= 0) {
 				itemStacks[inputSlot] = null;
 			}
 		}
@@ -529,10 +543,10 @@ public class TileMachineBase extends TileEntity implements IInventory {
 		for (int outputSlot = FIRST_OUTPUT_SLOT; outputSlot < FIRST_OUTPUT_SLOT + OUTPUT_SLOTS_COUNT; outputSlot++) {
 			if (itemStacks[outputSlot] == null) {
 				if(recipe[smeltNum + 1][outputSlot - FIRST_OUTPUT_SLOT] != null) {
-					itemStacks[outputSlot] = new ItemStack(recipe[smeltNum + 1][outputSlot - FIRST_OUTPUT_SLOT].getItem(), recipe[smeltNum + 1][outputSlot - FIRST_OUTPUT_SLOT].stackSize);
+					itemStacks[outputSlot] = new ItemStack(recipe[smeltNum + 1][outputSlot - FIRST_OUTPUT_SLOT].getItem(), recipe[smeltNum + 1][outputSlot - FIRST_OUTPUT_SLOT].getCount());
 				}
 			} else {
-				itemStacks[outputSlot].stackSize += recipe[smeltNum + 1][outputSlot - FIRST_OUTPUT_SLOT].stackSize;
+				itemStacks[outputSlot].setCount(itemStacks[outputSlot].getCount() +  recipe[smeltNum + 1][outputSlot - FIRST_OUTPUT_SLOT].getCount());
 			}
 		}
 			
@@ -555,7 +569,7 @@ public class TileMachineBase extends TileEntity implements IInventory {
 				burntime = this.burnTime[x];
 			}
 		}
-		return (short) MathHelper.clamp_int(burntime, 0, Short.MAX_VALUE);
+		return (short) MathHelper.clamp(burntime, 0, Short.MAX_VALUE);
 	}
 
 	// Gets the number of slots in the inventory
@@ -590,12 +604,12 @@ public class TileMachineBase extends TileEntity implements IInventory {
 			return null;
 
 		ItemStack itemStackRemoved;
-		if (itemStackInSlot.stackSize <= count) {
+		if (itemStackInSlot.getCount() <= count) {
 			itemStackRemoved = itemStackInSlot;
 			setInventorySlotContents(slotIndex, null);
 		} else {
 			itemStackRemoved = itemStackInSlot.splitStack(count);
-			if (itemStackInSlot.stackSize == 0) {
+			if (itemStackInSlot.getCount() == 0) {
 				setInventorySlotContents(slotIndex, null);
 			}
 		}
@@ -607,8 +621,8 @@ public class TileMachineBase extends TileEntity implements IInventory {
 	@Override
 	public void setInventorySlotContents(int slotIndex, ItemStack itemstack) {
 		itemStacks[slotIndex] = itemstack;
-		if (itemstack != null && itemstack.stackSize > getInventoryStackLimit()) {
-			itemstack.stackSize = getInventoryStackLimit();
+		if (itemstack != null && itemstack.getCount() > getInventoryStackLimit()) {
+			itemstack.setCount(getInventoryStackLimit());
 		}
 		markDirty();
 	}
@@ -628,7 +642,7 @@ public class TileMachineBase extends TileEntity implements IInventory {
 	// 2) the player isn't too far away from the centre of the block
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
-		if (this.worldObj.getTileEntity(xCoord, yCoord, zCoord) != this)
+		if (this.world.getTileEntity(xCoord, yCoord, zCoord) != this)
 			return false;
 		final double X_CENTRE_OFFSET = 0.5;
 		final double Y_CENTRE_OFFSET = 0.5;
@@ -680,17 +694,16 @@ public class TileMachineBase extends TileEntity implements IInventory {
 	// information to the client
 	// it uses getDescriptionPacket() and onDataPacket() to do this
 	@Override
-	public Packet getDescriptionPacket() {
+	public SPacketUpdateTileEntity getUpdatePacket() {
 		NBTTagCompound nbtTagCompound = new NBTTagCompound();
 		writeToNBT(nbtTagCompound);
 		final int METADATA = 0;
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, METADATA,
-				nbtTagCompound);
+		return new SPacketUpdateTileEntity(pos, METADATA, nbtTag);
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
-		readFromNBT(pkt.func_148857_g());
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+		readFromNBT(pkt.getNbtCompound());
 	}
 
 	// will add a key for this container to the lang file so we can name it in

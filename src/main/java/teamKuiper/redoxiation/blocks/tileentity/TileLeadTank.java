@@ -2,10 +2,10 @@ package teamKuiper.redoxiation.blocks.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
@@ -20,34 +20,34 @@ public class TileLeadTank extends TileEntity implements IFluidHandler {
 
     public TileLeadTank() {}
 
-    public TileLeadTank(int x, int y, int z) {
-        worldObj.getTileEntity(x, y, z);
+    public TileLeadTank(BlockPos pos) {
+        world.getTileEntity(pos);
 
     }
 
-    public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
+    public int fill(EnumFacing from, FluidStack resource, boolean doFill) {
         needsUpdate = true;
         return this.tank.fill(resource, doFill);
     }
 
-    public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
+    public FluidStack drain(EnumFacing from, FluidStack resource, boolean doDrain) {
         return this.tank.drain(resource.amount, doDrain);
     }
 
-    public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+    public FluidStack drain(EnumFacing from, int maxDrain, boolean doDrain) {
         needsUpdate = true;
         return this.tank.drain(maxDrain, doDrain);
     }
 
-    public boolean canFill(ForgeDirection from, Fluid fluid) {
+    public boolean canFill(EnumFacing from, Fluid fluid) {
         return true;
     }
 
-    public boolean canDrain(ForgeDirection from, Fluid fluid) {
+    public boolean canDrain(EnumFacing from, Fluid fluid) {
         return true;
     }
 
-    public FluidTankInfo[] getTankInfo(ForgeDirection from) {
+    public FluidTankInfo[] getTankInfo(EnumFacing from) {
         return new FluidTankInfo[] {this.tank.getInfo()};
     }
 
@@ -66,7 +66,7 @@ public class TileLeadTank extends TileEntity implements IFluidHandler {
                 } else {
                 --updateTimer;
                 if (updateTimer == 0) {
-                    worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+                    world.markBlockForUpdate(pos);
                     needsUpdate = false;
                 }
             }
@@ -80,10 +80,11 @@ public class TileLeadTank extends TileEntity implements IFluidHandler {
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound tag) {
-        super.writeToNBT(tag);
+    public NBTTagCompound writeToNBT(NBTTagCompound tag) {
+    	tag = super.writeToNBT(tag);
         tank.writeToNBT(tag);
         writeCustomNBT(tag);
+        return tag;
     }
 
     private void writeCustomNBT(NBTTagCompound tag) {
@@ -91,15 +92,15 @@ public class TileLeadTank extends TileEntity implements IFluidHandler {
     }
 
     @Override
-    public Packet getDescriptionPacket() {
+    public SPacketUpdateTileEntity getUpdatePacket() {
         NBTTagCompound tag = new NBTTagCompound();
         writeToNBT(tag);
-        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, this.blockMetadata, tag);
+        return new SPacketUpdateTileEntity(pos, 1, tag);
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
-        NBTTagCompound tag = pkt.func_148857_g();
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+        NBTTagCompound tag = pkt.getNbtCompound();
         readFromNBT(tag);
     }
 }
