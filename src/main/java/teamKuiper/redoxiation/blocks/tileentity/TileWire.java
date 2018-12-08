@@ -5,6 +5,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
 import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
 
 public class TileWire extends TileEntity {
@@ -136,7 +137,7 @@ public class TileWire extends TileEntity {
         return state;
     }
 
-    public int fill(int x, int y, int z, int checknum, boolean st, float mul) {
+    public int fill(BlockPos pos, int checknum, boolean st, float mul) {
     	if (checknum == -1)
     	{
     		checknum = -1;

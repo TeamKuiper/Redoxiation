@@ -5,10 +5,13 @@ import codechicken.lib.packet.PacketCustom;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import teamKuiper.redoxiation.PacketHandler;
@@ -18,6 +21,14 @@ import teamKuiper.redoxiation.blocks.tileentity.TileWire;
 public class Wire extends BlockContainer {
 
     String name = "wire";
+
+    public static final AxisAlignedBB DEFAULT_AABB = new AxisAlignedBB(1, 1, 1, 1, 1, 1);
+    public static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.3125f, 0.875f, 0.3125f, 0.6875f, 1.0f, 0.6875f);
+    public static final AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.3125f, 0.0f, 0.3125f, 0.6875f, 0.0625f, 0.6875f);
+    public static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.3125f, 0.3125f, 0.0f, 0.6875f, 0.6875f, 0.125f);
+    public static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.3125f, 0.3125f, 0.875f, 0.6875f, 0.6875f, 1.0f);
+    public static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.875f, 0.3125f, 0.3125f, 1.0f, 0.6875f, 0.6875f);
+    public static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(0.0f, 0.3125f, 0.3125f, 0.125f, 0.6875f, 0.6875f);
 
     public Wire() {
         super(Material.ROCK);
@@ -29,7 +40,7 @@ public class Wire extends BlockContainer {
     }
 
     public TileEntity createNewTileEntity(World world, int meta) {
-        return  new TileWire();
+        return new TileWire();
     }
 
 	@Override
@@ -53,127 +64,156 @@ public class Wire extends BlockContainer {
     }
 
     @Override
-    public void onBlockAdded(World world, int x, int y, int z) {
+    public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
         if(world.isRemote)
             new PacketCustom(PacketHandler.channel, 1).sendToServer();
-		TileWire tile = (TileWire) world.getTileEntity(x, y, z);
-		int check = tile.fill(x, y, z, 0, false, 1);
-		tile.setfill(x, y, z, check, true);
+		TileWire tile = (TileWire) world.getTileEntity(pos);
+		int check = tile.fill(pos, 0, false, 1);
+		tile.setfill(pos, check, true);
     }
     
-    public boolean checkstate(int x, int y, int z, boolean st, World world) {
-		return ((world.getBlock(x, y, z) == RedoxiationBlocks.wire) && (((TileWire) world.getTileEntity(x, y, z)).state() != st));
+    public boolean checkstate(BlockPos pos, boolean st, World world) {
+		return ((world.getBlockState(pos).getBlock() == RedoxiationBlocks.wire) && (((TileWire) world.getTileEntity(x, y, z)).state() != st));
 	}
     
-    public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
+    public void breakBlock(World world, BlockPos pos, Block block, int meta) {
+    	
+    	int x = pos.getX();
+    	int y = pos.getY();
+    	int z = pos.getZ();
+
+    	BlockPos pos1 = new BlockPos(x+1, y, z);
+    	BlockPos pos2 = new BlockPos(pos2);
+    	BlockPos pos3 = new BlockPos(pos3);
+    	BlockPos pos4 = new BlockPos(pos4);
+    	BlockPos pos5 = new BlockPos(pos5);
+    	BlockPos pos6 = new BlockPos(pos6);
 
 		int check = 0;
 
-		if (checkstate(x+1, y, z, false, world))
+		if (checkstate(pos1, false, world))
 		{
-			((TileWire)world.getTileEntity(x+1, y, z)).fill(x+1, y, z, 0, false, 1);
+			((TileWire)world.getTileEntity(pos1)).fill(pos1, 0, false, 1);
 		}
-		if (checkstate(x-1, y, z, false, world))
+		if (checkstate(pos2, false, world))
 		{
-			((TileWire)world.getTileEntity(x-1, y, z)).fill(x-1, y, z, 0, false, 1);
+			((TileWire)world.getTileEntity(pos2)).fill(pos2, 0, false, 1);
 		}
-		if (checkstate(x, y+1, z, false, world))
+		if (checkstate(pos3, false, world))
 		{
-			((TileWire)world.getTileEntity(x, y+1, z)).fill(x, y+1, z, 0, false, 1);
+			((TileWire)world.getTileEntity(pos3)).fill(pos3, 0, false, 1);
 		}
-		if (checkstate(x, y-1, z, false, world))
+		if (checkstate(pos4, false, world))
 		{
-			((TileWire)world.getTileEntity(x, y-1, z)).fill(x, y-1, z, 0, false, 1);
+			((TileWire)world.getTileEntity(pos4)).fill(pos4, 0, false, 1);
 		}
-		if (checkstate(x, y, z+1, false, world))
+		if (checkstate(pos5, false, world))
 		{
-			((TileWire)world.getTileEntity(x, y, z+1)).fill(x, y, z+1, 0, false, 1);
+			((TileWire)world.getTileEntity(pos5)).fill(pos5, 0, false, 1);
 		}
-		if (checkstate(x, y, z-1, false, world))
+		if (checkstate(pos6, false, world))
 		{
-			((TileWire)world.getTileEntity(x, y, z-1)).fill(x, y, z-1, 0, false, 1);
+			((TileWire)world.getTileEntity(pos6)).fill(pos6, 0, false, 1);
 		}
 		
 		
-		if (checkstate(x+1, y, z, true, world))
+		if (checkstate(pos1, true, world))
 		{
-			check = ((TileWire)world.getTileEntity(x+1, y, z)).getchunknumber();
-			((TileWire)world.getTileEntity(x+1, y, z)).setfill(x+1, y, z, check, true);
+			check = ((TileWire)world.getTileEntity(pos1)).getchunknumber();
+			((TileWire)world.getTileEntity(pos1)).setfill(pos1, check, true);
 		}
-		if (checkstate(x-1, y, z, true, world))
+		if (checkstate(pos2, true, world))
 		{
-			check = ((TileWire)world.getTileEntity(x-1, y, z)).getchunknumber();
-			((TileWire)world.getTileEntity(x-1, y, z)).setfill(x-1, y, z, check, true);
+			check = ((TileWire)world.getTileEntity(pos2)).getchunknumber();
+			((TileWire)world.getTileEntity(pos2)).setfill(pos2, check, true);
 		}
-		if (checkstate(x, y+1, z, true, world))
+		if (checkstate(pos3, true, world))
 		{
-			check = ((TileWire)world.getTileEntity(x, y+1, z)).getchunknumber();
-			((TileWire)world.getTileEntity(x, y+1, z)).setfill(x, y+1, z, check, true);
+			check = ((TileWire)world.getTileEntity(pos3)).getchunknumber();
+			((TileWire)world.getTileEntity(pos3)).setfill(pos3, check, true);
 		}
-		if (checkstate(x, y-1, z, true, world))
+		if (checkstate(pos4, true, world))
 		{
-			check = ((TileWire)world.getTileEntity(x, y-1, z)).getchunknumber();
-			((TileWire)world.getTileEntity(x, y-1, z)).setfill(x, y-1, z, check, true);
+			check = ((TileWire)world.getTileEntity(pos4)).getchunknumber();
+			((TileWire)world.getTileEntity(pos4)).setfill(pos4, check, true);
 		}
-		if (checkstate(x, y, z+1, true, world))
+		if (checkstate(pos5, true, world))
 		{
-			check = ((TileWire)world.getTileEntity(x, y, z+1)).getchunknumber();
-			((TileWire)world.getTileEntity(x, y, z+1)).setfill(x, y, z+1, check, true);
+			check = ((TileWire)world.getTileEntity(pos5)).getchunknumber();
+			((TileWire)world.getTileEntity(pos5)).setfill(pos5, check, true);
 		}
-		if (checkstate(x, y, z-1, true, world))
+		if (checkstate(pos6, true, world))
 		{
-			check = ((TileWire)world.getTileEntity(x, y, z-1)).getchunknumber();
-			((TileWire)world.getTileEntity(x, y, z-1)).setfill(x, y, z-1, check, true);
+			check = ((TileWire)world.getTileEntity(pos6)).getchunknumber();
+			((TileWire)world.getTileEntity(pos6)).setfill(pos6, check, true);
 		}
 		
 	}
 
     @Override
-    public boolean canPlaceBlockOnSide(World world, int x, int y, int z, int side) {
-        EnumFacing dir = EnumFacing.getOrientation(side).getOpposite();
-        return world.isSideSolid(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, dir.getOpposite());
+    public boolean canPlaceBlockOnSide(World world, BlockPos pos, EnumFacing side) {
+        EnumFacing dir = side.getOpposite();
+        return world.isSideSolid(new BlockPos(pos.getX() + dir.getFrontOffsetX(), pos.getY() + dir.getFrontOffsetY(), pos.getZ() + dir.getFrontOffsetZ()), dir.getOpposite());
     }
 
     @Override
-    public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-        return world.isSideSolid(x - 1, y, z, EnumFacing.EAST) ||
-                world.isSideSolid(x + 1, y, z, EnumFacing.WEST) ||
-                world.isSideSolid(x, y, z - 1, EnumFacing.SOUTH) ||
-                world.isSideSolid(x, y, z + 1, EnumFacing.NORTH) ||
-                world.isSideSolid(x, y - 1, z, EnumFacing.UP) ||
-                world.isSideSolid(x, y + 1, z, EnumFacing.DOWN);
+    public boolean canPlaceBlockAt(World world, BlockPos pos) {
+    	int x = pos.getX();
+    	int y = pos.getY();
+    	int z = pos.getZ();
+    	
+        return world.isSideSolid(new BlockPos(x - 1, y, z), EnumFacing.EAST, false) ||
+                world.isSideSolid(new BlockPos(x + 1, y, z), EnumFacing.WEST, false) ||
+                world.isSideSolid(new BlockPos(x, y, z - 1), EnumFacing.SOUTH, false) ||
+                world.isSideSolid(new BlockPos(x, y, z + 1), EnumFacing.NORTH, false) ||
+                world.isSideSolid(new BlockPos(x, y - 1, z), EnumFacing.UP, false) ||
+                world.isSideSolid(new BlockPos(x, y + 1, z), EnumFacing.DOWN, false);
     }
 
     @Override
-    public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
-        if (!this.canPlaceBlockAt(world, x, y, z)) {
-            this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-            world.setBlockToAir(x, y, z);
+    public void onNeighborChange(IBlockAccess worldIn, BlockPos pos, BlockPos neighbor) {
+    	if(!(worldIn instanceof World)) {
+    		return;
+    	}
+    	
+    	World world = (World) worldIn;
+        if (!this.canPlaceBlockAt(world, pos)) {
+            this.dropBlockAsItem(world, pos, world.getBlockState(pos), 0);
+            world.setBlockToAir(pos);
         } else {
-            int l = world.getBlockMetadata(x, y, z);
-            if (!canPlaceBlockOnSide(world, x, y, z, l)) {
-                this.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
-                world.setBlockToAir(x, y, z);
+            EnumFacing side = world.getBlockState(pos).getValue(RedoxiationBlocks.FACING);
+            if (!canPlaceBlockOnSide(world, pos, side)) {
+                this.dropBlockAsItem(world, pos, world.getBlockState(pos), 0);
+                world.setBlockToAir(pos);
             }
         }
     }
 
     @Override
-    public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
-        int l = world.getBlockMetadata(x, y, z);
-        if (l == 0) {
-            this.setBlockBounds(0.3125f, 0.875f, 0.3125f, 0.6875f, 1.0f, 0.6875f);
-        } else if (l == 1) {
-            this.setBlockBounds(0.3125f, 0.0f, 0.3125f, 0.6875f, 0.125f, 0.6875f);
-        } else if (l == 2) {
-            this.setBlockBounds(0.3125f, 0.3125f, 0.875f, 0.6875f, 0.6875f, 1.0f);
-        } else if (l == 3) {
-            this.setBlockBounds(0.3125f, 0.3125f, 0.0f, 0.6875f, 0.6875f, 0.125f);
-        } else if (l == 4) {
-            this.setBlockBounds(0.875f, 0.3125f, 0.3125f, 1.0f, 0.6875f, 0.6875f);
-        } else if (l == 5) {
-            this.setBlockBounds(0.0f, 0.3125f, 0.3125f, 0.125f, 0.6875f, 0.6875f);
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        EnumFacing direction = state.getValue(RedoxiationBlocks.FACING);
+        AxisAlignedBB boundingBox = DEFAULT_AABB;
+        
+        switch(direction) {
+        case UP:
+        	boundingBox = UP_AABB;
+        	break;
+        case DOWN:
+        	boundingBox = DOWN_AABB;
+        	break;
+        case NORTH:
+        	boundingBox = NORTH_AABB;
+        	break;
+        case SOUTH:
+        	boundingBox = SOUTH_AABB;
+        	break;
+        case EAST:
+        	boundingBox = EAST_AABB;
+        	break;
+        case WEST:
+        	boundingBox = WEST_AABB;
+        	break;
         }
+        return boundingBox;
     }
-
 }

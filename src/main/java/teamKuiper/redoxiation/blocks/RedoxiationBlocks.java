@@ -2,8 +2,10 @@ package teamKuiper.redoxiation.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
@@ -25,6 +27,8 @@ import teamKuiper.redoxiation.blocks.tileentity.TilePipeCopper;
 import teamKuiper.redoxiation.blocks.tileentity.TileWire;
 
 public class RedoxiationBlocks {
+	
+    public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.create("facing", EnumFacing.class);
 
 	public static Block oreCopper, oreTin, oreLead, oreSilver, oreNickel,
 			orePlatinum, oreZinc, oreCobalt, oreChromium, pitchblend,

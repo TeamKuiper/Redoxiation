@@ -13,8 +13,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -36,14 +39,21 @@ public class LeadTank extends Block implements ITileEntityProvider {
     }
  
     @Override
-    public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
         // TODO Auto-generated method stub
-        return Utils.getTankStackFromTile((TileLeadTank) world.getTileEntity(x, y, z), true);
+        return Utils.getTankStackFromTile((TileLeadTank) world.getTileEntity(pos), true);
+    }
+    
+    @Deprecated
+    public boolean hasComparatorInputOverride(IBlockState state)
+    {
+        return false;
     }
 
-    @Override
-    public boolean hasComparatorInputOverride() {
-        return true;
+    @Deprecated
+    public int getComparatorInputOverride(IBlockState blockState, World worldIn, BlockPos pos)
+    {
+        return 0;
     }
 
     public TileEntity createNewTileEntity(World world, int meta) {
@@ -74,14 +84,9 @@ public class LeadTank extends Block implements ITileEntityProvider {
     public int quantityDropped(Random rnd) {
         return 0;
     }
- 
-    @Override
-    public int getComparatorInputOverride(World world, int x, int y, int z, int opSide) {
-        return 0;
-    }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par6, float par7, float par8, float par9) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack stack = player.inventory.getCurrentItem();
         if (stack != null) {
             FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(stack);
@@ -128,18 +133,18 @@ public class LeadTank extends Block implements ITileEntityProvider {
     }
 
     @Override
-    public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z, boolean willHarvest) {
+    public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
         if (!player.capabilities.isCreativeMode) {
-            TileLeadTank tank = (TileLeadTank) world.getTileEntity(x, y, z);
-            Utils.dropStackInWorld(world, x, y, z, Utils.getTankStackFromTile(tank, true));
+            TileLeadTank tank = (TileLeadTank) world.getTileEntity(pos);
+            Utils.dropStackInWorld(world, pos, Utils.getTankStackFromTile(tank, true));
         }
-        return world.setBlockToAir(x, y, z);
+        return world.setBlockToAir(pos);
     }
 
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         if (stack.hasTagCompound()) {
-            TileLeadTank tank = (TileLeadTank) world.getTileEntity(x, y, z);
+            TileLeadTank tank = (TileLeadTank) world.getTileEntity(pos);
             if (tank != null) {
                 NBTTagCompound tagFluid = stack.getTagCompound().getCompoundTag("Fluid");
                 if (tagFluid != null) {
@@ -151,9 +156,9 @@ public class LeadTank extends Block implements ITileEntityProvider {
     }
 
     @Override
-    public void onBlockExploded(World world, int x, int y, int z, Explosion explosion) {
-        Utils.dropStackInWorld(world, x, y, z, Utils.getTankStackFromTile((TileLeadTank) world.getTileEntity(x, y, z), true));
-        world.setBlockToAir(x, y, z);
-        onBlockDestroyedByExplosion(world, x, y, z, explosion);
+    public void onBlockExploded(World world, BlockPos pos, Explosion explosion) {
+        Utils.dropStackInWorld(world, pos, Utils.getTankStackFromTile((TileLeadTank) world.getTileEntity(pos), true));
+        world.setBlockToAir(pos);
+        onBlockDestroyedByExplosion(world, pos, explosion);
     }
 }

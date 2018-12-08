@@ -18,6 +18,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 
 public class TileMachineBase extends TileEntity implements IInventory {
@@ -30,7 +31,7 @@ public class TileMachineBase extends TileEntity implements IInventory {
 	
 	private boolean hasMaster, isMaster;
 	public boolean hasmastercheck;
-	private int masterX, masterY, masterZ;
+	private BlockPos masterPos;
 
 	Item[] fuel;
 	private int[] burnTime;
@@ -170,9 +171,7 @@ public class TileMachineBase extends TileEntity implements IInventory {
 
 	/** Reset method to be run when the master is gone or tells them to */
 	public void reset() {
-		masterX = 0;
-		masterY = 0;
-		masterZ = 0;
+		masterPos = new BlockPos(0, 0, 0);
 		hasMaster = false;
 		isMaster = false;
 		hasmastercheck = false;
@@ -180,7 +179,7 @@ public class TileMachineBase extends TileEntity implements IInventory {
 
 	/** Check that the master exists */
 	public boolean checkForMaster() {
-		return worldObj.getBlock(masterX, masterY, masterZ) == block;
+		return worldObj.getBlock(masterPos) == block;
 	}
 
 	/** Reset all the parts of the structure */
@@ -206,11 +205,11 @@ public class TileMachineBase extends TileEntity implements IInventory {
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound data) {
+	public NBTTagCompound writeToNBT(NBTTagCompound data) {
 		super.writeToNBT(data);
-		data.setInteger("masterX", masterX);
-		data.setInteger("masterY", masterY);
-		data.setInteger("masterZ", masterZ);
+		data.setInteger("masterX", masterPos.getX());
+		data.setInteger("masterY", masterPos.getY());
+		data.setInteger("masterZ", masterPos.getZ());
 		data.setBoolean("hasMaster", hasMaster);
 		data.setBoolean("isMaster", isMaster);
 		if (hasMaster() && isMaster()) {
@@ -241,14 +240,18 @@ public class TileMachineBase extends TileEntity implements IInventory {
 		data.setShort("CookTime", cookTime);
 		data.setTag("burnTimeRemaining", new NBTTagIntArray(burnTimeRemaining));
 		data.setTag("burnTimeInitial", new NBTTagIntArray(burnTimeInitialValue));
+		
+		return data;
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound data) {
 		super.readFromNBT(data);
-		masterX = data.getInteger("masterX");
-		masterY = data.getInteger("masterY");
-		masterZ = data.getInteger("masterZ");
+		int masterX = data.getInteger("masterX");
+		int masterY = data.getInteger("masterY");
+		int masterZ = data.getInteger("masterZ");
+		masterPos = new BlockPos(masterX, masterY, masterZ);
+		
 		hasMaster = data.getBoolean("hasMaster");
 		isMaster = data.getBoolean("isMaster");
 		if (hasMaster() && isMaster()) {
@@ -287,16 +290,8 @@ public class TileMachineBase extends TileEntity implements IInventory {
 		return isMaster;
 	}
 
-	public int getMasterX() {
-		return masterX;
-	}
-
-	public int getMasterY() {
-		return masterY;
-	}
-
-	public int getMasterZ() {
-		return masterZ;
+	public BlockPos getMasterPos() {
+		return masterPos;
 	}
 
 	public void setHasMaster(boolean bool) {
@@ -307,10 +302,8 @@ public class TileMachineBase extends TileEntity implements IInventory {
 		isMaster = bool;
 	}
 
-	public void setMasterCoords(int x, int y, int z) {
-		masterX = x;
-		masterY = y;
-		masterZ = z;
+	public void setMasterCoords(BlockPos pos) {
+		masterPos = pos;
 	}
 
 	// Create and initialize the itemStacks variable that will store store the

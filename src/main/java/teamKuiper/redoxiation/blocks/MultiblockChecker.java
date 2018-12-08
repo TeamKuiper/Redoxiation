@@ -6,7 +6,6 @@ import net.minecraft.world.World;
 //THIS CODE IS USELESS, JUST FOR REFERENCE
 public class MultiblockChecker {
 
-	
 	public static boolean checkMultiBlockWithABlock(World world, int xPos, int yPos, int zPos, int xMinus, int yMinus, int zMinus, int xPlus, int yPlus, int zPlus, Block block) {
 		for(int x = xPos - xMinus; x <= xPos + xPlus; x++) {
 			for(int y = yPos - yMinus; y <= yPos + yPlus; y++) {

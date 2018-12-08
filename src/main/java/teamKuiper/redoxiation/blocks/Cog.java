@@ -18,8 +18,6 @@ import teamKuiper.redoxiation.blocks.tileentity.TileCog;
 public class Cog extends BlockContainer {
 
     String name = "cog";
-    
-    public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.create("facing", EnumFacing.class);
 
     public static final AxisAlignedBB DEFAULT_AABB = new AxisAlignedBB(1, 1, 1, 1, 1, 1);
     public static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.3125f, 0.9375f, 0.3125f, 0.6875f, 1.0f, 0.6875f);
@@ -44,7 +42,7 @@ public class Cog extends BlockContainer {
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        EnumFacing direction = state.getValue(FACING);
+        EnumFacing direction = state.getValue(RedoxiationBlocks.FACING);
         AxisAlignedBB boundingBox = DEFAULT_AABB;
         
         switch(direction) {

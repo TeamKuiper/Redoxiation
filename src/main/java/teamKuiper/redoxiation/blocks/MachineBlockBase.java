@@ -5,11 +5,16 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.achievement.RedoxiationAchievements;
@@ -27,8 +32,8 @@ public class MachineBlockBase extends BlockContainer {
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
-		TileEntity tile = world.getTileEntity(x, y, z);
+	public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
+		TileEntity tile = world.getTileEntity(pos);
 		if (tile != null && machineTile.isInstance(tile)) {
 			TileMachineBase multiBlock = (TileMachineBase) tile;
 			if (multiBlock.hasMaster()) {
@@ -37,25 +42,25 @@ public class MachineBlockBase extends BlockContainer {
 						multiBlock.resetStructure();
 				} else {
 					if (!multiBlock.checkForMaster()) {
-						TileMachineBase master = (TileMachineBase) world.getTileEntity(multiBlock.getMasterX(), multiBlock.getMasterY(), multiBlock.getMasterZ());
+						TileMachineBase master = (TileMachineBase) world.getTileEntity(multiBlock.getMasterPos());
 						master.resetStructure();
 					}
 				}
 			}
 		}
-		super.onNeighborBlockChange(world, x, y, z, block);
+		super.onNeighborChange(world, pos, neighbor);
 	}
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
-		TileEntity tile = world.getTileEntity(x, y, z);
+	public void breakBlock(World world, BlockPos pos, IBlockState state) {
+		TileEntity tile = world.getTileEntity(pos);
 		if ((tile != null) && (tile.getClass().isInstance(machineTile))) {
 			TileMachineBase multiBlock = (TileMachineBase) tile;
 			if (multiBlock.isMaster()) {
 				multiBlock.resetStructure();
 			}
 		}
-		TileMachineBase tileMachine = (TileMachineBase) world.getTileEntity(x, y, z);
+		TileMachineBase tileMachine = (TileMachineBase) world.getTileEntity(pos);
 
 		if (tileMachine != null) {
 			for (int i1 = 0; i1 < tileMachine.getSizeInventory(); ++i1) {
@@ -66,14 +71,15 @@ public class MachineBlockBase extends BlockContainer {
 					float f1 = this.random.nextFloat() * 0.8F + 0.1F;
 					EntityItem entityitem;
 
-					for (float f2 = this.random.nextFloat() * 0.8F + 0.1F; itemstack.stackSize > 0; world.spawnEntityInWorld(entityitem)) {
+					int stackSize = itemstack.getCount();
+					for (float f2 = this.random.nextFloat() * 0.8F + 0.1F; stackSize > 0; world.spawnEntityInWorld(entityitem)) {
 						int j1 = this.random.nextInt(21) + 10;
 
-						if (j1 > itemstack.stackSize) {
-							j1 = itemstack.stackSize;
+						if (j1 > stackSize) {
+							j1 = stackSize;
 						}
 
-						itemstack.stackSize -= j1;
+						itemstack.setCount(stackSize - j1);
 						entityitem = new EntityItem(world, (double) ((float) x + f), (double) ((float) y + f1), (double) ((float) z + f2), new ItemStack(itemstack.getItem(), j1,itemstack.getItemDamage()));
 						float f3 = 0.05F;
 						entityitem.motionX = (double) ((float) this.random.nextGaussian() * f3);
@@ -100,15 +106,13 @@ public class MachineBlockBase extends BlockContainer {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!world.isRemote) {
-			if (machineTile.isInstance(world.getTileEntity(x, y, z))) {
-				TileMachineBase tile = (TileMachineBase) world.getTileEntity(x, y, z);
+			if (machineTile.isInstance(world.getTileEntity(pos))) {
+				TileMachineBase tile = (TileMachineBase) world.getTileEntity(pos);
 				if (tile.hasmastercheck) {
-					int mx = tile.getMasterX();
-					int my = tile.getMasterY();
-					int mz = tile.getMasterZ();
-					player.openGui(Redoxiation.instance, GUIs.BlastFurnaceBlock.ordinal(), world, mx, my, mz);
+					BlockPos masterPos = tile.getMasterPos();
+					player.openGui(Redoxiation.instance, GUIs.BlastFurnaceBlock.ordinal(), world, masterPos.getX(), masterPos.getY(), masterPos.getZ());
 					RedoxiationAchievements.triggerAchievement(player, "redoxiation.blast");
 					return true;
 				}
