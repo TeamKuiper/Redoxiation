@@ -1,7 +1,7 @@
 package teamKuiper.redoxiation;
 
 import net.minecraftforge.common.config.Configuration;
-import teamKuiper.redoxiation.achievement.RedoxiationAchievements;
+import teamKuiper.redoxiation.advancement.RedoxiationAdvancement;
 import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
 import teamKuiper.redoxiation.items.RedoxiationGenericItems;
 
@@ -18,7 +18,7 @@ public class RedoxiationConfigHandler {
 		config.load();
     	Redoxiation.dummybool = config.get(config.CATEGORY_GENERAL, "Dummy", true).getBoolean();
     	Redoxiation.oredif = config.getInt("OreDifficulty", config.CATEGORY_GENERAL, 1, 0, 2, "1 to 2");
-    	RedoxiationAchievements.isachivenable = config.getBoolean("Achievement Enable", config.CATEGORY_GENERAL, true, "Achivevement Option");
+    	RedoxiationAdvancement.isachivenable = config.getBoolean("Achievement Enable", config.CATEGORY_GENERAL, true, "Achivevement Option");
     	// Enable / Disable
     	
 		// Blocks Start

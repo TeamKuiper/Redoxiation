@@ -19,8 +19,8 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import teamKuiper.redoxiation.achievement.AchievementEvents;
-import teamKuiper.redoxiation.achievement.RedoxiationAchievements;
+import teamKuiper.redoxiation.advancement.AdvancementEvents;
+import teamKuiper.redoxiation.advancement.RedoxiationAdvancement;
 import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
 import teamKuiper.redoxiation.blocks.gui.GuiHandler;
 import teamKuiper.redoxiation.items.RedoxiationGenericItems;
@@ -83,8 +83,8 @@ public class Redoxiation {
 		RedoxiationRecipeManager.recipeFurnace();
 		RedoxiationRecipeManager.recipeCrafting();
 		
-		if (RedoxiationAchievements.isachivenable) {
-			RedoxiationAchievements.addDefaultAchievements();
+		if (RedoxiationAdvancement.isachivenable) {
+			RedoxiationAdvancement.addDefaultAchievements();
 		}
 		
 		GameRegistry.registerWorldGenerator(handler, 0);
@@ -102,9 +102,9 @@ public class Redoxiation {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
-		if (RedoxiationAchievements.isachivenable) {
-			RedoxiationAchievements.registerAchievementPane();
-			MinecraftForge.EVENT_BUS.register(new AchievementEvents());
+		if (RedoxiationAdvancement.isachivenable) {
+			RedoxiationAdvancement.registerAchievementPane();
+			MinecraftForge.EVENT_BUS.register(new AdvancementEvents());
 			logger.info("ACHIVLOADED");
 		}
 	}

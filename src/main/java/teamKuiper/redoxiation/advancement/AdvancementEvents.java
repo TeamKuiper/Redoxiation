@@ -1,4 +1,4 @@
-package teamKuiper.redoxiation.achievement;
+package teamKuiper.redoxiation.advancement;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -6,7 +6,7 @@ import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
 
-public class AchievementEvents {
+public class AdvancementEvents {
 	@SubscribeEvent
 	public void entitySlain(LivingDeathEvent event) {
 		/*if(event.source != null && event.source.getEntity() instanceof EntityPlayer)
@@ -22,11 +22,11 @@ public class AchievementEvents {
 	
 	@SubscribeEvent
 	public void onBlockHarvest(HarvestDropsEvent event) {
-		if (event.harvester != null) {
-			EntityPlayer miner = event.harvester;
+		if (event.getHarvester() != null) {
+			EntityPlayer miner = event.getHarvester();
 
-			if (event.block == RedoxiationBlocks.oreCopper) {
-				RedoxiationAchievements.triggerAchievement(miner, "redoxiation.start");
+			if (event.getState().getBlock() == RedoxiationBlocks.oreCopper) {
+				RedoxiationAdvancement.triggerAchievement(miner, "redoxiation.start");
 			}
 		}
 	}

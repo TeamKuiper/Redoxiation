@@ -17,7 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import teamKuiper.redoxiation.Redoxiation;
-import teamKuiper.redoxiation.achievement.RedoxiationAchievements;
+import teamKuiper.redoxiation.advancement.RedoxiationAdvancement;
 import teamKuiper.redoxiation.blocks.gui.GUIs;
 import teamKuiper.redoxiation.blocks.tileentity.TileMachineBase;
 
@@ -113,7 +113,7 @@ public class MachineBlockBase extends BlockContainer {
 				if (tile.hasmastercheck) {
 					BlockPos masterPos = tile.getMasterPos();
 					player.openGui(Redoxiation.instance, GUIs.BlastFurnaceBlock.ordinal(), world, masterPos.getX(), masterPos.getY(), masterPos.getZ());
-					RedoxiationAchievements.triggerAchievement(player, "redoxiation.blast");
+					RedoxiationAdvancement.triggerAchievement(player, "redoxiation.blast");
 					return true;
 				}
 			}
