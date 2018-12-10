@@ -8,7 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.world.World;
 import teamKuiper.redoxiation.Redoxiation;
-import teamKuiper.redoxiation.blocks.tileentity.TileEntityWoodenCog;
+import teamKuiper.redoxiation.blocks.tileentity.TileWoodenCog;
 
 public class BlockWoodenCog extends BlockContainer {
 
@@ -20,7 +20,7 @@ public class BlockWoodenCog extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileEntityWoodenCog();
+		return new TileWoodenCog();
 	}
 
 	@Override
@@ -44,11 +44,11 @@ public class BlockWoodenCog extends BlockContainer {
 	}
 
 	public boolean checkstate(int x, int y, int z, int st, World world) {
-		return ((world.getBlock(x, y, z) == RedoxiationBlocks.woodenCog) && (((TileEntityWoodenCog) world.getTileEntity(x, y, z)).state() != st));
+		return ((world.getBlock(x, y, z) == RedoxiationBlocks.woodenCog) && (((TileWoodenCog) world.getTileEntity(x, y, z)).state() != st));
 	}
 
 	public void onBlockAdded(World world, int x, int y, int z) {
-		TileEntityWoodenCog tile = (TileEntityWoodenCog) world.getTileEntity(x, y, z);
+		TileWoodenCog tile = (TileWoodenCog) world.getTileEntity(x, y, z);
 		int check = tile.fill(x, y, z, 0, 1);
 		tile.setfill(x, y, z, check, 0, world);
 	}
@@ -59,59 +59,59 @@ public class BlockWoodenCog extends BlockContainer {
 
 		if (checkstate(x+1, y, z, 1, world))
 		{
-			((TileEntityWoodenCog)world.getTileEntity(x+1, y, z)).fill(x+1, y, z, 0, 1);
+			((TileWoodenCog)world.getTileEntity(x+1, y, z)).fill(x+1, y, z, 0, 1);
 		}
 		if (checkstate(x-1, y, z, 1, world))
 		{
-			((TileEntityWoodenCog)world.getTileEntity(x-1, y, z)).fill(x-1, y, z, 0, 1);
+			((TileWoodenCog)world.getTileEntity(x-1, y, z)).fill(x-1, y, z, 0, 1);
 		}
 		if (checkstate(x, y+1, z, 1, world))
 		{
-			((TileEntityWoodenCog)world.getTileEntity(x, y+1, z)).fill(x, y+1, z, 0, 1);
+			((TileWoodenCog)world.getTileEntity(x, y+1, z)).fill(x, y+1, z, 0, 1);
 		}
 		if (checkstate(x, y-1, z, 1, world))
 		{
-			((TileEntityWoodenCog)world.getTileEntity(x, y-1, z)).fill(x, y-1, z, 0, 1);
+			((TileWoodenCog)world.getTileEntity(x, y-1, z)).fill(x, y-1, z, 0, 1);
 		}
 		if (checkstate(x, y, z+1, 1, world))
 		{
-			((TileEntityWoodenCog)world.getTileEntity(x, y, z+1)).fill(x, y, z+1, 0, 1);
+			((TileWoodenCog)world.getTileEntity(x, y, z+1)).fill(x, y, z+1, 0, 1);
 		}
 		if (checkstate(x, y, z-1, 1, world))
 		{
-			((TileEntityWoodenCog)world.getTileEntity(x, y, z-1)).fill(x, y, z-1, 0, 1);
+			((TileWoodenCog)world.getTileEntity(x, y, z-1)).fill(x, y, z-1, 0, 1);
 		}
 		
 		
 		if (checkstate(x+1, y, z, 0, world))
 		{
-			check = ((TileEntityWoodenCog)world.getTileEntity(x+1, y, z)).chunknumber();
-			((TileEntityWoodenCog)world.getTileEntity(x+1, y, z)).setfill(x+1, y, z, check, 0, world);
+			check = ((TileWoodenCog)world.getTileEntity(x+1, y, z)).chunknumber();
+			((TileWoodenCog)world.getTileEntity(x+1, y, z)).setfill(x+1, y, z, check, 0, world);
 		}
 		if (checkstate(x-1, y, z, 0, world))
 		{
-			check = ((TileEntityWoodenCog)world.getTileEntity(x-1, y, z)).chunknumber();
-			((TileEntityWoodenCog)world.getTileEntity(x-1, y, z)).setfill(x-1, y, z, check, 0, world);
+			check = ((TileWoodenCog)world.getTileEntity(x-1, y, z)).chunknumber();
+			((TileWoodenCog)world.getTileEntity(x-1, y, z)).setfill(x-1, y, z, check, 0, world);
 		}
 		if (checkstate(x, y+1, z, 0, world))
 		{
-			check = ((TileEntityWoodenCog)world.getTileEntity(x, y+1, z)).chunknumber();
-			((TileEntityWoodenCog)world.getTileEntity(x, y+1, z)).setfill(x, y+1, z, check, 0, world);
+			check = ((TileWoodenCog)world.getTileEntity(x, y+1, z)).chunknumber();
+			((TileWoodenCog)world.getTileEntity(x, y+1, z)).setfill(x, y+1, z, check, 0, world);
 		}
 		if (checkstate(x, y-1, z, 0, world))
 		{
-			check = ((TileEntityWoodenCog)world.getTileEntity(x, y-1, z)).chunknumber();
-			((TileEntityWoodenCog)world.getTileEntity(x, y-1, z)).setfill(x, y-1, z, check, 0, world);
+			check = ((TileWoodenCog)world.getTileEntity(x, y-1, z)).chunknumber();
+			((TileWoodenCog)world.getTileEntity(x, y-1, z)).setfill(x, y-1, z, check, 0, world);
 		}
 		if (checkstate(x, y, z+1, 0, world))
 		{
-			check = ((TileEntityWoodenCog)world.getTileEntity(x, y, z+1)).chunknumber();
-			((TileEntityWoodenCog)world.getTileEntity(x, y, z+1)).setfill(x, y, z+1, check, 0, world);
+			check = ((TileWoodenCog)world.getTileEntity(x, y, z+1)).chunknumber();
+			((TileWoodenCog)world.getTileEntity(x, y, z+1)).setfill(x, y, z+1, check, 0, world);
 		}
 		if (checkstate(x, y, z-1, 0, world))
 		{
-			check = ((TileEntityWoodenCog)world.getTileEntity(x, y, z-1)).chunknumber();
-			((TileEntityWoodenCog)world.getTileEntity(x, y, z-1)).setfill(x, y, z-1, check, 0, world);
+			check = ((TileWoodenCog)world.getTileEntity(x, y, z-1)).chunknumber();
+			((TileWoodenCog)world.getTileEntity(x, y, z-1)).setfill(x, y, z-1, check, 0, world);
 		}
 		
 	}

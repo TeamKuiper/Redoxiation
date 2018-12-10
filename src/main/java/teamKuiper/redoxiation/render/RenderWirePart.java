@@ -9,9 +9,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 import teamKuiper.redoxiation.Redoxiation;
+import teamKuiper.redoxiation.blocks.tileentity.TileWire;
 import teamKuiper.redoxiation.multipart.WirePart;
 
-public class RenderWirePart extends TileEntitySpecialRenderer {
+public class RenderWirePart extends TileEntitySpecialRenderer<TileWire> {
     ResourceLocation texture;
     ResourceLocation objModelLocation;
     IModelCustom model;

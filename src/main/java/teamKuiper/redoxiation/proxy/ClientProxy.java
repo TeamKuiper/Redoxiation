@@ -5,9 +5,9 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
-import teamKuiper.redoxiation.blocks.tileentity.TileEntityIronCog;
-import teamKuiper.redoxiation.blocks.tileentity.TileEntityStoneCog;
-import teamKuiper.redoxiation.blocks.tileentity.TileEntityWoodenCog;
+import teamKuiper.redoxiation.blocks.tileentity.TileIronCog;
+import teamKuiper.redoxiation.blocks.tileentity.TileStoneCog;
+import teamKuiper.redoxiation.blocks.tileentity.TileWoodenCog;
 import teamKuiper.redoxiation.blocks.tileentity.TileLeadTank;
 import teamKuiper.redoxiation.blocks.tileentity.TilePipeCopper;
 import teamKuiper.redoxiation.blocks.tileentity.TileWire;
@@ -23,19 +23,20 @@ import teamKuiper.redoxiation.render.RenderWoodenCog;
 public class ClientProxy extends CommonProxy{
 	
 	public void registerTileEntitySpecialRenderer() {
-		TileEntitySpecialRenderer renderWoodenCog = new RenderWoodenCog();
-		TileEntitySpecialRenderer renderStoneCog = new RenderStoneCog();
-		TileEntitySpecialRenderer renderIronCog = new RenderIronCog();
-        TileEntitySpecialRenderer renderWire = new RenderWire();
-        TileEntitySpecialRenderer renderLeadTank = new RenderLeadTank();
-        TileEntitySpecialRenderer renderPipeCopper = new RenderPipeCopper();
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWoodenCog.class, renderWoodenCog);
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStoneCog.class, renderStoneCog);
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityIronCog.class, renderIronCog);
+		RenderWoodenCog renderWoodenCog = new RenderWoodenCog();
+		RenderStoneCog renderStoneCog = new RenderStoneCog();
+		RenderIronCog renderIronCog = new RenderIronCog();
+		RenderWire renderWire = new RenderWire();
+		RenderLeadTank renderLeadTank = new RenderLeadTank();
+		RenderPipeCopper renderPipeCopper = new RenderPipeCopper();
+        ClientRegistry.bindTileEntitySpecialRenderer(TileWoodenCog.class, renderWoodenCog);
+		ClientRegistry.bindTileEntitySpecialRenderer(TileStoneCog.class, renderStoneCog);
+		ClientRegistry.bindTileEntitySpecialRenderer(TileIronCog.class, renderIronCog);
         ClientRegistry.bindTileEntitySpecialRenderer(TileWire.class, renderWire);
         ClientRegistry.bindTileEntitySpecialRenderer(TileLeadTank.class, renderLeadTank);
         ClientRegistry.bindTileEntitySpecialRenderer(TilePipeCopper.class, renderPipeCopper);
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(RedoxiationBlocks.stoneCog), new ItemRenderStoneCog(renderStoneCog, new TileEntityStoneCog()));
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(RedoxiationBlocks.ironCog), new ItemRenderIronCog(renderIronCog, new TileEntityIronCog()));
+        //TODO The way of rendering has been changed 
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(RedoxiationBlocks.stoneCog), new ItemRenderStoneCog(renderStoneCog, new TileStoneCog()));
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(RedoxiationBlocks.ironCog), new ItemRenderIronCog(renderIronCog, new TileIronCog()));
 	}
 }

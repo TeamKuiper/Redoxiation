@@ -19,9 +19,9 @@ import net.minecraftforge.oredict.OreDictionary;
 import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.blocks.tileentity.TileBlastFurnaceBlock;
 import teamKuiper.redoxiation.blocks.tileentity.TileCog;
-import teamKuiper.redoxiation.blocks.tileentity.TileEntityIronCog;
-import teamKuiper.redoxiation.blocks.tileentity.TileEntityStoneCog;
-import teamKuiper.redoxiation.blocks.tileentity.TileEntityWoodenCog;
+import teamKuiper.redoxiation.blocks.tileentity.TileIronCog;
+import teamKuiper.redoxiation.blocks.tileentity.TileStoneCog;
+import teamKuiper.redoxiation.blocks.tileentity.TileWoodenCog;
 import teamKuiper.redoxiation.blocks.tileentity.TileLeadTank;
 import teamKuiper.redoxiation.blocks.tileentity.TilePipeCopper;
 import teamKuiper.redoxiation.blocks.tileentity.TileWire;
@@ -189,9 +189,9 @@ public class RedoxiationBlocks {
 		// Tile Entities
         GameRegistry.registerTileEntity(TileWire.class, wire.getRegistryName());
         GameRegistry.registerTileEntity(TileCog.class, cog.getRegistryName());
-		GameRegistry.registerTileEntity(TileEntityWoodenCog.class, woodenCog.getRegistryName());
-		GameRegistry.registerTileEntity(TileEntityStoneCog.class, stoneCog.getRegistryName());
-		GameRegistry.registerTileEntity(TileEntityIronCog.class, ironCog.getRegistryName());
+		GameRegistry.registerTileEntity(TileWoodenCog.class, woodenCog.getRegistryName());
+		GameRegistry.registerTileEntity(TileStoneCog.class, stoneCog.getRegistryName());
+		GameRegistry.registerTileEntity(TileIronCog.class, ironCog.getRegistryName());
 		GameRegistry.registerTileEntity(TileBlastFurnaceBlock.class, blastFurnaceBlock.getRegistryName());
         GameRegistry.registerTileEntity(TileLeadTank.class, tankLead.getRegistryName());
         GameRegistry.registerTileEntity(TilePipeCopper.class, pipeCopper.getRegistryName());

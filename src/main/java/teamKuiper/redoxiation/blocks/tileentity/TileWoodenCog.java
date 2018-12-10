@@ -10,7 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
 
-public class TileEntityWoodenCog extends TileEntity implements ITickable {
+public class TileWoodenCog extends TileEntity implements ITickable {
 	private float scale = 1.0f;
 	private float rotation = 0;
 	private float angvel = 0;
@@ -81,7 +81,7 @@ public class TileEntityWoodenCog extends TileEntity implements ITickable {
 
 	// FloodFill
 	public boolean checkState(BlockPos pos, int st) {
-		return ((world.getBlockState(pos).getBlock() == RedoxiationBlocks.woodenCog) && (((TileEntityWoodenCog) world.getTileEntity(pos)).state != st));
+		return ((world.getBlockState(pos).getBlock() == RedoxiationBlocks.woodenCog) && (((TileWoodenCog) world.getTileEntity(pos)).state != st));
 	}
 
 	public int state() {
@@ -90,7 +90,7 @@ public class TileEntityWoodenCog extends TileEntity implements ITickable {
 
 	public int fill(BlockPos pos, int checknum, int st) {
 		checknum++;
-		TileEntityWoodenCog tile = (TileEntityWoodenCog) world.getTileEntity(pos);
+		TileWoodenCog tile = (TileWoodenCog) world.getTileEntity(pos);
 		tile.state = st;
 		
 		int x = pos.getX();
@@ -128,7 +128,7 @@ public class TileEntityWoodenCog extends TileEntity implements ITickable {
 	}
 
 	public int setFill(BlockPos pos, int checknum, int st, World world) {
-		TileEntityWoodenCog tile = (TileEntityWoodenCog) world.getTileEntity(pos);
+		TileWoodenCog tile = (TileWoodenCog) world.getTileEntity(pos);
 		tile.setstate(st);
 		tile.setchunknumber(checknum);
 		

@@ -8,9 +8,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 import teamKuiper.redoxiation.Redoxiation;
-import teamKuiper.redoxiation.blocks.tileentity.TileEntityWoodenCog;
+import teamKuiper.redoxiation.blocks.tileentity.TileWoodenCog;
 
-public class RenderWoodenCog extends TileEntitySpecialRenderer {
+public class RenderWoodenCog extends TileEntitySpecialRenderer<TileWoodenCog> {
     ResourceLocation texture;
     ResourceLocation objModelLocation;
     IModelCustom model;
@@ -22,7 +22,7 @@ public class RenderWoodenCog extends TileEntitySpecialRenderer {
 
     @Override
     public void renderTileEntityAt(TileEntity tileentity, double posX, double posY, double posZ, float timeSinceLastTick) {
-        TileEntityWoodenCog te = (TileEntityWoodenCog) tileentity;
+        TileWoodenCog te = (TileWoodenCog) tileentity;
         float rotation = te.getRotation();
         float scale = te.getScale();
         bindTexture(texture);

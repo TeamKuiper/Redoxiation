@@ -6,10 +6,10 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import teamKuiper.redoxiation.Redoxiation;
-import teamKuiper.redoxiation.blocks.tileentity.TileEntityIronCog;
+import teamKuiper.redoxiation.blocks.tileentity.TileIronCog;
 import teamKuiper.redoxiation.model.ModelCogs;
 
-public class RenderIronCog extends TileEntitySpecialRenderer {
+public class RenderIronCog extends TileEntitySpecialRenderer<TileIronCog> {
 
 	public static final ResourceLocation texture = new ResourceLocation(Redoxiation.MODID, "textures/blocks/IronCog.png");
 
@@ -21,7 +21,7 @@ public class RenderIronCog extends TileEntitySpecialRenderer {
 
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {
-		TileEntityIronCog te = (TileEntityIronCog) tileentity;
+		TileIronCog te = (TileIronCog) tileentity;
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
 		GL11.glRotatef(180, 0F, 0F, 1F);

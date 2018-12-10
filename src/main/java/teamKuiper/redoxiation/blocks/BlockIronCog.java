@@ -7,7 +7,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.world.World;
 import teamKuiper.redoxiation.Redoxiation;
-import teamKuiper.redoxiation.blocks.tileentity.TileEntityIronCog;
+import teamKuiper.redoxiation.blocks.tileentity.TileIronCog;
 
 public class BlockIronCog extends BlockContainer {
 
@@ -19,7 +19,7 @@ public class BlockIronCog extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int i) {
-		return new TileEntityIronCog();
+		return new TileIronCog();
 	}
 
 	@Override

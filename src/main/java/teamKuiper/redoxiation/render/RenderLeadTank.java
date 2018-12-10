@@ -13,7 +13,7 @@ import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.blocks.tileentity.TileLeadTank;
 import teamKuiper.redoxiation.model.ModelTank;
 
-public class RenderLeadTank extends TileEntitySpecialRenderer {
+public class RenderLeadTank extends TileEntitySpecialRenderer<TileLeadTank> {
 
     public static final ResourceLocation texture = new ResourceLocation(Redoxiation.MODID, "textures/blocks/LeadTank.png");
 

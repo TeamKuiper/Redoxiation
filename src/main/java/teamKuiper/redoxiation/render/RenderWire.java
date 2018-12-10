@@ -10,7 +10,7 @@ import net.minecraftforge.client.model.IModelCustom;
 import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.blocks.tileentity.TileWire;
 
-public class RenderWire extends TileEntitySpecialRenderer {
+public class RenderWire extends TileEntitySpecialRenderer<TileWire> {
     ResourceLocation texture;
     ResourceLocation objModelLocation;
     IModelCustom model;

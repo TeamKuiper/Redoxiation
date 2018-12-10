@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.EnumFacing;
 import teamKuiper.redoxiation.blocks.tileentity.TilePipeBase;
 
-public class RenderPipeBase extends TileEntitySpecialRenderer {
+public class RenderPipeBase<T extends TileEntity> extends TileEntitySpecialRenderer<T> {
 
 	ResourceLocation texture;
 	boolean drawInside = true;
