@@ -18,7 +18,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import teamKuiper.redoxiation.Redoxiation;
-import teamKuiper.redoxiation.Utils;
+import teamKuiper.redoxiation.utils.Utils;
 
 public class ItemBlockLeadTank extends ItemBlock {
 

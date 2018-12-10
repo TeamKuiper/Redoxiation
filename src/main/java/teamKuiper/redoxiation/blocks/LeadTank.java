@@ -24,8 +24,8 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import teamKuiper.redoxiation.Redoxiation;
-import teamKuiper.redoxiation.Utils;
 import teamKuiper.redoxiation.blocks.tileentity.TileLeadTank;
+import teamKuiper.redoxiation.utils.Utils;
 
 public class LeadTank extends Block implements ITileEntityProvider {
 

@@ -13,7 +13,7 @@ public class RedoxiationConfigHandler {
 	public static final String CATEGORY_TOOLS = "tools";
 	public static String comment = "";
 	public static void initConfig(){
-		RedoxiationEventHandler oregen = new RedoxiationEventHandler();
+		RedoxiationGenHandler oregen = new RedoxiationGenHandler();
 		RedoxiationGenericItems items = null;
 		config.load();
     	Redoxiation.dummybool = config.get(config.CATEGORY_GENERAL, "Dummy", true).getBoolean();

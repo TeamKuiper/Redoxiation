@@ -62,7 +62,7 @@ public class Redoxiation {
 	@Metadata
 	public ModMetadata meta;
 
-	RedoxiationEventHandler handler = new RedoxiationEventHandler();
+	RedoxiationGenHandler handler = new RedoxiationGenHandler();
 
 	public static org.apache.logging.log4j.Logger logger;
 

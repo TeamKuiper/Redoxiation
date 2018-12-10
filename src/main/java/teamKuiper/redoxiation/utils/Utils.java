@@ -1,4 +1,4 @@
-package teamKuiper.redoxiation;
+package teamKuiper.redoxiation.utils;
 
 import org.lwjgl.opengl.GL11;
 
@@ -33,14 +33,14 @@ public class Utils {
     }
 
     public static void dropStackInWorld(World world, BlockPos pos, ItemStack stack) {
-        if (!world.isRemote && world.getGameRules().getGameRuleBooleanValue("doTileDrops")) {
+        if (!world.isRemote && world.getGameRules().getBoolean("doTileDrops")) {
             float f = 0.7F;
             double d0 = (double) (world.rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
             double d1 = (double) (world.rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
             double d2 = (double) (world.rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
             EntityItem entityitem = new EntityItem(world, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, stack);
-            entityitem.delayBeforeCanPickup = 10;
-            world.spawnEntityInWorld(entityitem);
+            entityitem.setPickupDelay(10);
+            world.spawnEntity(entityitem);
         }
     }
 
@@ -119,7 +119,7 @@ public class Utils {
     private static IIcon getValidIIcon(IIcon icon) {
         if (icon != null)
             return icon;
-        return Blocks.fire.getIcon(0, 0);
+        return Blocks.FIRE.getIcon(0, 0);
     }
 
     public static ItemStack getTankStackFromData() {
