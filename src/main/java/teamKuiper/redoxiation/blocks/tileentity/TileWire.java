@@ -1,9 +1,11 @@
 package teamKuiper.redoxiation.blocks.tileentity;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
@@ -23,7 +25,8 @@ public class TileWire extends TileEntity implements ITickable {
         } else {
             angVel = 0;
         }
-		world.markBlockForUpdate(pos);
+        IBlockState state = world.getBlockState(pos);
+		world.notifyBlockUpdate(pos, state, state, 2);
         if (world.isRemote) {
             rotation += angVel;
         }
@@ -74,15 +77,17 @@ public class TileWire extends TileEntity implements ITickable {
     public void setState(boolean state) {
         this.state = state;
     }
+    
     public float getAngVel() {
         return angVel;
     }
+    
     public void setAngVel(float angVel) {
         this.angVel = angVel;
     }
 
-    public int getSide() {
-        return world.getBlockMetadata(pos);
+    public EnumFacing getSide() {
+        return world.getBlockState(pos).getValue(RedoxiationBlocks.FACING);
     }
 
     @Override

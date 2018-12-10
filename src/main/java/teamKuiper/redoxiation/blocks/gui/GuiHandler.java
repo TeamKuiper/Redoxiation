@@ -2,6 +2,7 @@ package teamKuiper.redoxiation.blocks.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import teamKuiper.redoxiation.blocks.container.ContainerBlastFurnace;
@@ -21,7 +22,7 @@ public class GuiHandler implements IGuiHandler {
 		if (ID != getGuiID()) {
 			System.err.println("Invalid ID: expected " + getGuiID() + ", received " + ID);
 		}
-		TileEntity tileEntity = world.getTileEntity(x, y, z);
+		TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
 		if (tileEntity instanceof TileBlastFurnaceBlock) {
 			TileBlastFurnaceBlock tileInventoryFurnace = (TileBlastFurnaceBlock) tileEntity;
 			return new ContainerBlastFurnace(player.inventory, tileInventoryFurnace);
@@ -37,7 +38,7 @@ public class GuiHandler implements IGuiHandler {
 			System.err.println("Invalid ID: expected " + getGuiID() + ", received " + ID);
 		}
 
-		TileEntity tileEntity = world.getTileEntity(x, y, z);
+		TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
 		if (tileEntity instanceof TileBlastFurnaceBlock) {
 			TileBlastFurnaceBlock tileInventoryFurnace = (TileBlastFurnaceBlock) tileEntity;
 			return new GuiBlastFurnace(player.inventory, tileInventoryFurnace);

@@ -1,5 +1,6 @@
 package teamKuiper.redoxiation.blocks.tileentity;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -23,7 +24,8 @@ public class TileEntityWoodenCog extends TileEntity implements ITickable {
 		} else {
 			angvel = 0;
 		}
-		world.markBlockForUpdate(this.pos);
+		IBlockState state = world.getBlockState(pos);
+		world.notifyBlockUpdate(this.pos, state, state, 2);
 		if (world.isRemote) {
 			rotation += angvel;
 		}

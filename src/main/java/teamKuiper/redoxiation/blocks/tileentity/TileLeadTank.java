@@ -1,5 +1,6 @@
 package teamKuiper.redoxiation.blocks.tileentity;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -66,7 +67,8 @@ public class TileLeadTank extends TileEntity implements IFluidHandler {
                 } else {
                 --updateTimer;
                 if (updateTimer == 0) {
-                    world.markBlockForUpdate(pos);
+                	IBlockState state = world.getBlockState(pos);
+                    world.notifyBlockUpdate(pos, state, state, 2);
                     needsUpdate = false;
                 }
             }

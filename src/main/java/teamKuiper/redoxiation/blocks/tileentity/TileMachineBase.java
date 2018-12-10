@@ -3,6 +3,7 @@ package teamKuiper.redoxiation.blocks.tileentity;
 import java.util.Arrays;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
@@ -12,15 +13,14 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagIntArray;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 
 public class TileMachineBase extends TileEntity implements IInventory, ITickable {
 
@@ -113,7 +113,8 @@ public class TileMachineBase extends TileEntity implements IInventory, ITickable
 		if (cachedNumberOfBurningSlots != numberBurning) {
 			cachedNumberOfBurningSlots = numberBurning;
 			if (world.isRemote) {
-				world.markBlockForUpdate(pos);
+				IBlockState state = world.getBlockState(pos);
+				world.notifyBlockUpdate(pos, state, state, 3);
 			}
 		}
 	}
@@ -281,8 +282,7 @@ public class TileMachineBase extends TileEntity implements IInventory, ITickable
 			NBTTagCompound dataForOneSlot = dataForAllSlots.getCompoundTagAt(i);
 			byte slotNumber = dataForOneSlot.getByte("Slot");
 			if (slotNumber >= 0 && slotNumber < this.itemStacks.length) {
-				this.itemStacks[slotNumber] = ItemStack
-						.loadItemStackFromNBT(dataForOneSlot);
+				this.itemStacks[slotNumber] = new ItemStack(dataForOneSlot);
 			}
 		}
 
@@ -641,15 +641,15 @@ public class TileMachineBase extends TileEntity implements IInventory, ITickable
 	// 1) the world tileentity hasn't been replaced in the meantime, and
 	// 2) the player isn't too far away from the centre of the block
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player) {
-		if (this.world.getTileEntity(xCoord, yCoord, zCoord) != this)
+	public boolean isUsableByPlayer(EntityPlayer player) {
+		if (this.world.getTileEntity(pos) != this)
 			return false;
 		final double X_CENTRE_OFFSET = 0.5;
 		final double Y_CENTRE_OFFSET = 0.5;
 		final double Z_CENTRE_OFFSET = 0.5;
 		final double MAXIMUM_DISTANCE_SQ = 8.0 * 8.0;
-		return player.getDistanceSq(xCoord + X_CENTRE_OFFSET, yCoord
-				+ Y_CENTRE_OFFSET, zCoord + Z_CENTRE_OFFSET) < MAXIMUM_DISTANCE_SQ;
+		return player.getDistanceSq(pos.getX() + X_CENTRE_OFFSET, pos.getY()
+				+ Y_CENTRE_OFFSET, pos.getZ() + Z_CENTRE_OFFSET) < MAXIMUM_DISTANCE_SQ;
 	}
 
 	// Return true if the given stack is allowed to be inserted in the given
@@ -686,7 +686,7 @@ public class TileMachineBase extends TileEntity implements IInventory, ITickable
 	// slot
 	// Unlike the vanilla furnace, we allow anything to be placed in the fuel
 	// slots
-	static public boolean isItemValidForOutputSlot(ItemStack itemStack) {
+	public static boolean isItemValidForOutputSlot(ItemStack itemStack) {
 		return false;
 	}
 
@@ -698,7 +698,7 @@ public class TileMachineBase extends TileEntity implements IInventory, ITickable
 		NBTTagCompound nbtTagCompound = new NBTTagCompound();
 		writeToNBT(nbtTagCompound);
 		final int METADATA = 0;
-		return new SPacketUpdateTileEntity(pos, METADATA, nbtTag);
+		return new SPacketUpdateTileEntity(pos, METADATA, nbtTagCompound);
 	}
 
 	@Override
@@ -709,20 +709,21 @@ public class TileMachineBase extends TileEntity implements IInventory, ITickable
 	// will add a key for this container to the lang file so we can name it in
 	// the GUI
 	@Override
-	public String getInventoryName() {
+	public String getName() {
 		return inventoryName;
 	}
 
 	@Override
-	public boolean hasCustomInventoryName() {
+	public boolean hasCustomName() {
 		return false;
 	}
 
 	// standard code to look up what the human-readable name is
-	public IChatComponent getDisplayName() {
-		return this.hasCustomInventoryName() ? new ChatComponentText(
-				this.getInventoryName()) : new ChatComponentTranslation(
-				this.getInventoryName());
+	@Override
+	public ITextComponent getDisplayName() {
+		return this.hasCustomName() ? new TextComponentString(
+				this.getName()) : new TextComponentTranslation(
+				this.getName());
 	}
 
 	// Fields are used to send non-inventory information from the server to
@@ -742,6 +743,7 @@ public class TileMachineBase extends TileEntity implements IInventory, ITickable
 	private static final byte NUMBER_OF_FIELDS = FIRST_BURN_TIME_INITIAL_FIELD_ID
 			+ (byte) FUEL_SLOTS_COUNT;
 
+	@Override
 	public int getField(int id) {
 		if (id == COOK_FIELD_ID)
 			return cookTime;
@@ -759,6 +761,7 @@ public class TileMachineBase extends TileEntity implements IInventory, ITickable
 		return 0;
 	}
 
+	@Override
 	public void setField(int id, int value) {
 		if (id == COOK_FIELD_ID) {
 			cookTime = (short) value;
@@ -775,6 +778,7 @@ public class TileMachineBase extends TileEntity implements IInventory, ITickable
 		}
 	}
 
+	@Override
 	public int getFieldCount() {
 		return NUMBER_OF_FIELDS;
 	}
@@ -791,23 +795,42 @@ public class TileMachineBase extends TileEntity implements IInventory, ITickable
 	}
 
 	/**
-	 * This method removes the entire contents of the given slot and returns it.
-	 * Used by containers such as crafting tables which return any items in their
-	 * slots when you close the GUI
+	 * This method removes the contents with index.
+	 * When GUI is closed, this method is called to remove Itemstacks from slots
+	 * and return them. Used by containers such as anvils or crafting tables.
 	 */
 	@Override
-	public ItemStack getStackInSlotOnClosing(int slotIndex) {
-		ItemStack itemStack = getStackInSlot(slotIndex);
-		if (itemStack != null)
-			setInventorySlotContents(slotIndex, null);
-		return itemStack;
+	public ItemStack removeStackFromSlot(int index) {
+		if(index < NUMBER_OF_FIELDS) {
+			ItemStack stack = itemStacks[index];
+			itemStacks[index] = null;
+			return stack;
+		}
+		return null;
 	}
 
 	@Override
-	public void openInventory() {
+	public boolean isEmpty() {
+		for(int i = 0; i < NUMBER_OF_FIELDS; i++) {
+			if(itemStacks[i] != null) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	@Override
-	public void closeInventory() {
+	public void openInventory(EntityPlayer player) {
+	}
+
+	@Override
+	public void closeInventory(EntityPlayer player) {
+	}
+
+	@Override
+	public void clear() {
+		for(int i = 0; i < NUMBER_OF_FIELDS; i++) {
+			itemStacks[i] = null;
+		}
 	}
 }
