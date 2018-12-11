@@ -1,9 +1,10 @@
-package teamKuiper.redoxiation;
+package teamKuiper.redoxiation.handlers;
 
 import codechicken.lib.packet.PacketCustom;
 import codechicken.lib.packet.PacketCustom.IServerPacketHandler;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.play.INetHandlerPlayServer;
+import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.multipart.MultiPartEventHandler;
 
 public class PacketHandler implements IServerPacketHandler {

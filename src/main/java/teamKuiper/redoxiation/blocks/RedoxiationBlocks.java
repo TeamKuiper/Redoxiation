@@ -57,8 +57,7 @@ public class RedoxiationBlocks {
 			obsidianUranium, obsidianPlutonium, woodenCog, stoneCog, ironCog, wire, cog, blastFurnaceBlock,
 			tankLead, pipeCopper, hotAirBlock, moltenPigironBlock, slagBlock};
 
-	public void initBlocks() {
-
+	public static void initBlocks() {
 		// Blocks
 		// Normal Ore Name, Harvest level, Hardness, Resistance
 		oreCopper = new RedoxiationOre("oreCopper", 1, 2.5F, 5.0F);
@@ -126,8 +125,7 @@ public class RedoxiationBlocks {
 
 	}
 	
-	public void setOreDictionary() {
-
+	public static void setOreDictionary() {
 		OreDictionary.registerOre("oreCopper", oreCopper);
 		OreDictionary.registerOre("oreTin", oreTin);
 		OreDictionary.registerOre("oreLead", oreLead);
@@ -167,8 +165,7 @@ public class RedoxiationBlocks {
 		OreDictionary.registerOre("oreobsidianPlutonium", obsidianPlutonium);
 	}
 	
-	@SubscribeEvent
-	public void registerBlocks(RegistryEvent.Register<Block> event) {
+	public static void registerBlocks(RegistryEvent.Register<Block> event) {
 		// Block Fluids
 		FluidRegistry.registerFluid(hotAir);
 		hotAirBlock = (BlockFluidClassic) new BlockHotAir(hotAir, Material.LAVA).setRegistryName(Redoxiation.MODID, "HotAir");
@@ -195,27 +192,23 @@ public class RedoxiationBlocks {
 		GameRegistry.registerTileEntity(TileBlastFurnaceBlock.class, blastFurnaceBlock.getRegistryName());
         GameRegistry.registerTileEntity(TileLeadTank.class, tankLead.getRegistryName());
         GameRegistry.registerTileEntity(TilePipeCopper.class, pipeCopper.getRegistryName());
-        
-		
 		
 		Redoxiation.logger.info("Block Registry Complete. Starting Item Registry");
 	}
 	
-	@SubscribeEvent
-	public void registerBlockItems(RegistryEvent.Register<Item> event) {
+	public static void registerBlockItems(RegistryEvent.Register<Item> event) {
 		for(Block block : blocks) {
 			event.getRegistry().registerAll(Item.getItemFromBlock(block));
 		}
 	}
 
-	@SubscribeEvent
-	public void registerRenders(ModelRegistryEvent event) {
+	public static void registerRenders(ModelRegistryEvent event) {
 		for(Block block : blocks) {
 			registerRender(Item.getItemFromBlock(block));
 		}
 	}
 	
-	private void registerRender(Item item) {
+	private static void registerRender(Item item) {
 		ModelLoader.setCustomModelResourceLocation(item, 0,
 				new ModelResourceLocation(item.getRegistryName(), "inventory"));
 	}

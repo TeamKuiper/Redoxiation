@@ -19,8 +19,8 @@ import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import teamKuiper.redoxiation.PacketHandler;
 import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
+import teamKuiper.redoxiation.handlers.PacketHandler;
 
 public class MultiPartEventHandler {
     private ThreadLocal<Object> placing = new ThreadLocal<Object>();

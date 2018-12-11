@@ -96,8 +96,7 @@ public class RedoxiationGenericItems extends Item {
 		INFORMATION = "null";
 	}
 
-	@SubscribeEvent
-	public void registerItems(RegistryEvent.Register<Item> event) {
+	public static void registerItems(RegistryEvent.Register<Item> event) {
 		if(Calcite_enable){
 			Calcite = new RedoxiationGenericItems("Calcite", "CaCO3");
 			event.getRegistry().register(Calcite);

@@ -14,9 +14,9 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import teamKuiper.redoxiation.PacketHandler;
 import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.blocks.tileentity.TileWire;
+import teamKuiper.redoxiation.handlers.PacketHandler;
 
 public class Wire extends BlockContainer {
 

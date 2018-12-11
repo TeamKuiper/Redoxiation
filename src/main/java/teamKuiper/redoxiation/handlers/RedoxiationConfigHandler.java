@@ -1,6 +1,7 @@
-package teamKuiper.redoxiation;
+package teamKuiper.redoxiation.handlers;
 
 import net.minecraftforge.common.config.Configuration;
+import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.advancement.RedoxiationAdvancement;
 import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
 import teamKuiper.redoxiation.items.RedoxiationGenericItems;

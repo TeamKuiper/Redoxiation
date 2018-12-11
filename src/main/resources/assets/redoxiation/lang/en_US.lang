@@ -145,7 +145,7 @@ item.redoxiation.TungstenScythe.name=Tungsten Steel Scythe
 itemGroup.Redoxiation=Redoxiation Blocks
 itemGroup.RedoxiationItems=Redoxiation Items
 
-#Redoxiation Achievements
+#Redoxiation Advancements
 advancement.redoxiation.start=New Age
 advancement.redoxiation.blast=Blaster
 advancement.redoxiation.start.desc=Mine some copper ores.
