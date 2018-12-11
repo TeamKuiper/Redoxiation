@@ -146,10 +146,10 @@ itemGroup.Redoxiation=Redoxiation Blocks
 itemGroup.RedoxiationItems=Redoxiation Items
 
 #Redoxiation Achievements
-achievement.redoxiation.start=New Age
-achievement.redoxiation.blast=Blaster
-achievement.redoxiation.start.desc=Mine some copper ores.
-achievement.redoxiation.blast.desc=Smelt iron ores to molten pig iron in the blast furnace.
+advancement.redoxiation.start=New Age
+advancement.redoxiation.blast=Blaster
+advancement.redoxiation.start.desc=Mine some copper ores.
+advancement.redoxiation.blast.desc=Smelt iron ores to molten pig iron in the blast furnace.
 
 
 #Redoxiation GUI

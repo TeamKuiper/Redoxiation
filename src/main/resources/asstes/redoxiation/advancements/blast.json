@@ -1,0 +1,25 @@
+{
+	"display": {
+		"icon": {
+			"item": "redoxiation:MoltenPigironBucket"
+		},
+		"title": "advancement.redoxiation.blast",
+		"description": "advancement.redoxiation.blast.desc"
+	},
+	"parent": "redoxiation:start",
+	"criteria": {
+		"get_copper": {
+			"trigger": "redoxiation:blast_processed",
+			"conditions": {
+				"items": [
+					{
+						"item": "redoxiation:moltenPigiron"
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		"get_copper"
+	]
+}

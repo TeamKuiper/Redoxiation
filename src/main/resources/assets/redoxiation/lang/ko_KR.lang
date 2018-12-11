@@ -146,10 +146,10 @@ itemGroup.Redoxiation=리덕시에이션 블럭
 itemGroup.RedoxiationItems=리덕시에이션 아이템
 
 #리덕시에이션의 도전 과제
-achievement.redoxiation.start=새로운 시대
-achievement.redoxiation.blast=블래스터
-achievement.redoxiation.start.desc=구리 광석을 캐세요.
-achievement.redoxiation.blast.desc=용광로에서 철 광석을 선철로 녹이세요.
+advancement.redoxiation.start=새로운 시대
+advancement.redoxiation.blast=블래스터
+advancement.redoxiation.start.desc=구리 광석을 캐세요.
+advancement.redoxiation.blast.desc=용광로에서 철 광석을 선철로 녹이세요.
 
 #리덕시에이션 GUI
 #용광로

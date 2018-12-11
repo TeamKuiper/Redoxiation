@@ -1,0 +1,24 @@
+{
+	"display": {
+		"icon": {
+			"item": "redoxiation:ingotCopper"
+		},
+		"title": "advancement.redoxiation.start",
+		"description": "advancement.redoxiation.start.desc"
+	},
+	"criteria": {
+		"get_copper": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "redoxiation:oreCopper"
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		"get_copper"
+	]
+}

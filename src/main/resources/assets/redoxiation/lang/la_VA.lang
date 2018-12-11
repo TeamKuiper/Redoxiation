@@ -145,10 +145,10 @@ itemGroup.Redoxiation=Redoxiation
 itemGroup.RedoxiationItems=Objecti Redoxiationis
 
 #Facta Redoxiationis
-achievement.redoxiation.start=New Age
-achievement.redoxiation.blast=Caminus
-achievement.redoxiation.start.desc=Foda Saxi Cupri.
-achievement.redoxiation.blast.desc=Depura ferros.
+advancement.redoxiation.start=New Age
+advancement.redoxiation.blast=Caminus
+advancement.redoxiation.start.desc=Foda Saxi Cupri.
+advancement.redoxiation.blast.desc=Depura ferros.
 
 #Redoxiation GUI
 #BlastFurnace
