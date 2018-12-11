@@ -15,7 +15,7 @@ public class BlockWoodenCog extends BlockContainer {
 	public BlockWoodenCog() {
 		super(Material.WOOD);
 		setCreativeTab(Redoxiation.tabRedoxiation);
-		setRegistryName(Redoxiation.MODID, "WoodenCog");
+		setRegistryName(Redoxiation.MODID, "woodenCog");
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class BlockWoodenCog extends BlockContainer {
 
 	@Override
 	public String getUnlocalizedName() {
-		return "tile." + Redoxiation.MODID + ".WoodenCog";
+		return "tile." + Redoxiation.MODID + ".woodenCog";
 	}
 
 	@Override

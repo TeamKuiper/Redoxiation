@@ -10,11 +10,9 @@ import teamKuiper.redoxiation.items.RedoxiationGenericItems;
 
 public class Rutile extends Block {
 
-	String name = "rutile";
-
 	public Rutile() {
 		super(Material.ROCK);
-		setRegistryName(Redoxiation.MODID, Redoxiation.MODID + "." + name);
+		setRegistryName(Redoxiation.MODID, "rutile");
 		setCreativeTab(Redoxiation.tabRedoxiation);
 		setHarvestLevel("pickaxe", 2);
 		setHardness(2.0F);
@@ -23,7 +21,7 @@ public class Rutile extends Block {
 	}
 
 	public Item getItemDropped(int metadata, Random random, int fortune) {
-		return RedoxiationGenericItems.RawRutile;
+		return RedoxiationGenericItems.rawRutile;
 	}
 
 	public int quantityDropped(Random random) {

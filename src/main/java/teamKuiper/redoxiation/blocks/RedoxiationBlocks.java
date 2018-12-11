@@ -22,7 +22,7 @@ import teamKuiper.redoxiation.blocks.tileentity.TileCog;
 import teamKuiper.redoxiation.blocks.tileentity.TileIronCog;
 import teamKuiper.redoxiation.blocks.tileentity.TileStoneCog;
 import teamKuiper.redoxiation.blocks.tileentity.TileWoodenCog;
-import teamKuiper.redoxiation.blocks.tileentity.TileLeadTank;
+import teamKuiper.redoxiation.blocks.tileentity.TileTankLead;
 import teamKuiper.redoxiation.blocks.tileentity.TilePipeCopper;
 import teamKuiper.redoxiation.blocks.tileentity.TileWire;
 
@@ -44,10 +44,10 @@ public class RedoxiationBlocks {
 	public static BlockFluidClassic hotAirBlock, moltenPigironBlock, slagBlock;
 	public static Block blastFurnaceBlock, converterBlock;
 	
-	public static boolean oreCopper_cfg, oreTin_cfg, oreLead_cfg,
-			oreSilver_cfg, oreNickel_cfg, orePlatinum_cfg, oreZinc_cfg,
-			oreCobalt_cfg, oreChromium_cfg, pitchblend_cfg, rutile_cfg,
-			scheelite_cfg, bauxite_cfg, limestone_cfg, cryolite_cfg, oreSulfur_cfg;
+	public static boolean oreCopperCfg, oreTinCfg, oreLeadCfg,
+			oreSilverCfg, oreNickelCfg, orePlatinumCfg, oreZincCfg,
+			oreCobaltCfg, oreChromiumCfg, pitchblendCfg, rutileCfg,
+			scheeliteCfg, bauxiteCfg, limestoneCfg, cryoliteCfg, oreSulfurCfg;
 	
 	public static Block[] blocks = {oreCopper, oreTin, oreLead, oreSilver, oreNickel, orePlatinum, oreZinc,
 			oreCobalt, oreChromium, pitchblend, limestone, dolomite, saltRock, bauxite, rutile, scheelite, cryolite,
@@ -115,7 +115,7 @@ public class RedoxiationBlocks {
 		// Machine
 		blastFurnaceBlock = new BlastFurnaceBlock();
 		converterBlock = new ConverterBlock();
-        tankLead = new LeadTank();
+        tankLead = new TankLead();
         pipeCopper = new BlockPipeCopper();
         
 		// Fluids
@@ -168,15 +168,15 @@ public class RedoxiationBlocks {
 	public static void registerBlocks(RegistryEvent.Register<Block> event) {
 		// Block Fluids
 		FluidRegistry.registerFluid(hotAir);
-		hotAirBlock = (BlockFluidClassic) new BlockHotAir(hotAir, Material.LAVA).setRegistryName(Redoxiation.MODID, "HotAir");
+		hotAirBlock = (BlockFluidClassic) new BlockHotAir(hotAir, Material.LAVA).setRegistryName(Redoxiation.MODID, "hotAir");
 		hotAir.setUnlocalizedName(hotAirBlock.getUnlocalizedName());
 		
 		FluidRegistry.registerFluid(moltenPigiron);
-		moltenPigironBlock = (BlockFluidClassic) new BlockMoltenPigiron(moltenPigiron, Material.LAVA).setRegistryName(Redoxiation.MODID, "MoltenPigiron");
+		moltenPigironBlock = (BlockFluidClassic) new BlockMoltenPigiron(moltenPigiron, Material.LAVA).setRegistryName(Redoxiation.MODID, "moltenPigiron");
 		moltenPigiron.setUnlocalizedName(moltenPigironBlock.getUnlocalizedName());
 		
 		FluidRegistry.registerFluid(slag);
-		slagBlock = (BlockFluidClassic) new BlockSlag(slag, Material.LAVA).setRegistryName(Redoxiation.MODID, "Slag");
+		slagBlock = (BlockFluidClassic) new BlockSlag(slag, Material.LAVA).setRegistryName(Redoxiation.MODID, "slag");
 		slag.setUnlocalizedName(slagBlock.getUnlocalizedName());
 		
 		// Register
@@ -190,7 +190,7 @@ public class RedoxiationBlocks {
 		GameRegistry.registerTileEntity(TileStoneCog.class, stoneCog.getRegistryName());
 		GameRegistry.registerTileEntity(TileIronCog.class, ironCog.getRegistryName());
 		GameRegistry.registerTileEntity(TileBlastFurnaceBlock.class, blastFurnaceBlock.getRegistryName());
-        GameRegistry.registerTileEntity(TileLeadTank.class, tankLead.getRegistryName());
+        GameRegistry.registerTileEntity(TileTankLead.class, tankLead.getRegistryName());
         GameRegistry.registerTileEntity(TilePipeCopper.class, pipeCopper.getRegistryName());
 		
 		Redoxiation.logger.info("Block Registry Complete. Starting Item Registry");

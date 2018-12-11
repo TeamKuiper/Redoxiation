@@ -10,11 +10,9 @@ import teamKuiper.redoxiation.items.RedoxiationGenericItems;
 
 public class Dolomite extends Block {
 
-	String name = "dolomite";
-
 	public Dolomite() {
 		super(Material.ROCK);
-		setRegistryName(Redoxiation.MODID, Redoxiation.MODID + "." + name);
+		setRegistryName(Redoxiation.MODID, "dolomite");
 		setCreativeTab(Redoxiation.tabRedoxiation);
 		setHarvestLevel("pickaxe", 1);
 		setHardness(2.0F);
@@ -23,6 +21,6 @@ public class Dolomite extends Block {
 	}
 
 	public Item getItemDropped(int metadata, Random random, int fortune) {
-		return RedoxiationGenericItems.DolomiteShard;
+		return RedoxiationGenericItems.dolomiteShard;
 	}
 }

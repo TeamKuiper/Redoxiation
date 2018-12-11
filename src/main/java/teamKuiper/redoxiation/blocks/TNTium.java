@@ -12,11 +12,9 @@ import teamKuiper.redoxiation.Redoxiation;
 
 public class TNTium extends Block {
 
-	String name = "tntium";
-
 	public TNTium() {
 		super(Material.ROCK);
-		setRegistryName(Redoxiation.MODID, Redoxiation.MODID + "." + name);
+		setRegistryName(Redoxiation.MODID, "tntium");
 		setCreativeTab(Redoxiation.tabRedoxiation);
 		setHarvestLevel("pickaxe", 2);
 		setHardness(3.0F);

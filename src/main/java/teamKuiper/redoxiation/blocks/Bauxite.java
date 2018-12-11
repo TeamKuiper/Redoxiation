@@ -10,11 +10,9 @@ import teamKuiper.redoxiation.items.RedoxiationGenericItems;
 
 public class Bauxite extends Block {
 
-	String name = "bauxite";
-
 	public Bauxite() {
 		super(Material.ROCK);
-		setRegistryName(Redoxiation.MODID, Redoxiation.MODID + "." + name);
+		setRegistryName(Redoxiation.MODID, "bauxite");
 		setCreativeTab(Redoxiation.tabRedoxiation);
 		setHarvestLevel("pickaxe", 2);
 		setHardness(2.0F);
@@ -22,7 +20,7 @@ public class Bauxite extends Block {
 	}
 
 	public Item getItemDropped(int metadata, Random random, int fortune) {
-		return RedoxiationGenericItems.RawBauxite;
+		return RedoxiationGenericItems.rawBauxite;
 	}
 
 	public int quantityDropped(Random random) {

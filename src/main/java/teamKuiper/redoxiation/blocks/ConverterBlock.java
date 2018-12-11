@@ -7,13 +7,11 @@ import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.blocks.tileentity.TileConverterBlock;
 
 public class ConverterBlock extends MachineBlockBase {
-
-	String name = "converterBlock";
 	
 	protected ConverterBlock() {
 		super(Material.ROCK, TileConverterBlock.class);
 		setCreativeTab(Redoxiation.tabRedoxiation);
-		setRegistryName(Redoxiation.MODID, "redoxiation." + name);
+		setRegistryName(Redoxiation.MODID, "converterBlock");
 	}
 	
 	@Override

@@ -14,7 +14,7 @@ public class BlockIronCog extends BlockContainer {
 	public BlockIronCog() {
 		super(Material.IRON);
 		setCreativeTab(Redoxiation.tabRedoxiation);
-		setRegistryName(Redoxiation.MODID, "IronCog");
+		setRegistryName(Redoxiation.MODID, "ironCog");
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class BlockIronCog extends BlockContainer {
 
 	@Override
 	public String getUnlocalizedName() {
-		return "tile." + Redoxiation.MODID + ".IronCog";
+		return "tile." + Redoxiation.MODID + ".ironCog";
 	}
 
 	@Override

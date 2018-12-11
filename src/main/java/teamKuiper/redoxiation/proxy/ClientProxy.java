@@ -8,7 +8,7 @@ import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
 import teamKuiper.redoxiation.blocks.tileentity.TileIronCog;
 import teamKuiper.redoxiation.blocks.tileentity.TileStoneCog;
 import teamKuiper.redoxiation.blocks.tileentity.TileWoodenCog;
-import teamKuiper.redoxiation.blocks.tileentity.TileLeadTank;
+import teamKuiper.redoxiation.blocks.tileentity.TileTankLead;
 import teamKuiper.redoxiation.blocks.tileentity.TilePipeCopper;
 import teamKuiper.redoxiation.blocks.tileentity.TileWire;
 import teamKuiper.redoxiation.render.ItemRenderIronCog;
@@ -33,7 +33,7 @@ public class ClientProxy extends CommonProxy{
 		ClientRegistry.bindTileEntitySpecialRenderer(TileStoneCog.class, renderStoneCog);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileIronCog.class, renderIronCog);
         ClientRegistry.bindTileEntitySpecialRenderer(TileWire.class, renderWire);
-        ClientRegistry.bindTileEntitySpecialRenderer(TileLeadTank.class, renderLeadTank);
+        ClientRegistry.bindTileEntitySpecialRenderer(TileTankLead.class, renderLeadTank);
         ClientRegistry.bindTileEntitySpecialRenderer(TilePipeCopper.class, renderPipeCopper);
         //TODO The way of rendering has been changed 
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(RedoxiationBlocks.stoneCog), new ItemRenderStoneCog(renderStoneCog, new TileStoneCog()));

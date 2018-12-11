@@ -24,24 +24,23 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import teamKuiper.redoxiation.Redoxiation;
-import teamKuiper.redoxiation.blocks.tileentity.TileLeadTank;
+import teamKuiper.redoxiation.blocks.tileentity.TileTankLead;
 import teamKuiper.redoxiation.utils.Utils;
 
-public class LeadTank extends Block implements ITileEntityProvider {
+public class TankLead extends Block implements ITileEntityProvider {
 
-    String name = "tankLead";
     public static IIcon icon;
 
-    public LeadTank() {
+    public TankLead() {
         super(Material.GLASS);
-        setRegistryName(Redoxiation.MODID, Redoxiation.MODID + "." + name);
+        setRegistryName(Redoxiation.MODID, "tankLead");
         setCreativeTab(Redoxiation.tabRedoxiation);
     }
  
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
         // TODO Auto-generated method stub
-        return Utils.getTankStackFromTile((TileLeadTank) world.getTileEntity(pos), true);
+        return Utils.getTankStackFromTile((TileTankLead) world.getTileEntity(pos), true);
     }
     
     @Deprecated
@@ -57,7 +56,7 @@ public class LeadTank extends Block implements ITileEntityProvider {
     }
 
     public TileEntity createNewTileEntity(World world, int meta) {
-        return new TileLeadTank();
+        return new TileTankLead();
     }
 
 	@Override
@@ -90,7 +89,7 @@ public class LeadTank extends Block implements ITileEntityProvider {
         ItemStack stack = player.inventory.getCurrentItem();
         if (stack != null) {
             FluidStack liquid = FluidContainerRegistry.getFluidForFilledItem(stack);
-            TileLeadTank tank = (TileLeadTank) world.getTileEntity(x, y, z);
+            TileTankLead tank = (TileTankLead) world.getTileEntity(x, y, z);
             if (liquid != null) {
                 int amount = tank.fill(EnumFacing.UNKNOWN, liquid, false);
                 if (amount == liquid.amount) {
@@ -135,7 +134,7 @@ public class LeadTank extends Block implements ITileEntityProvider {
     @Override
     public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
         if (!player.capabilities.isCreativeMode) {
-            TileLeadTank tank = (TileLeadTank) world.getTileEntity(pos);
+            TileTankLead tank = (TileTankLead) world.getTileEntity(pos);
             Utils.dropStackInWorld(world, pos, Utils.getTankStackFromTile(tank, true));
         }
         return world.setBlockToAir(pos);
@@ -144,7 +143,7 @@ public class LeadTank extends Block implements ITileEntityProvider {
     @Override
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         if (stack.hasTagCompound()) {
-            TileLeadTank tank = (TileLeadTank) world.getTileEntity(pos);
+            TileTankLead tank = (TileTankLead) world.getTileEntity(pos);
             if (tank != null) {
                 NBTTagCompound tagFluid = stack.getTagCompound().getCompoundTag("Fluid");
                 if (tagFluid != null) {
@@ -157,7 +156,7 @@ public class LeadTank extends Block implements ITileEntityProvider {
 
     @Override
     public void onBlockExploded(World world, BlockPos pos, Explosion explosion) {
-        Utils.dropStackInWorld(world, pos, Utils.getTankStackFromTile((TileLeadTank) world.getTileEntity(pos), true));
+        Utils.dropStackInWorld(world, pos, Utils.getTankStackFromTile((TileTankLead) world.getTileEntity(pos), true));
         world.setBlockToAir(pos);
         onBlockDestroyedByExplosion(world, pos, explosion);
     }

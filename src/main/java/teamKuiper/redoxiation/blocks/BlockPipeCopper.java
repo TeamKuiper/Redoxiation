@@ -6,12 +6,10 @@ import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.blocks.tileentity.TilePipeCopper;
 
 public class BlockPipeCopper extends BlockPipeBase {
-
-	final String NAME = "pipeCopper";
 	
 	public BlockPipeCopper() {
 		super();
-		setRegistryName(Redoxiation.MODID, Redoxiation.MODID + "." + NAME);
+		setRegistryName(Redoxiation.MODID, "pipeCopper");
 		setCreativeTab(Redoxiation.tabRedoxiation);
 		setHarvestLevel("pickaxe", 1);
 		setHardness(2.0F);

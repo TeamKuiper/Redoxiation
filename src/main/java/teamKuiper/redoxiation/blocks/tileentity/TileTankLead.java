@@ -13,15 +13,15 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
-public class TileLeadTank extends TileEntity implements IFluidHandler {
+public class TileTankLead extends TileEntity implements IFluidHandler {
 
     public FluidTank tank = new FluidTank(20000);
     private boolean needsUpdate = false;
     private int updateTimer = 0;
 
-    public TileLeadTank() {}
+    public TileTankLead() {}
 
-    public TileLeadTank(BlockPos pos) {
+    public TileTankLead(BlockPos pos) {
         world.getTileEntity(pos);
 
     }

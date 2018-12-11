@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
-import teamKuiper.redoxiation.blocks.tileentity.TileLeadTank;
+import teamKuiper.redoxiation.blocks.tileentity.TileTankLead;
 
 public class Utils {
     public static ItemStack useItemSafely(ItemStack stack) {
@@ -44,7 +44,7 @@ public class Utils {
         }
     }
 
-    public static ItemStack getTankStackFromTile(TileLeadTank tank, boolean keepFluid) {
+    public static ItemStack getTankStackFromTile(TileTankLead tank, boolean keepFluid) {
         ItemStack stack = new ItemStack(RedoxiationBlocks.tankLead);
         stack.setTagCompound(new NBTTagCompound());
         FluidStack fluid = tank.tank.getFluid();

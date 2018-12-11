@@ -10,11 +10,9 @@ import teamKuiper.redoxiation.items.RedoxiationGenericItems;
 
 public class OreSulfur extends Block {
 
-	String name = "oreSulfur";
-
 	public OreSulfur() {
 		super(Material.ROCK);
-		setRegistryName(Redoxiation.MODID, Redoxiation.MODID + "." + name);
+		setRegistryName(Redoxiation.MODID, "oreSulfur");
 		setCreativeTab(Redoxiation.tabRedoxiation);
 		setHarvestLevel("pickaxe", 2);
 		setHardness(2.0F);
@@ -23,7 +21,7 @@ public class OreSulfur extends Block {
 	}
 
 	public Item getItemDropped(int metadata, Random random, int fortune) {
-		return RedoxiationGenericItems.SulfurChunk;
+		return RedoxiationGenericItems.sulfurChunk;
 	}
 
 	public int quantityDropped(Random random) {

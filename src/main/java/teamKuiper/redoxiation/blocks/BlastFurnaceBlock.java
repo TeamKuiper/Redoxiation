@@ -7,13 +7,11 @@ import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.blocks.tileentity.TileBlastFurnaceBlock;
 
 public class BlastFurnaceBlock extends MachineBlockBase {
-	
-	String name = "blastFurnaceBlock";
 
 	public BlastFurnaceBlock() {
 		super(Material.WOOD, TileBlastFurnaceBlock.class);
 		setCreativeTab(Redoxiation.tabRedoxiation);
-		setRegistryName(Redoxiation.MODID, "redoxiation." + name);
+		setRegistryName(Redoxiation.MODID, "blastFurnaceBlock");
 	}
 	
 	@Override

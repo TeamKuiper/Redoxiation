@@ -10,10 +10,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fluids.Fluid;
 import teamKuiper.redoxiation.Redoxiation;
-import teamKuiper.redoxiation.blocks.tileentity.TileLeadTank;
+import teamKuiper.redoxiation.blocks.tileentity.TileTankLead;
 import teamKuiper.redoxiation.model.ModelTank;
 
-public class RenderLeadTank extends TileEntitySpecialRenderer<TileLeadTank> {
+public class RenderLeadTank extends TileEntitySpecialRenderer<TileTankLead> {
 
     public static final ResourceLocation texture = new ResourceLocation(Redoxiation.MODID, "textures/blocks/LeadTank.png");
 
@@ -25,7 +25,7 @@ public class RenderLeadTank extends TileEntitySpecialRenderer<TileLeadTank> {
     
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
     	
-    	TileLeadTank tank = (TileLeadTank) world.getTileEntity(x, y, z);
+    	TileTankLead tank = (TileTankLead) world.getTileEntity(x, y, z);
     	if (tank.tank.getFluid() != null) {
             Fluid fluid = tank.tank.getFluid().getFluid();
             renderer.setRenderBounds(0.01, 0.01, 0.01, 0.99, (double) tank.tank.getFluidAmount() / (double) tank.tank.getCapacity() * 0.99, 0.99);

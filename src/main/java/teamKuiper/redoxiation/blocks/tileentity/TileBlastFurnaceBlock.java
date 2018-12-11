@@ -23,7 +23,7 @@ public class TileBlastFurnaceBlock extends TileMachineBase {
 	private static int[] burnTime = { 1600 };
 	private static ItemStack[][] recipe = {
 			{ new ItemStack(Blocks.IRON_ORE, 4), new ItemStack(Items.COAL, 17),
-					new ItemStack(RedoxiationGenericItems.Calcite, 11) },
+					new ItemStack(RedoxiationGenericItems.calcite, 11) },
 			{ new ItemStack(RedoxiationBlocks.moltenPigironBlock, 3), new ItemStack(RedoxiationBlocks.slagBlock, 3) } };
 
 	public TileBlastFurnaceBlock() {

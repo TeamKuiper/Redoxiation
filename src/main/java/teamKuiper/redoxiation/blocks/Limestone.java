@@ -10,11 +10,9 @@ import teamKuiper.redoxiation.items.RedoxiationGenericItems;
 
 public class Limestone extends Block {
 
-	String name = "limestone";
-
 	public Limestone() {
 		super(Material.ROCK);
-		setRegistryName(Redoxiation.MODID, Redoxiation.MODID + "." + name);
+		setRegistryName(Redoxiation.MODID, "limestone");
 		setCreativeTab(Redoxiation.tabRedoxiation);
 		setHarvestLevel("pickaxe", 1);
 		setHardness(2.0F);
@@ -23,7 +21,7 @@ public class Limestone extends Block {
 	}
 
 	public Item getItemDropped(int metadata, Random random, int fortune) {
-		return RedoxiationGenericItems.Calcite;
+		return RedoxiationGenericItems.calcite;
 	}
 
 	public int quantityDropped(Random random) {

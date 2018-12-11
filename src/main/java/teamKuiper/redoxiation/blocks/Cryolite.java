@@ -9,12 +9,10 @@ import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.items.RedoxiationGenericItems;
 
 public class Cryolite extends Block {
-
-	String name = "cryolite";
-
+	
 	public Cryolite() {
 		super(Material.ROCK);
-		setRegistryName(Redoxiation.MODID, Redoxiation.MODID + "." + name);
+		setRegistryName(Redoxiation.MODID, "cryolite");
 		setCreativeTab(Redoxiation.tabRedoxiation);
 		setHarvestLevel("pickaxe", 1);
 		setHardness(2.0F);
@@ -23,7 +21,7 @@ public class Cryolite extends Block {
 	}
 
 	public Item getItemDropped(int metadata, Random random, int fortune) {
-		return RedoxiationGenericItems.ItemCryolite;
+		return RedoxiationGenericItems.itemCryolite;
 	}
 
 	public int quantityDropped(Random random) {

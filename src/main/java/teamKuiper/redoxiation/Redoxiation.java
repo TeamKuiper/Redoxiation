@@ -58,7 +58,7 @@ public class Redoxiation {
 	public static final CreativeTabs tabRedoxiationitems = new CreativeTabs("RedoxiationItems") {
 		@SideOnly(Side.CLIENT)
 		public Item getTabIconItem() {
-			return RedoxiationGenericItems.Calcite;
+			return RedoxiationGenericItems.calcite;
 		}
 	};
 

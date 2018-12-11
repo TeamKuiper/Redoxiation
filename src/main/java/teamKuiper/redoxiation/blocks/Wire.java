@@ -20,8 +20,6 @@ import teamKuiper.redoxiation.handlers.PacketHandler;
 
 public class Wire extends BlockContainer {
 
-    String name = "wire";
-
     public static final AxisAlignedBB DEFAULT_AABB = new AxisAlignedBB(1, 1, 1, 1, 1, 1);
     public static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.3125f, 0.875f, 0.3125f, 0.6875f, 1.0f, 0.6875f);
     public static final AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.3125f, 0.0f, 0.3125f, 0.6875f, 0.0625f, 0.6875f);
@@ -32,7 +30,7 @@ public class Wire extends BlockContainer {
 
     public Wire() {
         super(Material.ROCK);
-        setRegistryName(Redoxiation.MODID, Redoxiation.MODID + "." + name);
+        setRegistryName(Redoxiation.MODID, "wire");
         setCreativeTab(Redoxiation.tabRedoxiation);
         setHarvestLevel("pickaxe", 2);
         setHardness(2.0F);

@@ -17,8 +17,6 @@ import teamKuiper.redoxiation.blocks.tileentity.TileCog;
 
 public class Cog extends BlockContainer {
 
-    String name = "cog";
-
     public static final AxisAlignedBB DEFAULT_AABB = new AxisAlignedBB(1, 1, 1, 1, 1, 1);
     public static final AxisAlignedBB UP_AABB = new AxisAlignedBB(0.3125f, 0.9375f, 0.3125f, 0.6875f, 1.0f, 0.6875f);
     public static final AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.3125f, 0.0f, 0.3125f, 0.6875f, 0.0625f, 0.6875f);
@@ -29,7 +27,7 @@ public class Cog extends BlockContainer {
 
     public Cog() {
         super(Material.ROCK);
-        setRegistryName(Redoxiation.MODID, Redoxiation.MODID + "." + name);
+        setRegistryName(Redoxiation.MODID, "cog");
         setCreativeTab(Redoxiation.tabRedoxiation);
         setHarvestLevel("pickaxe", 2);
         setHardness(2.0F);

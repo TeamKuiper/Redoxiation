@@ -10,11 +10,9 @@ import teamKuiper.redoxiation.items.RedoxiationGenericItems;
 
 public class SaltRock extends Block {
 
-	String name = "saltRock";
-
 	public SaltRock() {
 		super(Material.ROCK);
-		setRegistryName(Redoxiation.MODID, Redoxiation.MODID + "." + name);
+		setRegistryName(Redoxiation.MODID, "saltRock");
 		setCreativeTab(Redoxiation.tabRedoxiation);
 		setHarvestLevel("pickaxe", 1);
 		setHardness(2.0F);
@@ -23,7 +21,7 @@ public class SaltRock extends Block {
 	}
 
 	public Item getItemDropped(int metadata, Random random, int fortune) {
-		return RedoxiationGenericItems.SaltChunk;
+		return RedoxiationGenericItems.saltChunk;
 	}
 
 	public int quantityDropped(Random random) {

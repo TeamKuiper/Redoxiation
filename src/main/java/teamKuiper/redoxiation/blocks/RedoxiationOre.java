@@ -8,7 +8,7 @@ public class RedoxiationOre extends Block {
 
 	public RedoxiationOre(String name, int harvestlevel, float hardness, float resistance) {
 		super(Material.ROCK);
-		setRegistryName(Redoxiation.MODID, Redoxiation.MODID + "." + name);
+		setRegistryName(Redoxiation.MODID, name);
 		setCreativeTab(Redoxiation.tabRedoxiation);
 		setHarvestLevel("pickaxe", harvestlevel);
 		setHardness(hardness);
