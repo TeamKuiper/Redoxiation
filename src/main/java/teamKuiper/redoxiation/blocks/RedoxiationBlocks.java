@@ -17,6 +17,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import teamKuiper.redoxiation.Redoxiation;
+import teamKuiper.redoxiation.blocks.cog.BlockCog;
+import teamKuiper.redoxiation.blocks.cog.TileCog;
 import teamKuiper.redoxiation.blocks.rocks.Bauxite;
 import teamKuiper.redoxiation.blocks.rocks.Cryolite;
 import teamKuiper.redoxiation.blocks.rocks.Dolomite;
@@ -28,7 +30,6 @@ import teamKuiper.redoxiation.blocks.rocks.SaltRock;
 import teamKuiper.redoxiation.blocks.rocks.Scheelite;
 import teamKuiper.redoxiation.blocks.rocks.TNTium;
 import teamKuiper.redoxiation.blocks.tileentity.TileBlastFurnaceBlock;
-import teamKuiper.redoxiation.blocks.tileentity.TileCog;
 import teamKuiper.redoxiation.blocks.tileentity.TileIronCog;
 import teamKuiper.redoxiation.blocks.tileentity.TileStoneCog;
 import teamKuiper.redoxiation.blocks.tileentity.TileWoodenCog;
@@ -48,7 +49,8 @@ public class RedoxiationBlocks {
 			obsidianGold, obsidianCopper, obsidianTin, obsidianLead,
 			obsidianSilver, obsidianNickel, obsidianPlatinum, obsidianZinc,
 			obsidianCobalt, obsidianChromium, obsidianUranium,
-			obsidianPlutonium, woodenCog, stoneCog, ironCog, wire, tankLead, cog, pipeCopper;
+			obsidianPlutonium, woodenCog, stoneCog, ironCog, wire, tankLead, pipeCopper;
+	public static BlockCog cog;
 	
 	public static Fluid hotAir, moltenPigiron, slag;
 	public static BlockFluidClassic hotAirBlock, moltenPigironBlock, slagBlock;
@@ -120,7 +122,7 @@ public class RedoxiationBlocks {
 		stoneCog = new BlockStoneCog();
 		ironCog = new BlockIronCog();
         wire = new Wire();
-        cog = new Cog();
+        cog = new BlockCog();
 
 		// Machine
 		blastFurnaceBlock = new BlastFurnaceBlock();
