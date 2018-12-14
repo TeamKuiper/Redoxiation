@@ -6,12 +6,10 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -27,11 +25,10 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import teamKuiper.redoxiation.Redoxiation;
-import teamKuiper.redoxiation.blocks.rocks.BlockNetherOre.OreType;
+import teamKuiper.redoxiation.blocks.BlockBase;
 import teamKuiper.redoxiation.utils.IBlockBoundCustomizable;
-import teamKuiper.redoxiation.utils.IInitializable;
 
-public class BlockCog extends BlockContainer implements IInitializable, IBlockBoundCustomizable {
+public class BlockCog extends BlockBase implements IBlockBoundCustomizable {
 
     public static final PropertyEnum<CogType> DOWN = PropertyEnum.create("down", CogType.class);
     public static final PropertyEnum<CogType> UP = PropertyEnum.create("up", CogType.class);
@@ -50,8 +47,6 @@ public class BlockCog extends BlockContainer implements IInitializable, IBlockBo
     public static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(0.9375f, 0.3125f, 0.3125f, 1.0f, 0.6875f, 0.6875f);
     public static final AxisAlignedBB[] AABBs = {DOWN_AABB, UP_AABB, NORTH_AABB, SOUTH_AABB, WEST_AABB, EAST_AABB};
     
-    public static final ItemStack[] COGs = new ItemStack[CogType.values().length-1];
-    
     public BlockCog() {
         super(Material.ROCK);
         setRegistryName(Redoxiation.MODID, "cog");
@@ -59,14 +54,17 @@ public class BlockCog extends BlockContainer implements IInitializable, IBlockBo
         setHarvestLevel("pickaxe", 2);
         setHardness(2.0F);
         setResistance(10.0F);
+
+		variants = new ItemStack[CogType.values().length];
+		for (int i = 0; i < CogType.values().length-1; i++) {
+			if(CogType.values()[i] == CogType.NONE) continue;
+			variants[i] = new ItemStack(this, 1, i);
+		}
     }
     
     @Override
-    public void init() {
-		for (int i = 0; i < OreType.values().length-1; i++) {
-			if(CogType.values()[i] == CogType.NONE) continue;
-			COGs[i] = new ItemStack(this, 1, i);
-		}
+    public Item getItem() {
+    	return new ItemBlockCog();
     }
     
     @Override
@@ -110,14 +108,6 @@ public class BlockCog extends BlockContainer implements IInitializable, IBlockBo
 	@Override
 	public EnumBlockRenderType getRenderType(IBlockState state) {
 		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
-	}
-
-	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> items) {
-		for (int i = 0; i < OreType.values().length-1; i++) {
-			if(CogType.values()[i] == CogType.NONE) continue;
-			items.add(new ItemStack(this, 1, i));
-		}
 	}
 
 	@Override

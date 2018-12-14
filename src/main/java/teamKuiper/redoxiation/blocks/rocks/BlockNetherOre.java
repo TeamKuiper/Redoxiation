@@ -2,28 +2,25 @@ package teamKuiper.redoxiation.blocks.rocks;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 import teamKuiper.redoxiation.Redoxiation;
-import teamKuiper.redoxiation.blocks.rocks.BlockOverworldOre.OreType;
-import teamKuiper.redoxiation.items.RedoxiationGenericItems;
+import teamKuiper.redoxiation.blocks.BlockBase;
+import teamKuiper.redoxiation.blocks.IVariantType;
 
-public class BlockNetherOre extends Block {
+public class BlockNetherOre extends BlockBase {
 	
 	public static final PropertyEnum<OreType> TYPE = PropertyEnum.create("type", OreType.class);
-
+	
 	public BlockNetherOre() {
 		super(Material.ROCK);
 		setUnlocalizedName("ore");
@@ -34,6 +31,18 @@ public class BlockNetherOre extends Block {
 		for(int i = 0; i < OreType.values().length; i++) {
 			OreType type = OreType.values()[i];
 			setHarvestLevel("pickaxe", type.getHarvestLevel(), getStateFromMeta(type.getMetadata()));
+		}
+
+		variants = new ItemStack[OreType.values().length];
+		for (int i = 0; i < OreType.values().length; i++) {
+			variants[i] = new ItemStack(this, 1, i);
+		}
+	}
+	
+	@Override
+	public void onRegister() {
+		for(int i = 0; i < variants.length; i++) {
+			OreDictionary.registerOre(OreType.values()[i].getName(), variants[i]);
 		}
 	}
 	
@@ -72,13 +81,6 @@ public class BlockNetherOre extends Block {
 	}
 
 	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> items) {
-		for (int i = 0; i < OreType.values().length; i++) {
-			items.add(new ItemStack(this, 1, i));
-		}
-	}
-
-	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(TYPE, OreType.values()[meta]);
 	}
@@ -93,7 +95,7 @@ public class BlockNetherOre extends Block {
 		return state.getValue(TYPE).getMetadata();
 	}
 	
-	public enum OreType implements IStringSerializable {
+	public enum OreType implements IVariantType {
 		
 		FERRO_NICKEL(0, "oreFerroNickel", 2),
 		PSEUDO_BRONZE(1, "orePseudoBronze", 2),

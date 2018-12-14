@@ -1,20 +1,19 @@
 package teamKuiper.redoxiation.blocks.rocks;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.NonNullList;
+import net.minecraftforge.oredict.OreDictionary;
 import teamKuiper.redoxiation.Redoxiation;
+import teamKuiper.redoxiation.blocks.BlockBase;
+import teamKuiper.redoxiation.blocks.IVariantType;
 
-public class BlockObsidianOre extends Block {
+public class BlockObsidianOre extends BlockBase {
 	
 	public static final PropertyEnum<OreType> TYPE = PropertyEnum.create("type", OreType.class);
-
+	
 	public BlockObsidianOre() {
 		super(Material.ROCK);
 		setUnlocalizedName("ore");
@@ -26,18 +25,23 @@ public class BlockObsidianOre extends Block {
 			OreType type = OreType.values()[i];
 			setHarvestLevel("pickaxe", type.getHarvestLevel(), getStateFromMeta(type.getMetadata()));
 		}
+
+		variants = new ItemStack[OreType.values().length];
+		for (int i = 0; i < OreType.values().length; i++) {
+			variants[i] = new ItemStack(this, 1, i);
+		}
+	}
+
+	@Override
+	public void onRegister() {
+		for(int i = 0; i < variants.length; i++) {
+			OreDictionary.registerOre(OreType.values()[i].getName(), variants[i]);
+		}
 	}
 
 	@Override
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, TYPE);
-	}
-
-	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> items) {
-		for (int i = 0; i < OreType.values().length; i++) {
-			items.add(new ItemStack(this, 1, i));
-		}
 	}
 
 	@Override
@@ -55,7 +59,7 @@ public class BlockObsidianOre extends Block {
 		return state.getValue(TYPE).getMetadata();
 	}
 	
-	public enum OreType implements IStringSerializable {
+	public enum OreType implements IVariantType {
 		
 		OBSIDIAN_IRON(1, "obsidianIron", 3),
 		OBSIDIAN_GOLD(2, "obsidianGold", 3),

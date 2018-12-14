@@ -2,36 +2,46 @@ package teamKuiper.redoxiation.blocks.rocks;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.NonNullList;
+import net.minecraftforge.oredict.OreDictionary;
 import teamKuiper.redoxiation.Redoxiation;
+import teamKuiper.redoxiation.blocks.BlockBase;
+import teamKuiper.redoxiation.blocks.IVariantType;
 import teamKuiper.redoxiation.items.RedoxiationGenericItems;
 
-public class BlockRock extends Block {
+public class BlockRock extends BlockBase {
 	
 	public static final PropertyEnum<RockType> TYPE = PropertyEnum.create("type", RockType.class);
-
+	
 	public BlockRock() {
 		super(Material.ROCK);
 		
 		setUnlocalizedName("rock");
 		setCreativeTab(Redoxiation.tabRedoxiation);
+		setHardness(2.0F);
+		setResistance(10.0F);
 		
 		for(int i = 0; i < RockType.values().length; i++) {
 			RockType type = RockType.values()[i];
 			setHarvestLevel("pickaxe", type.getHarvestLevel(), getStateFromMeta(type.getMetadata()));
 		}
+		
+		variants = new ItemStack[RockType.values().length];
+		for (int i = 0; i < RockType.values().length; i++) {
+			variants[i] = new ItemStack(this, 1, i);
+		}
+	}
 
-		setHardness(2.0F);
-		setResistance(10.0F);
+	@Override
+	public void onRegister() {
+		for(int i = 0; i < variants.length; i++) {
+			OreDictionary.registerOre(RockType.values()[i].getName(), variants[i]);
+		}
 	}
 
 	@Override
@@ -60,13 +70,6 @@ public class BlockRock extends Block {
 	}
 
 	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> items) {
-		for (int i = 0; i < RockType.values().length; i++) {
-			items.add(new ItemStack(this, 1, i));
-		}
-	}
-
-	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(TYPE, RockType.values()[meta]);
 	}
@@ -81,7 +84,7 @@ public class BlockRock extends Block {
 		return state.getValue(TYPE).getMetadata();
 	}
 	
-	public enum RockType implements IStringSerializable {
+	public enum RockType implements IVariantType {
 		
 		BAUXITE(0, "bauxite", 2, RedoxiationGenericItems.rawBauxite, 2, 2),
 		CRYOLITE(1, "cryolite", 1, RedoxiationGenericItems.itemCryolite, 2, 2),
