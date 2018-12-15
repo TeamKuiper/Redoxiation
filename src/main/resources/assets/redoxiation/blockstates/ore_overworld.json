@@ -1,0 +1,66 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "cube_all",
+		"transform": "forge:default-block"
+	},
+	"variants": {
+		"type": {
+			"copper": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_copper"
+				}
+			},
+			"tin": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_tin"
+				}
+			},
+			"lead": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_lead"
+				}
+			},
+			"silver": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_silver"
+				}
+			},
+			"nickel": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_nickel"
+				}
+			},
+			"platinum": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_platinum"
+				}
+			},
+			"zinc": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_zinc"
+				}
+			},
+			"cobalt": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_cobalt"
+				}
+			},
+			"chromium": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_chromium"
+				}
+			},
+			"pitchblend": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_pitchblend"
+				}
+			},
+			"sulfur": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_sulfur"
+				}
+			}
+		}
+	}
+}

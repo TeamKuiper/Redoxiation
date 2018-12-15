@@ -3,7 +3,9 @@ package teamKuiper.redoxiation;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
-import teamKuiper.redoxiation.items.RedoxiationGenericItems;
+import teamKuiper.redoxiation.blocks.rocks.BlockOverworldOre;
+import teamKuiper.redoxiation.blocks.rocks.BlockRock;
+import teamKuiper.redoxiation.items.RedoxiationItems;
 
 public class RedoxiationRecipeManager {
 	
@@ -15,16 +17,16 @@ public class RedoxiationRecipeManager {
 	public static void recipeFurnace()
 	{
 		//Normal Smelting
-		GameRegistry.addSmelting(RedoxiationBlocks.oreCopper, new ItemStack(RedoxiationGenericItems.ingotCopper,1,0),0.1f);
-		GameRegistry.addSmelting(RedoxiationBlocks.oreChromium, new ItemStack(RedoxiationGenericItems.ingotChromium,1,0), 0.1f);
-		GameRegistry.addSmelting(RedoxiationBlocks.oreCobalt, new ItemStack(RedoxiationGenericItems.ingotCobalt,1,0), 0.1f);
-		GameRegistry.addSmelting(RedoxiationBlocks.oreLead, new ItemStack(RedoxiationGenericItems.ingotLead,1,0), 0.1f);
-		GameRegistry.addSmelting(RedoxiationBlocks.oreNickel, new ItemStack(RedoxiationGenericItems.ingotNickel,1,0), 0.1f);
-		GameRegistry.addSmelting(RedoxiationBlocks.orePlatinum, new ItemStack(RedoxiationGenericItems.ingotPlatinum,1,0), 0.1f);
-		GameRegistry.addSmelting(RedoxiationBlocks.oreSilver, new ItemStack(RedoxiationGenericItems.ingotSilver,1,0),0.1f);
-		GameRegistry.addSmelting(RedoxiationBlocks.oreTin, new ItemStack(RedoxiationGenericItems.ingotTin,1,0),0.1f);
-		GameRegistry.addSmelting(RedoxiationBlocks.oreZinc, new ItemStack(RedoxiationGenericItems.ingotZinc,1,0), 0.1f);
-		GameRegistry.addSmelting(RedoxiationBlocks.scheelite, new ItemStack(RedoxiationGenericItems.ingotTungsten,1,0), 0.1f);
+		/*GameRegistry.addSmelting(BlockOverworldOre.oreCopper, new ItemStack(RedoxiationItems.ingotCopper,1,0),0.1f);
+		GameRegistry.addSmelting(BlockOverworldOre.oreChromium, new ItemStack(RedoxiationItems.ingotChromium,1,0), 0.1f);
+		GameRegistry.addSmelting(BlockOverworldOre.oreCobalt, new ItemStack(RedoxiationItems.ingotCobalt,1,0), 0.1f);
+		GameRegistry.addSmelting(BlockOverworldOre.oreLead, new ItemStack(RedoxiationItems.ingotLead,1,0), 0.1f);
+		GameRegistry.addSmelting(BlockOverworldOre.oreNickel, new ItemStack(RedoxiationItems.ingotNickel,1,0), 0.1f);
+		GameRegistry.addSmelting(BlockOverworldOre.orePlatinum, new ItemStack(RedoxiationItems.ingotPlatinum,1,0), 0.1f);
+		GameRegistry.addSmelting(BlockOverworldOre.oreSilver, new ItemStack(RedoxiationItems.ingotSilver,1,0),0.1f);
+		GameRegistry.addSmelting(BlockOverworldOre.oreTin, new ItemStack(RedoxiationItems.ingotTin,1,0),0.1f);
+		GameRegistry.addSmelting(BlockOverworldOre.oreZinc, new ItemStack(RedoxiationItems.ingotZinc,1,0), 0.1f);
+		GameRegistry.addSmelting(BlockRock.scheelite, new ItemStack(RedoxiationItems.ingotTungsten,1,0), 0.1f);*/
 		
 		//Dust Smelting
 		

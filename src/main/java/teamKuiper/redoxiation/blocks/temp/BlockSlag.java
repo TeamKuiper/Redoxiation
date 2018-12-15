@@ -1,4 +1,4 @@
-package teamKuiper.redoxiation.blocks;
+package teamKuiper.redoxiation.blocks.temp;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -11,13 +11,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import teamKuiper.redoxiation.Redoxiation;
 
-public class BlockMoltenPigiron extends BlockFluidClassic {
+public class BlockSlag extends BlockFluidClassic {
 	@SideOnly(Side.CLIENT)
 	protected IIcon stillIcon;
 	@SideOnly(Side.CLIENT)
 	protected IIcon flowingIcon;
 
-	public BlockMoltenPigiron(Fluid fluid, Material material) {
+	public BlockSlag(Fluid fluid, Material material) {
 		super(fluid, material);
 		setCreativeTab(Redoxiation.tabRedoxiation);
 	}
@@ -30,8 +30,8 @@ public class BlockMoltenPigiron extends BlockFluidClassic {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerBlockIcons(IIconRegister register) {
-		stillIcon = register.registerIcon("Redoxiation:MoltenPigironStill");
-		flowingIcon = register.registerIcon("Redoxiation:MoltenPigironFlowing");
+		stillIcon = register.registerIcon("Redoxiation:SlagStill");
+		flowingIcon = register.registerIcon("Redoxiation:SlagFlowing");
 	}
 
 	@Override

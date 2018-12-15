@@ -1,4 +1,4 @@
-package teamKuiper.redoxiation.blocks;
+package teamKuiper.redoxiation.blocks.temp;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -13,6 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import teamKuiper.redoxiation.Redoxiation;
+import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
 import teamKuiper.redoxiation.blocks.tileentity.TileCog;
 
 public class Cog extends BlockContainer {

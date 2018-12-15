@@ -1,4 +1,4 @@
-package teamKuiper.redoxiation.items;
+package teamKuiper.redoxiation.items.temp;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ import net.minecraftforge.registries.GameData;
 import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
 
-public class RedoxiationGenericItems extends Item {
+public class RedoxiationItems extends Item {
 	public static final RegistryNamespaced itemRegistry = GameData.getItemRegistry();
 	private final String ITEMNAME;
 	private final String INFORMATION;
@@ -82,14 +82,14 @@ public class RedoxiationGenericItems extends Item {
 			//Fluid
 			itemHotAirBucketEnabled, itemMoltenPigironBucketEnabled, itemSlagBucketEnabled;
 
-	public RedoxiationGenericItems(String name, String info) {
+	public RedoxiationItems(String name, String info) {
 		super();
 		setCreativeTab(Redoxiation.tabRedoxiationitems);
 		INFORMATION = info;
 		ITEMNAME = name;
 	}
 
-	public RedoxiationGenericItems(String name) {
+	public RedoxiationItems(String name) {
 		super();
 		setCreativeTab(Redoxiation.tabRedoxiationitems);
 		ITEMNAME = name;
@@ -98,308 +98,308 @@ public class RedoxiationGenericItems extends Item {
 
 	public static void registerItems(RegistryEvent.Register<Item> event) {
 		if(calciteEnabled){
-			calcite = new RedoxiationGenericItems("calcite", "CaCO3");
+			calcite = new RedoxiationItems("calcite", "CaCO3");
 			event.getRegistry().register(calcite);
-			OreDictionary.registerOre("materialcalcite", RedoxiationGenericItems.calcite);
+			OreDictionary.registerOre("materialcalcite", RedoxiationItems.calcite);
     	}
 		if(saltChunkEnabled){
-			saltChunk = new RedoxiationGenericItems("saltChunk", "NaCl");
+			saltChunk = new RedoxiationItems("saltChunk", "NaCl");
 			event.getRegistry().register(saltChunk);
-			OreDictionary.registerOre("lumpSalt", RedoxiationGenericItems.saltChunk);
+			OreDictionary.registerOre("lumpSalt", RedoxiationItems.saltChunk);
 		}
 		if(rawBauxiteEnabled){
-			rawBauxite = new RedoxiationGenericItems("rawBauxite", "Al(OH)3");
+			rawBauxite = new RedoxiationItems("rawBauxite", "Al(OH)3");
 			event.getRegistry().register(rawBauxite);
-			OreDictionary.registerOre("lumpBauxite", RedoxiationGenericItems.rawBauxite);
+			OreDictionary.registerOre("lumpBauxite", RedoxiationItems.rawBauxite);
 		}
 		if(rawRutileEnabled){
-			rawRutile = new RedoxiationGenericItems("rawRutile", "Ti");
+			rawRutile = new RedoxiationItems("rawRutile", "Ti");
 			event.getRegistry().register(rawRutile);
-			OreDictionary.registerOre("lumpRutile", RedoxiationGenericItems.rawRutile);
+			OreDictionary.registerOre("lumpRutile", RedoxiationItems.rawRutile);
 		}
 		if(rawScheeliteEnabled){
-			rawScheelite = new RedoxiationGenericItems("rawScheelite", "CaWO4");
+			rawScheelite = new RedoxiationItems("rawScheelite", "CaWO4");
 			event.getRegistry().register(rawScheelite);
-			OreDictionary.registerOre("lumpScheelite", RedoxiationGenericItems.rawScheelite);
+			OreDictionary.registerOre("lumpScheelite", RedoxiationItems.rawScheelite);
 		}
 		if(dolomiteShardEnabled){
-			dolomiteShard = new RedoxiationGenericItems("dolomiteShard");
+			dolomiteShard = new RedoxiationItems("dolomiteShard");
 			event.getRegistry().register(dolomiteShard);
 		}
 		if(crushedOreIronEnabled){
-			crushedOreIron = new RedoxiationGenericItems("crushedOreIron", "Fe");
+			crushedOreIron = new RedoxiationItems("crushedOreIron", "Fe");
 			event.getRegistry().register(crushedOreIron);
-			OreDictionary.registerOre("crushedIron", RedoxiationGenericItems.crushedOreIron);
+			OreDictionary.registerOre("crushedIron", RedoxiationItems.crushedOreIron);
     	}
 		if(crushedOreGoldEnabled){
-			crushedOreGold = new RedoxiationGenericItems("crushedOreGold", "Au");
+			crushedOreGold = new RedoxiationItems("crushedOreGold", "Au");
 			event.getRegistry().register(crushedOreGold);
-			OreDictionary.registerOre("crushedGold", RedoxiationGenericItems.crushedOreGold);
+			OreDictionary.registerOre("crushedGold", RedoxiationItems.crushedOreGold);
     	}
 		if(crushedOreCopperEnabled){
-			crushedOreCopper = new RedoxiationGenericItems("crushedOreCopper", "Cu");
+			crushedOreCopper = new RedoxiationItems("crushedOreCopper", "Cu");
 			event.getRegistry().register(crushedOreCopper);
-			OreDictionary.registerOre("crushedCopper", RedoxiationGenericItems.crushedOreCopper);
+			OreDictionary.registerOre("crushedCopper", RedoxiationItems.crushedOreCopper);
     	}
 		if(crushedOreTinEnabled){
-			crushedOreTin = new RedoxiationGenericItems("crushedOreTin", "Sn");
+			crushedOreTin = new RedoxiationItems("crushedOreTin", "Sn");
 			event.getRegistry().register(crushedOreTin);
-			OreDictionary.registerOre("crushedTin", RedoxiationGenericItems.crushedOreTin);
+			OreDictionary.registerOre("crushedTin", RedoxiationItems.crushedOreTin);
     	}
 		if(crushedOreLeadEnabled){
-			crushedOreLead = new RedoxiationGenericItems("crushedOreLead", "Pb");
+			crushedOreLead = new RedoxiationItems("crushedOreLead", "Pb");
 			event.getRegistry().register(crushedOreLead);
-			OreDictionary.registerOre("crushedLead", RedoxiationGenericItems.crushedOreLead);
+			OreDictionary.registerOre("crushedLead", RedoxiationItems.crushedOreLead);
     	}
 		if(crushedOreSilverEnabled){
-			crushedOreSilver = new RedoxiationGenericItems("crushedOreSilver", "Ag");
+			crushedOreSilver = new RedoxiationItems("crushedOreSilver", "Ag");
 			event.getRegistry().register(crushedOreSilver);
-			OreDictionary.registerOre("crushedSilver", RedoxiationGenericItems.crushedOreSilver);
+			OreDictionary.registerOre("crushedSilver", RedoxiationItems.crushedOreSilver);
 		}
 		if(crushedOrePlatinumEnabled){
-			crushedOrePlatinum = new RedoxiationGenericItems("crushedOrePlatinum", "Pt");
+			crushedOrePlatinum = new RedoxiationItems("crushedOrePlatinum", "Pt");
 			event.getRegistry().register(crushedOrePlatinum);
-			OreDictionary.registerOre("crushedPlatinum", RedoxiationGenericItems.crushedOrePlatinum);
+			OreDictionary.registerOre("crushedPlatinum", RedoxiationItems.crushedOrePlatinum);
 		}
 		if(crushedOreZincEnabled){
-			crushedOreZinc = new RedoxiationGenericItems("crushedOreZinc", "Zn");
+			crushedOreZinc = new RedoxiationItems("crushedOreZinc", "Zn");
 			event.getRegistry().register(crushedOreZinc);
-			OreDictionary.registerOre("crushedZinc", RedoxiationGenericItems.crushedOreZinc);
+			OreDictionary.registerOre("crushedZinc", RedoxiationItems.crushedOreZinc);
 		}
 		if(crushedOreNickelEnabled){
-			crushedOreNickel = new RedoxiationGenericItems("crushedOreNickel", "Ni");
+			crushedOreNickel = new RedoxiationItems("crushedOreNickel", "Ni");
 			event.getRegistry().register(crushedOreNickel);
-			OreDictionary.registerOre("crushedNickel", RedoxiationGenericItems.crushedOreNickel);
+			OreDictionary.registerOre("crushedNickel", RedoxiationItems.crushedOreNickel);
 		}
 		if(crushedOreChromiumEnabled){
-			crushedOreChromium = new RedoxiationGenericItems("crushedOreChromium", "Cr");
+			crushedOreChromium = new RedoxiationItems("crushedOreChromium", "Cr");
 			event.getRegistry().register(crushedOreChromium);
-			OreDictionary.registerOre("crushedChromium", RedoxiationGenericItems.crushedOreChromium);
+			OreDictionary.registerOre("crushedChromium", RedoxiationItems.crushedOreChromium);
 		}
 		if(dustOreIronEnabled){
-			dustOreIron = new RedoxiationGenericItems("dustOreIron", "Fe");
+			dustOreIron = new RedoxiationItems("dustOreIron", "Fe");
 			event.getRegistry().register(dustOreIron);
-			OreDictionary.registerOre("dustOreIronRedox", RedoxiationGenericItems.dustOreIron);
+			OreDictionary.registerOre("dustOreIronRedox", RedoxiationItems.dustOreIron);
 		}
 		if(dustOreGoldEnabled){
-			dustOreGold = new RedoxiationGenericItems("dustOreGold", "Au");
+			dustOreGold = new RedoxiationItems("dustOreGold", "Au");
 			event.getRegistry().register(dustOreGold);
-			OreDictionary.registerOre("dustOreGoldRedox", RedoxiationGenericItems.dustOreGold);
+			OreDictionary.registerOre("dustOreGoldRedox", RedoxiationItems.dustOreGold);
 		}
 		if(dustOreCopperEnabled){
-			dustOreCopper = new RedoxiationGenericItems("dustOreCopper", "Cu");
+			dustOreCopper = new RedoxiationItems("dustOreCopper", "Cu");
 			event.getRegistry().register(dustOreCopper);
-			OreDictionary.registerOre("dustOreCopperRedox", RedoxiationGenericItems.dustOreCopper);
+			OreDictionary.registerOre("dustOreCopperRedox", RedoxiationItems.dustOreCopper);
 		}
 		if(dustOreTinEnabled){
-			dustOreTin = new RedoxiationGenericItems("dustOreTin", "Sn");
+			dustOreTin = new RedoxiationItems("dustOreTin", "Sn");
 			event.getRegistry().register(dustOreTin);
-			OreDictionary.registerOre("dustOreTinRedox", RedoxiationGenericItems.dustOreTin);
+			OreDictionary.registerOre("dustOreTinRedox", RedoxiationItems.dustOreTin);
 		}
 		if(dustOreLeadEnabled){
-			dustOreLead = new RedoxiationGenericItems("dustOreLead", "Pb");
+			dustOreLead = new RedoxiationItems("dustOreLead", "Pb");
 			event.getRegistry().register(dustOreLead);
-			OreDictionary.registerOre("dustOreLeadRedox", RedoxiationGenericItems.dustOreLead);
+			OreDictionary.registerOre("dustOreLeadRedox", RedoxiationItems.dustOreLead);
 		}
 		if(dustOreSilverEnabled){
-			dustOreSilver = new RedoxiationGenericItems("dustOreSilver", "Ag");
+			dustOreSilver = new RedoxiationItems("dustOreSilver", "Ag");
 			event.getRegistry().register(dustOreSilver);
-			OreDictionary.registerOre("dustOreSilverRedox", RedoxiationGenericItems.dustOreSilver);
+			OreDictionary.registerOre("dustOreSilverRedox", RedoxiationItems.dustOreSilver);
 		}
 		if(dustOrePlatinumEnabled){
-			dustOrePlatinum = new RedoxiationGenericItems("dustOrePlatinum", "Pt");
+			dustOrePlatinum = new RedoxiationItems("dustOrePlatinum", "Pt");
 			event.getRegistry().register(dustOrePlatinum);
-			OreDictionary.registerOre("dustOrePlatinumRedox", RedoxiationGenericItems.dustOrePlatinum);
+			OreDictionary.registerOre("dustOrePlatinumRedox", RedoxiationItems.dustOrePlatinum);
 		}
     	if(dustOreZincEnabled){
-			dustOreZinc = new RedoxiationGenericItems("dustOreZinc", "Zn");
+			dustOreZinc = new RedoxiationItems("dustOreZinc", "Zn");
 			event.getRegistry().register(dustOreZinc);
-			OreDictionary.registerOre("dustOreZincRedox", RedoxiationGenericItems.dustOreZinc);
+			OreDictionary.registerOre("dustOreZincRedox", RedoxiationItems.dustOreZinc);
     	}
     	if(dustOreNickelEnabled){
-			dustOreNickel = new RedoxiationGenericItems("dustOreNickel", "Ni");
+			dustOreNickel = new RedoxiationItems("dustOreNickel", "Ni");
 			event.getRegistry().register(dustOreNickel);
-			OreDictionary.registerOre("dustOreNickelRedox", RedoxiationGenericItems.dustOreNickel);
+			OreDictionary.registerOre("dustOreNickelRedox", RedoxiationItems.dustOreNickel);
     	}
     	if(dustOreChromiumEnabled){
-			dustOreChromium = new RedoxiationGenericItems("dustOreChromium", "Cr");
+			dustOreChromium = new RedoxiationItems("dustOreChromium", "Cr");
 			event.getRegistry().register(dustOreChromium);
-			OreDictionary.registerOre("dustOreChromiumRedox", RedoxiationGenericItems.dustOreChromium);
+			OreDictionary.registerOre("dustOreChromiumRedox", RedoxiationItems.dustOreChromium);
     	}
     	if(dustSaltEnabled){
-    		dustSalt = new RedoxiationGenericItems("dustSalt", "NaCl");
+    		dustSalt = new RedoxiationItems("dustSalt", "NaCl");
 			event.getRegistry().register(dustSalt);
-			OreDictionary.registerOre("dustOreSaltRedox", RedoxiationGenericItems.dustSalt);
+			OreDictionary.registerOre("dustOreSaltRedox", RedoxiationItems.dustSalt);
     	}
     	if(dustBauxiteEnabled){
-			dustBauxite = new RedoxiationGenericItems("dustBauxite", "Al2O3");
+			dustBauxite = new RedoxiationItems("dustBauxite", "Al2O3");
 			event.getRegistry().register(dustBauxite);
-			OreDictionary.registerOre("dustOreAluminumRedox", RedoxiationGenericItems.dustBauxite);
+			OreDictionary.registerOre("dustOreAluminumRedox", RedoxiationItems.dustBauxite);
     	}
     	if(dustRutileEnabled){
-			dustRutile = new RedoxiationGenericItems("dustRutile", "TiO2");
+			dustRutile = new RedoxiationItems("dustRutile", "TiO2");
 			event.getRegistry().register(dustRutile);
-			OreDictionary.registerOre("dustOreTitaniumRedox", RedoxiationGenericItems.dustRutile);
+			OreDictionary.registerOre("dustOreTitaniumRedox", RedoxiationItems.dustRutile);
     	}
     	if(dustScheeliteEnabled){
-			dustScheelite = new RedoxiationGenericItems("dustScheelite", "WO3");
+			dustScheelite = new RedoxiationItems("dustScheelite", "WO3");
 			event.getRegistry().register(dustScheelite);
-			OreDictionary.registerOre("dustOreTungstenRedox", RedoxiationGenericItems.dustScheelite);
+			OreDictionary.registerOre("dustOreTungstenRedox", RedoxiationItems.dustScheelite);
     	}
     	if(ingotCopperEnabled){
-			ingotCopper = new RedoxiationGenericItems("ingotCopper", "Cu");
+			ingotCopper = new RedoxiationItems("ingotCopper", "Cu");
 			event.getRegistry().register(ingotCopper);
-			OreDictionary.registerOre("ingotCopper", RedoxiationGenericItems.ingotCopper);
+			OreDictionary.registerOre("ingotCopper", RedoxiationItems.ingotCopper);
     	}
     	if(ingotTinEnabled){
-			ingotTin = new RedoxiationGenericItems("ingotTin", "Sn");
+			ingotTin = new RedoxiationItems("ingotTin", "Sn");
 			event.getRegistry().register(ingotTin);
-			OreDictionary.registerOre("ingotTin", RedoxiationGenericItems.ingotTin);
+			OreDictionary.registerOre("ingotTin", RedoxiationItems.ingotTin);
     	}
     	if(ingotLeadEnabled){
-			ingotLead = new RedoxiationGenericItems("ingotLead", "Pb");
+			ingotLead = new RedoxiationItems("ingotLead", "Pb");
 			event.getRegistry().register(ingotLead);
-			OreDictionary.registerOre("ingotLead", RedoxiationGenericItems.ingotLead);
+			OreDictionary.registerOre("ingotLead", RedoxiationItems.ingotLead);
 		}
     	if(ingotSilverEnabled){
-			ingotSilver = new RedoxiationGenericItems("ingotSilver", "Ag");
+			ingotSilver = new RedoxiationItems("ingotSilver", "Ag");
 			event.getRegistry().register(ingotSilver);
-			OreDictionary.registerOre("ingotSilver", RedoxiationGenericItems.ingotSilver);
+			OreDictionary.registerOre("ingotSilver", RedoxiationItems.ingotSilver);
     	}
     	if(ingotPlatinumEnabled){
-			ingotPlatinum = new RedoxiationGenericItems("ingotPlatinum", "Pt");	
+			ingotPlatinum = new RedoxiationItems("ingotPlatinum", "Pt");	
 			event.getRegistry().register(ingotPlatinum);
-			OreDictionary.registerOre("ingotPlatinum", RedoxiationGenericItems.ingotPlatinum);
+			OreDictionary.registerOre("ingotPlatinum", RedoxiationItems.ingotPlatinum);
     	}
     	if(ingotZincEnabled){
-			ingotZinc = new RedoxiationGenericItems("ingotZinc", "Zn");
+			ingotZinc = new RedoxiationItems("ingotZinc", "Zn");
 			event.getRegistry().register(ingotZinc);
-			OreDictionary.registerOre("ingotZinc", RedoxiationGenericItems.ingotZinc);
+			OreDictionary.registerOre("ingotZinc", RedoxiationItems.ingotZinc);
     	}
     	if(ingotNickelEnabled){
-			ingotNickel = new RedoxiationGenericItems("ingotNickel", "Ni");
+			ingotNickel = new RedoxiationItems("ingotNickel", "Ni");
 			event.getRegistry().register(ingotNickel);
-			OreDictionary.registerOre("ingotNickel", RedoxiationGenericItems.ingotNickel);
+			OreDictionary.registerOre("ingotNickel", RedoxiationItems.ingotNickel);
     	}
     	if(ingotChromiumEnabled){
-			ingotChromium = new RedoxiationGenericItems("ingotChromium", "Cr");
+			ingotChromium = new RedoxiationItems("ingotChromium", "Cr");
 			event.getRegistry().register(ingotChromium);
-			OreDictionary.registerOre("ingotChromium", RedoxiationGenericItems.ingotChromium);
+			OreDictionary.registerOre("ingotChromium", RedoxiationItems.ingotChromium);
     	}
     	if(ingotAluminumEnabled){
-			ingotAluminum = new RedoxiationGenericItems("ingotAluminum", "Al2O3");
+			ingotAluminum = new RedoxiationItems("ingotAluminum", "Al2O3");
 			event.getRegistry().register(ingotAluminum);
-			OreDictionary.registerOre("ingotAluminumOort", RedoxiationGenericItems.ingotAluminum);
+			OreDictionary.registerOre("ingotAluminumOort", RedoxiationItems.ingotAluminum);
     	}
     	if(ingotTitaniumEnabled){
-			ingotTitanium = new RedoxiationGenericItems("ingotTitanium", "TiO2");
+			ingotTitanium = new RedoxiationItems("ingotTitanium", "TiO2");
 			event.getRegistry().register(ingotTitanium);
-			OreDictionary.registerOre("ingotTitaniumOort", RedoxiationGenericItems.ingotTitanium);
+			OreDictionary.registerOre("ingotTitaniumOort", RedoxiationItems.ingotTitanium);
     	}
     	if(ingotTungstenEnabled){
-			ingotTungsten = new RedoxiationGenericItems("ingotTungsten", "WO3");
+			ingotTungsten = new RedoxiationItems("ingotTungsten", "WO3");
 			event.getRegistry().register(ingotTungsten);
-			OreDictionary.registerOre("ingotTungstenOort", RedoxiationGenericItems.ingotTungsten);
+			OreDictionary.registerOre("ingotTungstenOort", RedoxiationItems.ingotTungsten);
 		}
     	if(ingotCobaltEnabled){
-			ingotCobalt = new RedoxiationGenericItems("ingotCobalt","Co");
+			ingotCobalt = new RedoxiationItems("ingotCobalt","Co");
 			event.getRegistry().register(ingotCobalt);
-			OreDictionary.registerOre("ingotCobalt", RedoxiationGenericItems.ingotCobalt);
+			OreDictionary.registerOre("ingotCobalt", RedoxiationItems.ingotCobalt);
     	}
     	if(ingotSteelEnabled){
-			ingotSteel = new RedoxiationGenericItems("ingotSteel");
+			ingotSteel = new RedoxiationItems("ingotSteel");
 			event.getRegistry().register(ingotSteel);
-			OreDictionary.registerOre("ingotSteelOort", RedoxiationGenericItems.ingotSteel);
+			OreDictionary.registerOre("ingotSteelOort", RedoxiationItems.ingotSteel);
     	}
     	if(nuggetIronEnabled){
-    		nuggetIron = new RedoxiationGenericItems("nuggetIron", "Fe");
+    		nuggetIron = new RedoxiationItems("nuggetIron", "Fe");
 			event.getRegistry().register(nuggetIron);
-			OreDictionary.registerOre("nuggetIron", RedoxiationGenericItems.nuggetIron);
+			OreDictionary.registerOre("nuggetIron", RedoxiationItems.nuggetIron);
     	}
     	if(nuggetCopperEnabled){
-    		nuggetCopper = new RedoxiationGenericItems("nuggetCopper", "Cu");
+    		nuggetCopper = new RedoxiationItems("nuggetCopper", "Cu");
 			event.getRegistry().register(nuggetCopper);
-			OreDictionary.registerOre("nuggetCopper", RedoxiationGenericItems.nuggetCopper);
+			OreDictionary.registerOre("nuggetCopper", RedoxiationItems.nuggetCopper);
     	}
     	if(nuggetTinEnabled){
-			nuggetTin = new RedoxiationGenericItems("nuggetTin", "Sn");
+			nuggetTin = new RedoxiationItems("nuggetTin", "Sn");
 			event.getRegistry().register(nuggetTin);
-			OreDictionary.registerOre("nuggetTin", RedoxiationGenericItems.nuggetTin);
+			OreDictionary.registerOre("nuggetTin", RedoxiationItems.nuggetTin);
     	}
     	if(nuggetLeadEnabled){
-    		nuggetLead = new RedoxiationGenericItems("nuggetLead", "Pb");
+    		nuggetLead = new RedoxiationItems("nuggetLead", "Pb");
 			event.getRegistry().register(nuggetLead);
-			OreDictionary.registerOre("nuggetLead", RedoxiationGenericItems.nuggetLead);
+			OreDictionary.registerOre("nuggetLead", RedoxiationItems.nuggetLead);
     	}
     	if(nuggetSilverEnabled){
-    		nuggetSilver = new RedoxiationGenericItems("nuggetSilver", "Ag");
+    		nuggetSilver = new RedoxiationItems("nuggetSilver", "Ag");
 			event.getRegistry().register(nuggetSilver);
-			OreDictionary.registerOre("nuggetSilver", RedoxiationGenericItems.nuggetSilver);
+			OreDictionary.registerOre("nuggetSilver", RedoxiationItems.nuggetSilver);
     	}
     	if(nuggetPlatinumEnabled){
-    		nuggetPlatinum = new RedoxiationGenericItems("nuggetPlatinum", "Pt");
+    		nuggetPlatinum = new RedoxiationItems("nuggetPlatinum", "Pt");
 			event.getRegistry().register(nuggetPlatinum);
-			OreDictionary.registerOre("nuggetPlatinum", RedoxiationGenericItems.nuggetPlatinum);
+			OreDictionary.registerOre("nuggetPlatinum", RedoxiationItems.nuggetPlatinum);
     	}
     	if(nuggetZincEnabled){
-    		nuggetZinc = new RedoxiationGenericItems("nuggetZinc", "Zn");
+    		nuggetZinc = new RedoxiationItems("nuggetZinc", "Zn");
 			event.getRegistry().register(nuggetZinc);
-			OreDictionary.registerOre("nuggetZinc", RedoxiationGenericItems.nuggetZinc);
+			OreDictionary.registerOre("nuggetZinc", RedoxiationItems.nuggetZinc);
     	}
     	if(nuggetNickelEnabled){
-    		nuggetNickel = new RedoxiationGenericItems("nuggetNickel", "Ni");
+    		nuggetNickel = new RedoxiationItems("nuggetNickel", "Ni");
 			event.getRegistry().register(nuggetNickel);
-			OreDictionary.registerOre("nuggetNickel", RedoxiationGenericItems.nuggetNickel);
+			OreDictionary.registerOre("nuggetNickel", RedoxiationItems.nuggetNickel);
     	}
     	if(nuggetChromiumEnabled){
-    		nuggetChromium = new RedoxiationGenericItems("nuggetChromium", "Cr");
+    		nuggetChromium = new RedoxiationItems("nuggetChromium", "Cr");
 			event.getRegistry().register(nuggetChromium);
-			OreDictionary.registerOre("nuggetChromium", RedoxiationGenericItems.nuggetChromium);
+			OreDictionary.registerOre("nuggetChromium", RedoxiationItems.nuggetChromium);
     	}
     	if(nuggetAluminumEnabled){
-    		nuggetAluminum = new RedoxiationGenericItems("nuggetAluminum", "Al2O3");
+    		nuggetAluminum = new RedoxiationItems("nuggetAluminum", "Al2O3");
 			event.getRegistry().register(nuggetAluminum);
-			OreDictionary.registerOre("nuggetAluminum", RedoxiationGenericItems.nuggetAluminum);
+			OreDictionary.registerOre("nuggetAluminum", RedoxiationItems.nuggetAluminum);
     	}
     	if(nuggetTitaniumEnabled){
-    		nuggetTitanium = new RedoxiationGenericItems("nuggetTitanium", "TiO2");
+    		nuggetTitanium = new RedoxiationItems("nuggetTitanium", "TiO2");
 			event.getRegistry().register(nuggetTitanium);
-			OreDictionary.registerOre("nuggetTitanium", RedoxiationGenericItems.nuggetTitanium);
+			OreDictionary.registerOre("nuggetTitanium", RedoxiationItems.nuggetTitanium);
 		}
     	if(nuggetTungstenEnabled){
-    		nuggetTungsten = new RedoxiationGenericItems("nuggetTungsten", "WO3");
+    		nuggetTungsten = new RedoxiationItems("nuggetTungsten", "WO3");
 			event.getRegistry().register(nuggetTungsten);
-			OreDictionary.registerOre("nuggetTungsten", RedoxiationGenericItems.nuggetTungsten);
+			OreDictionary.registerOre("nuggetTungsten", RedoxiationItems.nuggetTungsten);
     	}
     	if(nuggetSteelEnabled){
-    		nuggetSteel = new RedoxiationGenericItems("nuggetSteel");
+    		nuggetSteel = new RedoxiationItems("nuggetSteel");
 			event.getRegistry().register(nuggetSteel);
-			OreDictionary.registerOre("nuggetSteel", RedoxiationGenericItems.nuggetSteel);
+			OreDictionary.registerOre("nuggetSteel", RedoxiationItems.nuggetSteel);
     	}
     	if(sulfurChunkEnabled){
-			sulfurChunk = new RedoxiationGenericItems("sulfurChunk");
+			sulfurChunk = new RedoxiationItems("sulfurChunk");
 			event.getRegistry().register(sulfurChunk);
-			OreDictionary.registerOre("lumpSulfur", RedoxiationGenericItems.sulfurChunk);
+			OreDictionary.registerOre("lumpSulfur", RedoxiationItems.sulfurChunk);
     	}
     	if(dustSulfurEnabled){
-    		dustSulfur = new RedoxiationGenericItems("dustSulfur");
+    		dustSulfur = new RedoxiationItems("dustSulfur");
 			event.getRegistry().register(dustSulfur);
-			OreDictionary.registerOre("dustOreSulfurOort", RedoxiationGenericItems.dustSulfur);
+			OreDictionary.registerOre("dustOreSulfurOort", RedoxiationItems.dustSulfur);
 		}
     	if(dolomitePowderEnabled){
-    		dolomitePowder = new RedoxiationGenericItems("dolomitePowder");
+    		dolomitePowder = new RedoxiationItems("dolomitePowder");
     		event.getRegistry().register(dolomitePowder);
     	}
     	if(itemCryoliteEnabled){
-			itemCryolite = new RedoxiationGenericItems("itemCryolite");
+			itemCryolite = new RedoxiationItems("itemCryolite");
 			event.getRegistry().register(itemCryolite);
 			OreDictionary.registerOre("materialCryolite", itemCryolite);
     	}
     	if(crashedNetherrackEnabled){
-			crashedNetherrack = new RedoxiationGenericItems("crashedNetherrack");
+			crashedNetherrack = new RedoxiationItems("crashedNetherrack");
     	}
     	if(crashedObsidianEnabled){
-			crashedObsidian = new RedoxiationGenericItems("crashedObsidian");
+			crashedObsidian = new RedoxiationItems("crashedObsidian");
     	}
         if(itemHotAirBucketEnabled) {
             itemHotAirBucket = new RedoxiationBucket(RedoxiationBlocks.hotAirBlock, "HotAirBucket");

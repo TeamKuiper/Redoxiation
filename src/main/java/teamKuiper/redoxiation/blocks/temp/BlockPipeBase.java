@@ -1,4 +1,4 @@
-package teamKuiper.redoxiation.blocks;
+package teamKuiper.redoxiation.blocks.temp;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;

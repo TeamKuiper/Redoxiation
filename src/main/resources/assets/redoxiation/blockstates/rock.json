@@ -1,0 +1,46 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "cube_all",
+		"transform": "forge:default-block"
+	},
+	"variants": {
+		"type": {
+			"bauxite": {
+				"textures": {
+					"all": "redoxiation:blocks/rocks/bauxite"
+				}
+			},
+			"cryolite": {
+				"textures": {
+					"all": "redoxiation:blocks/rocks/cryolite"
+				}
+			},
+			"dolomite": {
+				"textures": {
+					"all": "redoxiation:blocks/rocks/dolomite"
+				}
+			},
+			"limestone": {
+				"textures": {
+					"all": "redoxiation:blocks/rocks/limestone"
+				}
+			},
+			"rutile": {
+				"textures": {
+					"all": "redoxiation:blocks/rocks/rutile"
+				}
+			},
+			"saltrock": {
+				"textures": {
+					"all": "redoxiation:blocks/rocks/saltrock"
+				}
+			},
+			"sceelite": {
+				"textures": {
+					"all": "redoxiation:blocks/rocks/sceelite"
+				}
+			}
+		}
+	}
+}

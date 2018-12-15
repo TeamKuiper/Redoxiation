@@ -1,27 +1,27 @@
 package teamKuiper.redoxiation.blocks.cog;
 
-import net.minecraft.util.IStringSerializable;
+import teamKuiper.redoxiation.blocks.IVariantType;
 
-public enum CogType implements IStringSerializable {
+public enum CogType implements IVariantType {
 	WOODEN(0, "wooden", 0, 0),
 	STONE(1, "stone", 0, 0),
 	IRON(2, "iron", 0, 0),
 	NONE(3, "none", 0, 0);
 	
-	int value;
+	int metadata;
 	String name;
 	float maxAngularVelocity;
 	float frictionTorque;
 	
-	CogType(int value, String name, float maxAngularVelocity, float frictionTorque) {
-		this.value = value;
+	CogType(int metadata, String name, float maxAngularVelocity, float frictionTorque) {
+		this.metadata = metadata;
 		this.name= name;
 		this.maxAngularVelocity = maxAngularVelocity;
 		this.frictionTorque = frictionTorque;
 	}
 	
-	public int getValue() {
-		return value;
+	public int getMetadata() {
+		return metadata;
 	}
 
 	@Override

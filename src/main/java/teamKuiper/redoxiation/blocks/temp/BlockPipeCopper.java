@@ -1,4 +1,4 @@
-package teamKuiper.redoxiation.blocks;
+package teamKuiper.redoxiation.blocks.temp;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;

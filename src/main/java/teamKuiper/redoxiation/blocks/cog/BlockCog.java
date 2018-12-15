@@ -49,23 +49,23 @@ public class BlockCog extends BlockBase implements IBlockBoundCustomizable {
     
     public BlockCog() {
         super(Material.ROCK);
+        setUnlocalizedName("cog");
         setRegistryName(Redoxiation.MODID, "cog");
         setCreativeTab(Redoxiation.tabRedoxiation);
         setHarvestLevel("pickaxe", 2);
         setHardness(2.0F);
         setResistance(10.0F);
-
-		variants = new ItemStack[CogType.values().length];
-		for (int i = 0; i < CogType.values().length-1; i++) {
-			if(CogType.values()[i] == CogType.NONE) continue;
-			variants[i] = new ItemStack(this, 1, i);
-		}
     }
     
     @Override
     public Item getItem() {
     	return new ItemBlockCog();
     }
+    
+	@Override
+	public int damageDropped(IBlockState state) {
+		return state.getValue(DOWN).getMetadata();
+	}
     
     @Override
     public AxisAlignedBB[] getDrawAABBs(World world, EntityPlayer player, BlockPos pos, IBlockState state) {
@@ -256,7 +256,7 @@ public class BlockCog extends BlockBase implements IBlockBoundCustomizable {
 		
 		for(int i = 0; i < SIDE_PROPERTIES.length; i++) {
 			metadata <<= 2;
-			metadata += state.getValue((PropertyEnum<CogType>) SIDE_PROPERTIES[i]).getValue();
+			metadata += state.getValue((PropertyEnum<CogType>) SIDE_PROPERTIES[i]).getMetadata();
 		}
 		
 		return metadata;
@@ -268,7 +268,7 @@ public class BlockCog extends BlockBase implements IBlockBoundCustomizable {
 	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
 		int[] valueCount = new int[CogType.values().length];
 		for(int i = 0; i < SIDE_PROPERTIES.length; i++) {
-			int value = state.getValue((PropertyEnum<CogType>) SIDE_PROPERTIES[i]).getValue();
+			int value = state.getValue((PropertyEnum<CogType>) SIDE_PROPERTIES[i]).getMetadata();
 			valueCount[value]++;
 		}
 		for(int i = 0; i < valueCount.length; i++) {
@@ -287,7 +287,7 @@ public class BlockCog extends BlockBase implements IBlockBoundCustomizable {
 		CogType type = state.getValue((PropertyEnum<CogType>) SIDE_PROPERTIES[facing.getIndex()]);
 		if(type == CogType.NONE) return null;
 		ItemStack stack = new ItemStack(Item.getItemFromBlock(this));
-		stack.setItemDamage(type.getValue());
+		stack.setItemDamage(type.getMetadata());
 		return stack;
 	}
 	
@@ -313,7 +313,7 @@ public class BlockCog extends BlockBase implements IBlockBoundCustomizable {
     	CogType type = state.getValue((PropertyEnum<CogType>) SIDE_PROPERTIES[side.getIndex()]);
     	if(type == CogType.NONE)
     		return null;
-    	return new ItemStack(this, 1, type.getValue());
+    	return new ItemStack(this, 1, type.getMetadata());
 	}
 	
 	public EnumFacing getLookingSide(EntityPlayer player, BlockPos pos, IBlockState state) {
@@ -362,4 +362,17 @@ public class BlockCog extends BlockBase implements IBlockBoundCustomizable {
 		}
 		return sides.toArray(new EnumFacing[0]);
 	}
+
+	public IBlockState getStateForModel(CogType type) {
+		return this.createBlockState().getBaseState().withProperty(DOWN, type);
+	}
+    
+    @Override
+    public void init() {
+    	woodenCog = addVariant(CogType.WOODEN.getMetadata());
+    	stoneCog = addVariant(CogType.STONE.getMetadata());
+    	ironCog = addVariant(CogType.STONE.getMetadata());
+    }
+    
+    public static ItemStack woodenCog, stoneCog, ironCog;
 }

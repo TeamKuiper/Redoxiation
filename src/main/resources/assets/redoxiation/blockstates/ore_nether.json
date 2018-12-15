@@ -1,0 +1,46 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "cube_all",
+		"transform": "forge:default-block"
+	},
+	"variants": {
+		"type": {
+			"ferro_nickel": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_ferro_nickel"
+				}
+			},
+			"pseudo_bronze": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_pseudo_bronze"
+				}
+			},
+			"pseudo_brass": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_pseudo_brass"
+				}
+			},
+			"argent_aurum": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/argent_aurum"
+				}
+			},
+			"pseudo_solder": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/pseudo_solder"
+				}
+			},
+			"pseudo_stellite": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/pseudo_stellite"
+				}
+			},
+			"tntium": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/tntium"
+				}
+			}
+		}
+	}
+}

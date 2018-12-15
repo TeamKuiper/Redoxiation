@@ -8,11 +8,10 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.blocks.BlockBase;
 import teamKuiper.redoxiation.blocks.IVariantType;
-import teamKuiper.redoxiation.items.RedoxiationGenericItems;
+import teamKuiper.redoxiation.items.ItemCommon;
 
 public class BlockRock extends BlockBase {
 	
@@ -22,6 +21,7 @@ public class BlockRock extends BlockBase {
 		super(Material.ROCK);
 		
 		setUnlocalizedName("rock");
+		setRegistryName(Redoxiation.MODID, "ore_obsidian");
 		setCreativeTab(Redoxiation.tabRedoxiation);
 		setHardness(2.0F);
 		setResistance(10.0F);
@@ -30,23 +30,16 @@ public class BlockRock extends BlockBase {
 			RockType type = RockType.values()[i];
 			setHarvestLevel("pickaxe", type.getHarvestLevel(), getStateFromMeta(type.getMetadata()));
 		}
-		
-		variants = new ItemStack[RockType.values().length];
-		for (int i = 0; i < RockType.values().length; i++) {
-			variants[i] = new ItemStack(this, 1, i);
-		}
-	}
-
-	@Override
-	public void onRegister() {
-		for(int i = 0; i < variants.length; i++) {
-			OreDictionary.registerOre(RockType.values()[i].getName(), variants[i]);
-		}
 	}
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return state.getValue(TYPE).getDropItem();
+		return state.getValue(TYPE).getDropItem().getItem();
+	}
+
+	@Override
+	public int damageDropped(IBlockState state) {
+		return state.getValue(TYPE).getDropItem().getMetadata();
 	}
 
 	@Override
@@ -78,31 +71,37 @@ public class BlockRock extends BlockBase {
 	public int getMetaFromState(IBlockState state) {
 		return state.getValue(TYPE).getMetadata();
 	}
-
+	
 	@Override
-	public int damageDropped(IBlockState state) {
-		return state.getValue(TYPE).getMetadata();
+	public void init() {
+		bauxite = addVariant(RockType.BAUXITE.getMetadata(), "blockBauxite");
+		cryolite = addVariant(RockType.CRYOLITE.getMetadata(), "blockCryolite");
+		dolomite = addVariant(RockType.DOLOMITE.getMetadata(), "blockDolomite");
+		limestone = addVariant(RockType.LIMESTONE.getMetadata(), "blockLimestone");
+		rutile = addVariant(RockType.RUTILE.getMetadata(), "blockRutile");
+		saltRock = addVariant(RockType.SALTROCK.getMetadata(), "blockSaltrock");
+		sceelite = addVariant(RockType.SCHEELITE.getMetadata(), "blockSceelite");
 	}
 	
+	public static ItemStack bauxite, cryolite, dolomite, limestone, rutile, saltRock, sceelite;
+	
 	public enum RockType implements IVariantType {
-		
-		BAUXITE(0, "bauxite", 2, RedoxiationGenericItems.rawBauxite, 2, 2),
-		CRYOLITE(1, "cryolite", 1, RedoxiationGenericItems.itemCryolite, 2, 2),
-		DOLOMITE(2, "dolomite", 1, RedoxiationGenericItems.dolomiteShard, 1, 0),
-		LIMESTONE(3, "limestone", 1, RedoxiationGenericItems.calcite, 3, 2),
-		ORE_SULFUR(4, "oreSulfur", 2, RedoxiationGenericItems.sulfurChunk, 3, 2),
-		RUTILE(5, "rutile", 2, RedoxiationGenericItems.rawRutile, 2, 2),
-		SALTROCK(6, "saltrock", 1, RedoxiationGenericItems.saltChunk, 2, 2),
-		SCHEELITE(7, "sceelite", 2, RedoxiationGenericItems.rawScheelite, 2, 2);
+		BAUXITE(0, "bauxite", 2, ItemCommon.rawBauxite, 2, 2),
+		CRYOLITE(1, "cryolite", 1, ItemCommon.itemCryolite, 2, 2),
+		DOLOMITE(2, "dolomite", 1, ItemCommon.dolomiteShard, 1, 0),
+		LIMESTONE(3, "limestone", 1, ItemCommon.calcite, 3, 2),
+		RUTILE(4, "rutile", 2, ItemCommon.rawRutile, 2, 2),
+		SALTROCK(5, "saltrock", 1, ItemCommon.saltChunk, 2, 2),
+		SCHEELITE(6, "sceelite", 2, ItemCommon.rawScheelite, 2, 2);
 
 		private final int metadata;
 		private final String name;
 		private final int harvestLevel;
-		private final Item dropItem;
+		private final ItemStack dropItem;
 		private final int quantityBase;
 		private final int quantityRandomMax;
 		
-		RockType(int metadata, String name, int harvestLevel, Item dropItem, int quantityBase, int quantityRandomMax) {
+		RockType(int metadata, String name, int harvestLevel, ItemStack dropItem, int quantityBase, int quantityRandomMax) {
 			this.metadata = metadata;
 			this.name = name;
 			this.harvestLevel = harvestLevel;
@@ -123,7 +122,7 @@ public class BlockRock extends BlockBase {
 			return harvestLevel;
 		}
 
-		public Item getDropItem() {
+		public ItemStack getDropItem() {
 			return dropItem;
 		}
 

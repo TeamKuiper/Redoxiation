@@ -1,4 +1,4 @@
-package teamKuiper.redoxiation.blocks;
+package teamKuiper.redoxiation.blocks.temp;
 
 import java.util.Random;
 
@@ -25,7 +25,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.blocks.tileentity.TileTankLead;
-import teamKuiper.redoxiation.utils.Utils;
+import teamKuiper.redoxiation.utils.temp.Utils;
 
 public class TankLead extends Block implements ITileEntityProvider {
 

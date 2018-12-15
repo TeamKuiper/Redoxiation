@@ -14,11 +14,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreDictionary;
 import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.blocks.BlockBase;
 import teamKuiper.redoxiation.blocks.IVariantType;
-import teamKuiper.redoxiation.items.RedoxiationGenericItems;
+import teamKuiper.redoxiation.items.ItemCommon;
 
 public class BlockOverworldOre extends BlockBase {
 	
@@ -26,9 +25,8 @@ public class BlockOverworldOre extends BlockBase {
 	
 	public BlockOverworldOre() {
 		super(Material.ROCK);
-		
-		setRegistryName("oreOverworld");
 		setUnlocalizedName("ore");
+		setRegistryName(Redoxiation.MODID, "ore_overworld");
 		setCreativeTab(Redoxiation.tabRedoxiation);
 		setHardness(2.5F);
 		setResistance(5.0F);
@@ -37,20 +35,8 @@ public class BlockOverworldOre extends BlockBase {
 			OreType type = OreType.values()[i];
 			setHarvestLevel("pickaxe", type.getHarvestLevel(), getStateFromMeta(type.getMetadata()));
 		}
-		
-		variants = new ItemStack[OreType.values().length];
-		for (int i = 0; i < OreType.values().length; i++) {
-			variants[i] = new ItemStack(this, 1, i);
-		}
 	}
 	
-	@Override
-	public void onRegister() {
-		for(int i = 0; i < variants.length; i++) {
-			OreDictionary.registerOre(OreType.values()[i].getName(), variants[i]);
-		}
-	}
-
 	//For sulfur ore -start-
 	@Override
     public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
@@ -64,8 +50,13 @@ public class BlockOverworldOre extends BlockBase {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return ((state.getValue(TYPE) == OreType.SULFUR) ? RedoxiationGenericItems.sulfurChunk : Item.getItemFromBlock(this));
+        return ((state.getValue(TYPE) == OreType.SULFUR) ? ItemCommon.sulfurChunk.getItem() : Item.getItemFromBlock(this));
     }
+
+	@Override
+	public int damageDropped(IBlockState state) {
+		return ((state.getValue(TYPE) == OreType.SULFUR) ? ItemCommon.sulfurChunk.getItemDamage() : state.getValue(TYPE).getMetadata());
+	}
     
 	@Override
 	public int quantityDropped(IBlockState state, int fortune, Random random) {
@@ -98,23 +89,34 @@ public class BlockOverworldOre extends BlockBase {
 	public int getMetaFromState(IBlockState state) {
 		return state.getValue(TYPE).getMetadata();
 	}
-
+	
 	@Override
-	public int damageDropped(IBlockState state) {
-		return state.getValue(TYPE).getMetadata();
+	public void init() {
+		oreCopper = addVariant(OreType.COPPER.getMetadata(), "oreCopper");
+		oreTin = addVariant(OreType.TIN.getMetadata(), "oreTin");
+		oreLead = addVariant(OreType.LEAD.getMetadata(), "oreLead");
+		oreSilver = addVariant(OreType.SILVER.getMetadata(), "oreSilver");
+		oreNickel = addVariant(OreType.NICKEL.getMetadata(), "oreNickel");
+		orePlatinum = addVariant(OreType.PLATINUM.getMetadata(), "orePlatinum");
+		oreZinc = addVariant(OreType.ZINC.getMetadata(), "oreZinc");
+		oreCobalt = addVariant(OreType.COBALT.getMetadata(), "oreCobalt");
+		oreChromium = addVariant(OreType.CHROMIUM.getMetadata(), "oreChromium");
+		orePitchblend = addVariant(OreType.PITCHBLEND.getMetadata(), "orePitchblend");
+		oreSulfur = addVariant(OreType.SULFUR.getMetadata(), "oreSulfur");
 	}
 	
+	public static ItemStack oreCopper, oreTin, oreLead, oreSilver, oreNickel, orePlatinum, oreZinc, oreCobalt, oreChromium, orePitchblend, oreSulfur;
+	
 	public enum OreType implements IVariantType {
-		
-		COPPER(0, "oreCopper", 1),
-		TIN(1, "oreTin", 1),
-		LEAD(2, "oreLead", 1),
-		SILVER(3, "oreSilver", 2),
-		NICKEL(4, "oreNickel", 1),
-		PLATINUM(5, "orePlatinum", 2),
-		ZINC(6, "oreZinc", 1),
-		COBALT(7, "oreCobalt", 1),
-		CHROMIUM(8, "oreChromium", 1),
+		COPPER(0, "copper", 1),
+		TIN(1, "tin", 1),
+		LEAD(2, "lead", 1),
+		SILVER(3, "silver", 2),
+		NICKEL(4, "nickel", 1),
+		PLATINUM(5, "platinum", 2),
+		ZINC(6, "zinc", 1),
+		COBALT(7, "cobalt", 1),
+		CHROMIUM(8, "chromium", 1),
 		PITCHBLEND(9, "pitchblend", 2),
 		SULFUR(10, "sulfur", 2);
 

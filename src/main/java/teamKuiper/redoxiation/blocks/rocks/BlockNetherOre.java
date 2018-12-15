@@ -12,7 +12,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreDictionary;
 import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.blocks.BlockBase;
 import teamKuiper.redoxiation.blocks.IVariantType;
@@ -23,7 +22,9 @@ public class BlockNetherOre extends BlockBase {
 	
 	public BlockNetherOre() {
 		super(Material.ROCK);
+		
 		setUnlocalizedName("ore");
+        setRegistryName(Redoxiation.MODID, "ore_nether");
 		setCreativeTab(Redoxiation.tabRedoxiation);
 		setHardness(3.0F);
 		setResistance(15.0F);
@@ -31,18 +32,6 @@ public class BlockNetherOre extends BlockBase {
 		for(int i = 0; i < OreType.values().length; i++) {
 			OreType type = OreType.values()[i];
 			setHarvestLevel("pickaxe", type.getHarvestLevel(), getStateFromMeta(type.getMetadata()));
-		}
-
-		variants = new ItemStack[OreType.values().length];
-		for (int i = 0; i < OreType.values().length; i++) {
-			variants[i] = new ItemStack(this, 1, i);
-		}
-	}
-	
-	@Override
-	public void onRegister() {
-		for(int i = 0; i < variants.length; i++) {
-			OreDictionary.registerOre(OreType.values()[i].getName(), variants[i]);
 		}
 	}
 	
@@ -63,8 +52,13 @@ public class BlockNetherOre extends BlockBase {
 	
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return ((state.getValue(TYPE) == OreType.TNTIUM) ? Items.GUNPOWDER : Item.getItemFromBlock(this));
+        return (state.getValue(TYPE) == OreType.TNTIUM) ? Items.GUNPOWDER : Item.getItemFromBlock(this);
     }
+
+	@Override
+	public int damageDropped(IBlockState state) {
+		return (state.getValue(TYPE) == OreType.TNTIUM) ? 0 : state.getValue(TYPE).getMetadata();
+	}
     
 	@Override
 	public int quantityDropped(IBlockState state, int fortune, Random random) {
@@ -89,20 +83,26 @@ public class BlockNetherOre extends BlockBase {
 	public int getMetaFromState(IBlockState state) {
 		return state.getValue(TYPE).getMetadata();
 	}
-
+	
 	@Override
-	public int damageDropped(IBlockState state) {
-		return state.getValue(TYPE).getMetadata();
+	public void init() {
+		ferroNickel = addVariant(OreType.FERRO_NICKEL.metadata, "blockFerroNickel");
+		pseudoBronze = addVariant(OreType.PSEUDO_BRONZE.metadata, "blockPseudoBronze");
+		pseudoBrass = addVariant(OreType.PSEUDO_BRASS.metadata, "blockFerroBrass");
+		argentAurum = addVariant(OreType.ARGENT_AURUM.metadata, "blockArgentAurum");
+		pseudoSolder = addVariant(OreType.PSEUDO_SOLDER.metadata, "blockPseudoSolder");
+		tntium = addVariant(OreType.TNTIUM.metadata, "blockTNTium");
 	}
 	
+	public static ItemStack ferroNickel, pseudoBronze, pseudoBrass, argentAurum, pseudoSolder, pseudoStellite, tntium;
+	
 	public enum OreType implements IVariantType {
-		
-		FERRO_NICKEL(0, "oreFerroNickel", 2),
-		PSEUDO_BRONZE(1, "orePseudoBronze", 2),
-		PSEUDO_BRASS(2, "orePseudoBrassOre", 2),
-		ARGENT_AURUM(3, "argentAurum", 2),
-		PSEUDO_SOLDER(4, "pseudoSolder", 2),
-		PSEUDO_STELLITE(5, "pseudoStellite", 2),
+		FERRO_NICKEL(0, "ferro_nickel", 2),
+		PSEUDO_BRONZE(1, "pseudo_bronze", 2),
+		PSEUDO_BRASS(2, "pseudo_brass", 2),
+		ARGENT_AURUM(3, "argent_aurum", 2),
+		PSEUDO_SOLDER(4, "pseudo_solder", 2),
+		PSEUDO_STELLITE(5, "pseudo_stellite", 2),
 		TNTIUM(6, "tntium", 2);
 		
 		private final int metadata;

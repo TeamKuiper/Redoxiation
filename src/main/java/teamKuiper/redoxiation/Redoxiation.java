@@ -1,12 +1,12 @@
 package teamKuiper.redoxiation;
 
-import codechicken.lib.packet.PacketCustom;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.Mod.Metadata;
 import net.minecraftforge.fml.common.ModMetadata;
@@ -19,18 +19,15 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import teamKuiper.redoxiation.advancement.AdvancementEvents;
-import teamKuiper.redoxiation.advancement.RedoxiationAdvancement;
-import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
 import teamKuiper.redoxiation.blocks.gui.GuiHandler;
-import teamKuiper.redoxiation.handlers.PacketHandler;
+import teamKuiper.redoxiation.blocks.rocks.BlockOverworldOre;
 import teamKuiper.redoxiation.handlers.RedoxiationConfigHandler;
 import teamKuiper.redoxiation.handlers.RedoxiationGenHandler;
-import teamKuiper.redoxiation.items.RedoxiationGenericItems;
+import teamKuiper.redoxiation.handlers.RedoxiationRegistryHandler;
+import teamKuiper.redoxiation.items.ItemCommon;
 import teamKuiper.redoxiation.multipart.MultiPartEventHandler;
 import teamKuiper.redoxiation.multipart.RegisterBlockPart;
 import teamKuiper.redoxiation.proxy.CommonProxy;
-import teamKuiper.redoxiation.recipes.RedoxiationRecipes;
 
 @Mod(modid = Redoxiation.MODID, version = Redoxiation.VERSION, name = Redoxiation.NAME, dependencies="after:ForgeMultipart" )
 public class Redoxiation {
@@ -50,15 +47,15 @@ public class Redoxiation {
 
 	public static final CreativeTabs tabRedoxiation = new CreativeTabs("Redoxiation") {
 		@SideOnly(Side.CLIENT)
-		public Item getTabIconItem() {
-			return Item.getItemFromBlock(RedoxiationBlocks.oreCopper);
+		public ItemStack getTabIconItem() {
+			return BlockOverworldOre.oreCopper;
 		}
 	};
 
 	public static final CreativeTabs tabRedoxiationitems = new CreativeTabs("RedoxiationItems") {
 		@SideOnly(Side.CLIENT)
-		public Item getTabIconItem() {
-			return RedoxiationGenericItems.calcite;
+		public ItemStack getTabIconItem() {
+			return ItemCommon.calcite;
 		}
 	};
 
@@ -73,22 +70,14 @@ public class Redoxiation {
 	public void preinit(FMLPreInitializationEvent event) {
 		logger = event.getModLog();
 		logger.info("Hello World!");
-        RedoxiationRecipes.RecipesMember();
 		
 		// Simple Config
 		config = new Configuration(event.getSuggestedConfigurationFile());
 		RedoxiationConfigHandler.initConfig();
 		
-		// Config end
-		RedoxiationBlocks.registerBlocks();
-		RedoxiationGenericItems.registerItems();
-		proxy.registerTileEntitySpecialRenderer();
+		MinecraftForge.EVENT_BUS.register(new RedoxiationRegistryHandler());
 		RedoxiationRecipeManager.recipeFurnace();
 		RedoxiationRecipeManager.recipeCrafting();
-		
-		if (RedoxiationAdvancement.isachivenable) {
-			RedoxiationAdvancement.addDefaultAchievements();
-		}
 		
 		GameRegistry.registerWorldGenerator(handler, 0);
 		NetworkRegistry.INSTANCE.registerGuiHandler(Redoxiation.instance, GuiHandlerRegistry.getInstance());
@@ -98,18 +87,11 @@ public class Redoxiation {
             new RegisterBlockPart().init();
         }
         MinecraftForge.EVENT_BUS.register(new MultiPartEventHandler());
-        MinecraftForge.EVENT_BUS.register(new teamKuiper.redoxiation.EventHandler());
-
-        PacketCustom.assignHandler(this, new PacketHandler());    }
+	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
-		if (RedoxiationAdvancement.isachivenable) {
-			RedoxiationAdvancement.registerAchievementPane();
-			MinecraftForge.EVENT_BUS.register(new AdvancementEvents());
-			logger.info("ACHIVLOADED");
-		}
 	}
 
 	@EventHandler

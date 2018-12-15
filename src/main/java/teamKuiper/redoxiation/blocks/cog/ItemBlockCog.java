@@ -24,7 +24,7 @@ public class ItemBlockCog extends ItemBlock {
 			BlockPos newPos = pos.add(facing.getFrontOffsetX(), facing.getFrontOffsetY(), facing.getFrontOffsetZ());
 			IBlockState state = worldIn.getBlockState(newPos);
 			if(state.getBlock() == RedoxiationBlocks.cog) {
-				boolean succeed = RedoxiationBlocks.cog.placeSide(state, facing.getOpposite(), CogType.values()[stack.getMetadata()]);
+				boolean succeed = ((BlockCog) RedoxiationBlocks.cog).placeSide(state, facing.getOpposite(), CogType.values()[stack.getMetadata()]);
 				if(succeed) {
 					return EnumActionResult.SUCCESS;
 				}

@@ -1,0 +1,76 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "cube_all",
+		"transform": "forge:default-block"
+	},
+	"variants": {
+		"type": {
+			"iron": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_obsidian_iron"
+				}
+			},
+			"gold": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_obsidian_gold"
+				}
+			},
+			"copper": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_obsidian_copper"
+				}
+			},
+			"tin": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_obsidian_tin"
+				}
+			},
+			"lead": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_obsidian_lead"
+				}
+			},
+			"silver": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_obsidian_silver"
+				}
+			},
+			"nickel": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_obsidian_nickel"
+				}
+			},
+			"platinum": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_obsidian_platinum"
+				}
+			},
+			"zinc": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_obsidian_zinc"
+				}
+			},
+			"cobalt": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_obsidian_cobalt"
+				}
+			},
+			"chromium": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_obsidian_chromium"
+				}
+			},
+			"uranium": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_obsidian_uranium"
+				}
+			},
+			"plutonium": {
+				"textures": {
+					"all": "redoxiation:blocks/ores/ore_obsidian_plutonium"
+				}
+			}
+		}
+	}
+}

@@ -1,4 +1,4 @@
-package teamKuiper.redoxiation.blocks;
+package teamKuiper.redoxiation.blocks.temp;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -7,24 +7,24 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.world.World;
 import teamKuiper.redoxiation.Redoxiation;
-import teamKuiper.redoxiation.blocks.tileentity.TileStoneCog;
+import teamKuiper.redoxiation.blocks.tileentity.TileIronCog;
 
-public class BlockStoneCog extends BlockContainer {
+public class BlockIronCog extends BlockContainer {
 
-	public BlockStoneCog() {
-		super(Material.ROCK);
+	public BlockIronCog() {
+		super(Material.IRON);
 		setCreativeTab(Redoxiation.tabRedoxiation);
-		setRegistryName(Redoxiation.MODID, "stoneCog");
+		setRegistryName(Redoxiation.MODID, "ironCog");
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int i) {
-		return new TileStoneCog();
+		return new TileIronCog();
 	}
 
 	@Override
 	public String getUnlocalizedName() {
-		return "tile." + Redoxiation.MODID + ".stoneCog";
+		return "tile." + Redoxiation.MODID + ".ironCog";
 	}
 
 	@Override
@@ -41,4 +41,5 @@ public class BlockStoneCog extends BlockContainer {
 	public boolean isFullCube(IBlockState state) {
 		return false;
 	}
+
 }

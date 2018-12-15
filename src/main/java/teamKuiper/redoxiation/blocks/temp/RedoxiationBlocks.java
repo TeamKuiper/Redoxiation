@@ -1,4 +1,4 @@
-package teamKuiper.redoxiation.blocks;
+package teamKuiper.redoxiation.blocks.temp;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -37,7 +37,7 @@ import teamKuiper.redoxiation.blocks.tileentity.TileTankLead;
 import teamKuiper.redoxiation.blocks.tileentity.TilePipeCopper;
 import teamKuiper.redoxiation.blocks.tileentity.TileWire;
 
-public class RedoxiationBlocks2 {
+public class RedoxiationBlocks {
 	
     public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.create("facing", EnumFacing.class);
 

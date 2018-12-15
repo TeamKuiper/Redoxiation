@@ -1,45 +1,23 @@
 package teamKuiper.redoxiation.blocks;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fluids.BlockFluidClassic;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.OreDictionary;
 import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.blocks.cog.BlockCog;
 import teamKuiper.redoxiation.blocks.cog.TileCog;
-import teamKuiper.redoxiation.blocks.rocks.Bauxite;
 import teamKuiper.redoxiation.blocks.rocks.BlockNetherOre;
 import teamKuiper.redoxiation.blocks.rocks.BlockObsidianOre;
-import teamKuiper.redoxiation.blocks.rocks.Cryolite;
-import teamKuiper.redoxiation.blocks.rocks.Dolomite;
-import teamKuiper.redoxiation.blocks.rocks.Limestone;
-import teamKuiper.redoxiation.blocks.rocks.OreSulfur;
 import teamKuiper.redoxiation.blocks.rocks.BlockOverworldOre;
 import teamKuiper.redoxiation.blocks.rocks.BlockRock;
-import teamKuiper.redoxiation.blocks.rocks.Rutile;
-import teamKuiper.redoxiation.blocks.rocks.SaltRock;
-import teamKuiper.redoxiation.blocks.rocks.Scheelite;
-import teamKuiper.redoxiation.blocks.rocks.TNTium;
-import teamKuiper.redoxiation.blocks.tileentity.TileBlastFurnaceBlock;
-import teamKuiper.redoxiation.blocks.tileentity.TileIronCog;
-import teamKuiper.redoxiation.blocks.tileentity.TileStoneCog;
-import teamKuiper.redoxiation.blocks.tileentity.TileWoodenCog;
-import teamKuiper.redoxiation.utils.ICallableWhenRegister;
-import teamKuiper.redoxiation.blocks.tileentity.TileTankLead;
-import teamKuiper.redoxiation.blocks.tileentity.TilePipeCopper;
-import teamKuiper.redoxiation.blocks.tileentity.TileWire;
+import teamKuiper.redoxiation.render.RenderCog;
 
 public class RedoxiationBlocks {
 	
@@ -47,12 +25,9 @@ public class RedoxiationBlocks {
 
 	public static BlockBase oreOverworld, oreNether, oreObsidian, rock, cog;
 	
-	public static boolean oreCopperCfg, oreTinCfg, oreLeadCfg,
-			oreSilverCfg, oreNickelCfg, orePlatinumCfg, oreZincCfg,
-			oreCobaltCfg, oreChromiumCfg, pitchblendCfg, rutileCfg,
-			scheeliteCfg, bauxiteCfg, limestoneCfg, cryoliteCfg, oreSulfurCfg;
+	public static RenderCog renderCog;
 	
-	public static BlockBase[] blocks = {oreOverworld, oreNether, oreObsidian, rock, cog};
+	public static BlockBase[] blocks;
 
 	public static void initBlocks() {
 		// Blocks
@@ -62,18 +37,23 @@ public class RedoxiationBlocks {
 		oreObsidian = new BlockObsidianOre();
 		rock = new BlockRock();
 		cog = new BlockCog();
+		
+		blocks = new BlockBase[] {oreOverworld, oreNether, oreObsidian, rock, cog};
+		for(BlockBase block : blocks) {
+			block.init();
+		}
 	}
 	
 	public static void registerBlocks(RegistryEvent.Register<Block> event) {
 		// Register
 		event.getRegistry().registerAll(blocks);
-		for(BlockBase block : blocks) {
-			block.onRegister();
-		}
 
 		// Tile Entities
         GameRegistry.registerTileEntity(TileCog.class, cog.getRegistryName());
 		
+        renderCog = new RenderCog();
+        ClientRegistry.bindTileEntitySpecialRenderer(TileCog.class, renderCog);
+        
 		Redoxiation.logger.info("Block Registry Complete. Starting Item Registry");
 	}
 	

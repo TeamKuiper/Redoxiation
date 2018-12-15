@@ -1,4 +1,4 @@
-package teamKuiper.redoxiation.items;
+package teamKuiper.redoxiation.items.temp;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;

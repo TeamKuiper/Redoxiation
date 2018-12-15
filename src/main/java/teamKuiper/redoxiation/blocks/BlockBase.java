@@ -1,5 +1,8 @@
 package teamKuiper.redoxiation.blocks;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -7,11 +10,13 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class BlockBase extends Block {
 
-	protected ItemStack[] variants = new ItemStack[] {new ItemStack(this)};
-	
+	protected List<Integer> metas = new ArrayList<Integer>();
+	protected List<ItemStack> variants = new ArrayList<ItemStack>();
+
 	public BlockBase(Material materialIn) {
 		super(materialIn);
 	}
@@ -20,26 +25,31 @@ public class BlockBase extends Block {
 		super(blockMaterialIn, blockMapColorIn);
 	}
 	
-	public void onRegister() {}
+	public void init() {}
 	
 	public Item getItem() {
 		return Item.getItemFromBlock(this);
 	}
 	
-	public ItemStack[] getVariants() {
-		return variants;
+	protected ItemStack addVariant(int meta) {
+		if(metas.contains(meta))
+			return null;
+		ItemStack stack = new ItemStack(this, 1, meta);
+		
+		return stack;
 	}
 	
-	public ItemStack getVariant(int index) {
-		if(index < 0 || variants.length <= index)
+	protected ItemStack addVariant(int meta, String name) {
+		if(metas.contains(meta))
 			return null;
-		return variants[index];
+		ItemStack stack = new ItemStack(this, 1, meta);
+		OreDictionary.registerOre(name, stack);
+		
+		return stack;
 	}
 	
 	@Override
 	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> items) {
-		for (int i = 0; i < variants.length; i++) {
-			items.add(variants[i]);
-		}
+		items.addAll(variants);
 	}
 }
