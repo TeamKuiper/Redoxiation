@@ -84,3 +84,12 @@ run/config/forgeChunkLoading.cfg
 run/config/splash.properties
 run/logs/debug.log
 run/logs/latest.log
+run/config/CodeChickenCore.cfg
+run/config/CodeChickenLib.cfg
+run/config/microblocks.cfg
+run/config/multipart.cfg
+run/config/NEI/client.cfg
+run/logs/2018-12-19-1.log.gz
+run/logs/fml-client-latest.log
+run/logs/fml-junk-earlystartup.log
+run/saves/NEI/client.dat
