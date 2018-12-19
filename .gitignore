@@ -76,3 +76,11 @@ gradlew.bat
 *.iml
 *.ipr
 *.iws
+gradle.properties
+Redoxiation_Client.launch
+Redoxiation_Server.launch
+run/config/forge.cfg
+run/config/forgeChunkLoading.cfg
+run/config/splash.properties
+run/logs/debug.log
+run/logs/latest.log
