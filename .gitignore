@@ -67,6 +67,7 @@ bin/
 build/
 eclipse/
 gradle/
+run/
 .classpath
 .project
 gradlew
@@ -76,3 +77,7 @@ gradlew.bat
 *.iml
 *.ipr
 *.iws
+gradle.properties
+Redoxiation_Client.launch
+Redoxiation_Server.launch
+run/config/forge.cfg
