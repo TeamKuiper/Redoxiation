@@ -2,6 +2,7 @@ package teamKuiper.redoxiation;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
@@ -19,6 +20,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
 import teamKuiper.redoxiation.blocks.gui.GuiHandler;
 import teamKuiper.redoxiation.blocks.rocks.BlockOverworldOre;
 import teamKuiper.redoxiation.handlers.RedoxiationConfigHandler;
@@ -74,7 +76,8 @@ public class Redoxiation {
 		// Simple Config
 		config = new Configuration(event.getSuggestedConfigurationFile());
 		RedoxiationConfigHandler.initConfig();
-		
+
+		OBJLoader.INSTANCE.addDomain(Redoxiation.MODID);
 		MinecraftForge.EVENT_BUS.register(new RedoxiationRegistryHandler());
 		RedoxiationRecipeManager.recipeFurnace();
 		RedoxiationRecipeManager.recipeCrafting();
@@ -86,7 +89,6 @@ public class Redoxiation {
         if (Loader.isModLoaded("ForgeMultipart")) {
             new RegisterBlockPart().init();
         }
-        MinecraftForge.EVENT_BUS.register(new MultiPartEventHandler());
 	}
 
 	@EventHandler
@@ -96,7 +98,7 @@ public class Redoxiation {
 
 	@EventHandler
 	public void postinit(FMLPostInitializationEvent event) {
-
+		RedoxiationBlocks.postInit();
 	}
 
 	@EventHandler

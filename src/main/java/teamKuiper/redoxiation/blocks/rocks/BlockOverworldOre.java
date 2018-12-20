@@ -91,7 +91,7 @@ public class BlockOverworldOre extends BlockBase {
 	}
 	
 	@Override
-	public void init() {
+	public void postInit() {
 		oreCopper = addVariant(OreType.COPPER.getMetadata(), "oreCopper");
 		oreTin = addVariant(OreType.TIN.getMetadata(), "oreTin");
 		oreLead = addVariant(OreType.LEAD.getMetadata(), "oreLead");

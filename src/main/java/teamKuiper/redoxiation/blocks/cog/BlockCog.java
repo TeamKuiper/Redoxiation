@@ -1,14 +1,11 @@
 package teamKuiper.redoxiation.blocks.cog;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,17 +23,18 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import teamKuiper.redoxiation.Redoxiation;
 import teamKuiper.redoxiation.blocks.BlockBase;
+import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
 import teamKuiper.redoxiation.utils.IBlockBoundCustomizable;
 
 public class BlockCog extends BlockBase implements IBlockBoundCustomizable {
-
+/*
     public static final PropertyEnum<CogType> DOWN = PropertyEnum.create("down", CogType.class);
     public static final PropertyEnum<CogType> UP = PropertyEnum.create("up", CogType.class);
     public static final PropertyEnum<CogType> NORTH = PropertyEnum.create("north", CogType.class);
     public static final PropertyEnum<CogType> SOUTH = PropertyEnum.create("south", CogType.class);
     public static final PropertyEnum<CogType> WEST = PropertyEnum.create("west", CogType.class);
     public static final PropertyEnum<CogType> EAST = PropertyEnum.create("east", CogType.class);
-    public static final PropertyEnum<?>[] SIDE_PROPERTIES = {DOWN, UP, NORTH, SOUTH, WEST, EAST};
+    public static final PropertyEnum<?>[] SIDE_PROPERTIES = {DOWN, UP, NORTH, SOUTH, WEST, EAST};*/
     
     //public static final AxisAlignedBB DEFAULT_AABB = new AxisAlignedBB(1, 1, 1, 1, 1, 1);
     public static final AxisAlignedBB DOWN_AABB = new AxisAlignedBB(0.3125f, 0.0f, 0.3125f, 0.6875f, 0.0625f, 0.6875f);
@@ -62,17 +60,13 @@ public class BlockCog extends BlockBase implements IBlockBoundCustomizable {
     	return new ItemBlockCog();
     }
     
-	@Override
-	public int damageDropped(IBlockState state) {
-		return state.getValue(DOWN).getMetadata();
-	}
-    
     @Override
-    public AxisAlignedBB[] getDrawAABBs(World world, EntityPlayer player, BlockPos pos, IBlockState state) {
-    	return new AxisAlignedBB[] {AABBs[getLookingSide(player, pos, state).getIndex()]};
+    public AxisAlignedBB[] getDrawAABBs(EntityPlayer player, World world, BlockPos pos) {
+    	return new AxisAlignedBB[] {AABBs[getLookingSide(player, world, pos).getIndex()]};
     }
 
-    public TileEntity createNewTileEntity(World world, int meta) {
+    @Override
+    public TileEntity createTileEntity(World world, IBlockState state){
         return new TileCog();
     }
 
@@ -121,12 +115,12 @@ public class BlockCog extends BlockBase implements IBlockBoundCustomizable {
 	}
 	
 	//Sets collision boxes
-	@SuppressWarnings("unchecked")
 	@Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
-		for (int i = 0; i < SIDE_PROPERTIES.length; i++) {
-			if(state.getValue((PropertyEnum<CogType>) SIDE_PROPERTIES[i]) != CogType.NONE) {
-		        addCollisionBoxToList(pos, entityBox, collidingBoxes, AABBs[i]);
+		TileCog cog = getCog(worldIn, pos);
+		for(EnumFacing side : EnumFacing.values()) {
+			if(cog.getCogType(side) != CogType.NONE) {
+				addCollisionBoxToList(pos, entityBox, collidingBoxes, AABBs[side.getIndex()]);
 			}
 		}
     }
@@ -134,11 +128,10 @@ public class BlockCog extends BlockBase implements IBlockBoundCustomizable {
 	//Returns true if there is no cog in the given side and the block of the given side is solid.
     @Override
     public boolean canPlaceBlockOnSide(World world, BlockPos pos, EnumFacing side) {
-    	if(world.getBlockState(pos).getValue(SIDE_PROPERTIES[side.getIndex()]) != CogType.NONE)
-    		return false;
     	EnumFacing oppositeSide = side.getOpposite();
     	BlockPos blockPos = new BlockPos(pos.getX() + oppositeSide.getFrontOffsetX(), pos.getY() + oppositeSide.getFrontOffsetY(), pos.getZ() + oppositeSide.getFrontOffsetZ());
-        return world.isSideSolid(blockPos, side);
+        return world.isSideSolid(pos, side) && 
+        		(world.getBlockState(blockPos).getBlock() != RedoxiationBlocks.cog || getCog(world, blockPos).getCogType(oppositeSide) == CogType.NONE);
     }
 
     /*@Override
@@ -159,165 +152,59 @@ public class BlockCog extends BlockBase implements IBlockBoundCustomizable {
     
     
     //Drops the cog which is on the non-solid block.
-    @SuppressWarnings("unchecked")
 	@Override
     public void onNeighborChange(IBlockAccess worldIn, BlockPos pos, BlockPos neighbor) {
     	if(worldIn instanceof World) {
     		World world = (World) worldIn;
-			IBlockState state = world.getBlockState(pos);
-			for (int i = 0; i < SIDE_PROPERTIES.length; i++) {
-				CogType type = state.getValue((PropertyEnum<CogType>) SIDE_PROPERTIES[i]);
-				EnumFacing side = EnumFacing.getFront(i);
+			for(EnumFacing side : EnumFacing.values()) {
+				TileCog cog = getCog(worldIn, pos);
+				CogType type = cog.getCogType(side);
 				if (type != CogType.NONE && !canPlaceBlockOnSide(world, pos, side)) {
-					destroySide(world, pos, state, EnumFacing.getFront(i), true);
-					Block.spawnAsEntity(world, pos, getItemStackBySide(state, side));
+					cog.destroySide(side, true);
+					Block.spawnAsEntity(world, pos, new ItemStack(this, 1, type.getMetadata()));
 				}
 	    	}
     	}
     }
-    
-    /**
-     * Place the cog in the given side.
-     * Returns true if succeed.
-     * @param state
-     * @param side
-     * @param newType
-     * @return
-     */
-    @SuppressWarnings("unchecked")
-	public boolean placeSide(IBlockState state, EnumFacing side, CogType newType) {
-    	PropertyEnum<CogType> property = (PropertyEnum<CogType>) SIDE_PROPERTIES[side.getIndex()];
-		CogType type = state.getValue(property);
-		if(type != CogType.NONE) return false;
-		state.withProperty(property, newType);
-		return true;
-    }
-    
-    /**
-     * Destroys the cog which is in the given side.
-     * Returns true if succeed.
-     * @param world
-     * @param pos
-     * @param state
-     * @param side
-     * @param dropItem
-     * @return
-     */
-    @SuppressWarnings("unchecked")
-	public boolean destroySide(World world, BlockPos pos, IBlockState state, EnumFacing side, boolean dropItem) {
-    	PropertyEnum<CogType> property = (PropertyEnum<CogType>) SIDE_PROPERTIES[side.getIndex()];
-		CogType type = state.getValue(property);
-		if(type == CogType.NONE) return false;
-		state.withProperty(property, CogType.NONE);
-		removeIfEmpty(world, pos, state);
-		return true;
-    }
-
-    /**
-     * Remove the block if there is no cog in the block.
-     * @param world
-     * @param pos
-     * @param state
-     * @return
-     */
-    @SuppressWarnings("unchecked")
-	public boolean removeIfEmpty(World world, BlockPos pos, IBlockState state) {
-		for(int i = 0; i < SIDE_PROPERTIES.length; i++) {
-			if(state.getValue((PropertyEnum<CogType>) SIDE_PROPERTIES[i]) != CogType.NONE)
-				return false;
-		}
-		world.setBlockToAir(pos);
-		return true;
-    }
-
-	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, SIDE_PROPERTIES);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public IBlockState getStateFromMeta(int meta) {
-		IBlockState state = this.getDefaultState();
-		CogType[] types = CogType.values();
-		
-		for(int i = SIDE_PROPERTIES.length - 1; i >= 0; i--) {
-			state.withProperty((PropertyEnum<CogType>) SIDE_PROPERTIES[i], types[meta%4]);
-			meta >>= 2;
-		}
-		
-		return state;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public int getMetaFromState(IBlockState state) {
-		int metadata = 0;
-		
-		for(int i = 0; i < SIDE_PROPERTIES.length; i++) {
-			metadata <<= 2;
-			metadata += state.getValue((PropertyEnum<CogType>) SIDE_PROPERTIES[i]).getMetadata();
-		}
-		
-		return metadata;
-	}
 
 	//Returns ItemStack of cogs in all sides.
-	@SuppressWarnings("unchecked")
 	@Override
 	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
 		int[] valueCount = new int[CogType.values().length];
-		for(int i = 0; i < SIDE_PROPERTIES.length; i++) {
-			int value = state.getValue((PropertyEnum<CogType>) SIDE_PROPERTIES[i]).getMetadata();
+		for(EnumFacing side : EnumFacing.values()) {
+			int value = getCog(world, pos).getCogType(side).getMetadata();
 			valueCount[value]++;
 		}
 		for(int i = 0; i < valueCount.length; i++) {
 			if(CogType.values()[i] == CogType.NONE) continue;
-			ItemStack stack = new ItemStack(Item.getItemFromBlock(this), valueCount[i], i);
+			ItemStack stack = new ItemStack(this, valueCount[i], i);
 			drops.add(stack);
 		}
 	}
 	
-	//Returns the ItemStack of the cog which player is lokking.
-	@SuppressWarnings("unchecked")
+	//Returns the ItemStack of the cog which player is looking.
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-		EnumFacing facing = getLookingSide(player, pos, state);
+		EnumFacing facing = getLookingSide(player, world, pos);
 		if(facing == null) return null;
-		CogType type = state.getValue((PropertyEnum<CogType>) SIDE_PROPERTIES[facing.getIndex()]);
+		CogType type = getCog(world, pos).getCogType(facing);
 		if(type == CogType.NONE) return null;
-		ItemStack stack = new ItemStack(Item.getItemFromBlock(this));
-		stack.setItemDamage(type.getMetadata());
-		return stack;
+		return new ItemStack(this, 1, type.getMetadata());
 	}
 	
 	//When player breaks the cog, only destroys the cog which player is looking.
 	@Override
 	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest){
-		EnumFacing side = getLookingSide(player, pos, state);
+		EnumFacing side = getLookingSide(player, world, pos);
 		if(side != null) {
-			destroySide(world, pos, state, side, true);
+			getCog(world, pos).destroySide(side, true);
 			return true;
 		}
 		return false;
     }
 	
-	/**
-	 * Returns Itemstack of the cog which are in the given side.
-	 * @param state
-	 * @param side
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public ItemStack getItemStackBySide(IBlockState state, EnumFacing side) {
-    	CogType type = state.getValue((PropertyEnum<CogType>) SIDE_PROPERTIES[side.getIndex()]);
-    	if(type == CogType.NONE)
-    		return null;
-    	return new ItemStack(this, 1, type.getMetadata());
-	}
-	
-	public EnumFacing getLookingSide(EntityPlayer player, BlockPos pos, IBlockState state) {
-		return findLookingSide(player, pos, getPlacedBlockSides(state));
+	public EnumFacing getLookingSide(EntityPlayer player, IBlockAccess world, BlockPos pos) {
+		return findLookingSide(player, pos, getCog(world, pos).getPlacedBlockSides());
 	}
 	
 	/**
@@ -347,28 +234,12 @@ public class BlockCog extends BlockBase implements IBlockBoundCustomizable {
 		return side;
 	}
 	
-	/**
-	 * Returns the sides which cog exists.
-	 * @param state
-	 * @return
-	 */
-	@SuppressWarnings("unchecked")
-	public EnumFacing[] getPlacedBlockSides(IBlockState state) {
-		List<EnumFacing> sides = new ArrayList<EnumFacing>();
-		for(int i = 0; i < SIDE_PROPERTIES.length; i++) {
-			if(state.getValue((PropertyEnum<CogType>) SIDE_PROPERTIES[i]) != CogType.NONE) {
-				sides.add(EnumFacing.getFront(i));
-			}
-		}
-		return sides.toArray(new EnumFacing[0]);
-	}
-
-	public IBlockState getStateForModel(CogType type) {
-		return this.createBlockState().getBaseState().withProperty(DOWN, type);
+	private TileCog getCog(IBlockAccess world, BlockPos pos) {
+		return (TileCog) world.getTileEntity(pos);
 	}
     
     @Override
-    public void init() {
+    public void postInit() {
     	woodenCog = addVariant(CogType.WOODEN.getMetadata());
     	stoneCog = addVariant(CogType.STONE.getMetadata());
     	ironCog = addVariant(CogType.STONE.getMetadata());

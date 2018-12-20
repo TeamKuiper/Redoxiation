@@ -7,6 +7,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import teamKuiper.redoxiation.blocks.RedoxiationBlocks;
 import teamKuiper.redoxiation.items.RedoxiationItems;
+import teamKuiper.redoxiation.utils.TempOreDictionary;
 
 public class RedoxiationRegistryHandler {
 
@@ -14,13 +15,16 @@ public class RedoxiationRegistryHandler {
 	public void registerBlocks(RegistryEvent.Register<Block> event) {
 		RedoxiationBlocks.initBlocks();
 		RedoxiationBlocks.registerBlocks(event);
+		RedoxiationBlocks.postInitBlocks();
 	}
 
 	@SubscribeEvent
 	public void registerItems(RegistryEvent.Register<Item> event) {
 		RedoxiationBlocks.registerBlockItems(event);
+		TempOreDictionary.register("blocks");
 		RedoxiationItems.initItems();
 		RedoxiationItems.registerItems(event);
+		TempOreDictionary.register("items");
 	}
 
 	@SubscribeEvent

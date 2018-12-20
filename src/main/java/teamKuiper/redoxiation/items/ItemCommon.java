@@ -18,7 +18,7 @@ public class ItemCommon extends ItemBase {
     	items.addAll(variants);
     }
 	
-	public void init() {
+	public void postInit() {
 		int index;
 		
 		//shard

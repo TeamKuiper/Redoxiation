@@ -14,7 +14,6 @@ public class ClientProxy extends CommonProxy {
 	
 	
 	public void init() {
-		OBJLoader.INSTANCE.addDomain(Redoxiation.MODID);
         //TODO The way of rendering has been changed 
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(RedoxiationBlocks.stoneCog), new ItemRenderStoneCog(renderStoneCog, new TileStoneCog()));
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(RedoxiationBlocks.ironCog), new ItemRenderIronCog(renderIronCog, new TileIronCog()));

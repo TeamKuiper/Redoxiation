@@ -8,9 +8,10 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraftforge.oredict.OreDictionary;
+import teamKuiper.redoxiation.utils.TempOreDictionary;
 
 public class BlockBase extends Block {
 
@@ -25,16 +26,17 @@ public class BlockBase extends Block {
 		super(blockMaterialIn, blockMapColorIn);
 	}
 	
-	public void init() {}
+	public void postInit() {}
 	
 	public Item getItem() {
-		return Item.getItemFromBlock(this);
+		return new ItemBlock(this).setRegistryName(this.getRegistryName());
 	}
 	
 	protected ItemStack addVariant(int meta) {
 		if(metas.contains(meta))
 			return null;
 		ItemStack stack = new ItemStack(this, 1, meta);
+		this.variants.add(stack);
 		
 		return stack;
 	}
@@ -43,7 +45,8 @@ public class BlockBase extends Block {
 		if(metas.contains(meta))
 			return null;
 		ItemStack stack = new ItemStack(this, 1, meta);
-		OreDictionary.registerOre(name, stack);
+		this.variants.add(stack);
+		TempOreDictionary.tempRegister("blocks", name, stack);
 		
 		return stack;
 	}

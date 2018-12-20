@@ -49,7 +49,7 @@ public class BlockObsidianOre extends BlockBase {
 	}
 	
 	@Override
-	public void init() {
+	public void postInit() {
 		oreObsidianIron = addVariant(OreType.IRON.metadata, "oreObsidianIron");
 		oreObsidianGold = addVariant(OreType.GOLD.metadata, "oreObsidianGold");
 		oreObsidianCopper = addVariant(OreType.COPPER.metadata, "oreObsidianCopper");

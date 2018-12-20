@@ -39,8 +39,11 @@ public class RedoxiationBlocks {
 		cog = new BlockCog();
 		
 		blocks = new BlockBase[] {oreOverworld, oreNether, oreObsidian, rock, cog};
+	}
+	
+	public static void postInitBlocks() {
 		for(BlockBase block : blocks) {
-			block.init();
+			block.postInit();
 		}
 	}
 	
@@ -50,16 +53,14 @@ public class RedoxiationBlocks {
 
 		// Tile Entities
         GameRegistry.registerTileEntity(TileCog.class, cog.getRegistryName());
-		
-        renderCog = new RenderCog();
-        ClientRegistry.bindTileEntitySpecialRenderer(TileCog.class, renderCog);
         
 		Redoxiation.logger.info("Block Registry Complete. Starting Item Registry");
 	}
 	
 	public static void registerBlockItems(RegistryEvent.Register<Item> event) {
 		for(BlockBase block : blocks) {
-			event.getRegistry().registerAll(block.getItem());
+			System.out.println(block.getRegistryName());
+			event.getRegistry().register(block.getItem());
 		}
 	}
 
@@ -67,6 +68,11 @@ public class RedoxiationBlocks {
 		for(BlockBase block : blocks) {
 			registerRender(block.getItem());
 		}
+	}
+	
+	public static void postInit() {
+        renderCog = new RenderCog();
+        ClientRegistry.bindTileEntitySpecialRenderer(TileCog.class, renderCog);
 	}
 	
 	private static void registerRender(Item item) {

@@ -1,6 +1,5 @@
 package teamKuiper.redoxiation.blocks.cog;
 
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -15,6 +14,8 @@ public class ItemBlockCog extends ItemBlock {
 
 	public ItemBlockCog() {
 		super(RedoxiationBlocks.cog);
+		setRegistryName("cog");
+		setUnlocalizedName("cog");
 	}
 
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
@@ -22,9 +23,8 @@ public class ItemBlockCog extends ItemBlock {
 		if(hand == EnumHand.MAIN_HAND) {
 			ItemStack stack = player.getHeldItemMainhand();
 			BlockPos newPos = pos.add(facing.getFrontOffsetX(), facing.getFrontOffsetY(), facing.getFrontOffsetZ());
-			IBlockState state = worldIn.getBlockState(newPos);
-			if(state.getBlock() == RedoxiationBlocks.cog) {
-				boolean succeed = ((BlockCog) RedoxiationBlocks.cog).placeSide(state, facing.getOpposite(), CogType.values()[stack.getMetadata()]);
+			if(worldIn.getBlockState(newPos).getBlock() == RedoxiationBlocks.cog) {
+				boolean succeed = ((TileCog) worldIn.getTileEntity(pos)).placeSide(facing.getOpposite(), CogType.values()[stack.getMetadata()]);
 				if(succeed) {
 					return EnumActionResult.SUCCESS;
 				}

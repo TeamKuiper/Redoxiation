@@ -9,7 +9,7 @@ public class RedoxiationItems {
 	
 	public static void initItems() {
 		itemCommon = new ItemCommon();
-		itemCommon.init();
+		itemCommon.postInit();
 	}
 	
 	public static void registerItems(RegistryEvent.Register<Item> event) {

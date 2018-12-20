@@ -12,6 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
+import teamKuiper.redoxiation.utils.TempOreDictionary;
 
 public class ItemBase extends Item {
 
@@ -40,7 +41,7 @@ public class ItemBase extends Item {
 		NAME_MAP.put(metadata, name);
 		INFO_MAP.put(metadata, info);
 		if(registerOreDictionary) {
-			OreDictionary.registerOre(name, stack);	
+			TempOreDictionary.tempRegister("items", name, stack);	
 		}
 		
 		return stack;

@@ -85,7 +85,7 @@ public class BlockNetherOre extends BlockBase {
 	}
 	
 	@Override
-	public void init() {
+	public void postInit() {
 		ferroNickel = addVariant(OreType.FERRO_NICKEL.metadata, "blockFerroNickel");
 		pseudoBronze = addVariant(OreType.PSEUDO_BRONZE.metadata, "blockPseudoBronze");
 		pseudoBrass = addVariant(OreType.PSEUDO_BRASS.metadata, "blockFerroBrass");

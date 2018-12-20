@@ -1,6 +1,6 @@
 # Blender v2.78 (sub 0) OBJ File: ''
 # www.blender.org
-mtllib cog.mtl
+mtllib iron_cog.mtl
 o Cylinder
 v -0.037034 0.000000 -0.561280
 v 0.028423 0.062500 -0.436576

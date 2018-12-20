@@ -21,7 +21,7 @@ public class BlockRock extends BlockBase {
 		super(Material.ROCK);
 		
 		setUnlocalizedName("rock");
-		setRegistryName(Redoxiation.MODID, "ore_obsidian");
+		setRegistryName(Redoxiation.MODID, "rock");
 		setCreativeTab(Redoxiation.tabRedoxiation);
 		setHardness(2.0F);
 		setResistance(10.0F);
@@ -73,7 +73,7 @@ public class BlockRock extends BlockBase {
 	}
 	
 	@Override
-	public void init() {
+	public void postInit() {
 		bauxite = addVariant(RockType.BAUXITE.getMetadata(), "blockBauxite");
 		cryolite = addVariant(RockType.CRYOLITE.getMetadata(), "blockCryolite");
 		dolomite = addVariant(RockType.DOLOMITE.getMetadata(), "blockDolomite");
